@@ -1,5 +1,7 @@
 # Asresh Kuricheti — Portfolio
 
+**🔗 Live at [asresh.github.io](https://asresh.github.io)**
+
 A single-page portfolio for a hardware engineer, organized around four areas of work:
 
 1. **RTL Design** — synthesizable SystemVerilog, self-checking testbenches
@@ -21,9 +23,7 @@ Then visit <http://localhost:8000>.
 
 ## Deploy to GitHub Pages
 
-1. Push this folder to a repository (e.g. `asresh.github.io` for a user site, or any repo for a project site).
-2. In **Settings → Pages**, set the source to the `main` branch, root (`/`).
-3. The site is served as-is (`.nojekyll` disables Jekyll processing).
+This repo is a `<user>.github.io` site, so GitHub Pages serves it automatically from the `main` branch root — every push to `main` redeploys **<https://asresh.github.io>** in ~30–60 s. The site is served as-is (`.nojekyll` disables Jekyll processing).
 
 ## Structure
 
