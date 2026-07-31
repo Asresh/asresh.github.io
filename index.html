@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Asresh Kuricheti — Hardware Engineer</title>
-  <meta name="description" content="Asresh Kuricheti — hardware engineer. RTL design, functional verification, hardware–software co-design, and AI hardware acceleration: systolic GEMM, structured sparsity, and GPU/SIMT dataflow." />
+  <meta name="description" content="Asresh Kuricheti — hardware engineer. RTL design, Design Verification, hardware–software co-design, and AI hardware acceleration: systolic GEMM, structured sparsity, and GPU/SIMT dataflow." />
   <meta name="author" content="Asresh Kuricheti" />
   <meta name="theme-color" content="#0a192f" />
   <meta name="color-scheme" content="dark" />
@@ -12,7 +12,7 @@
   <!-- Open Graph / social -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Asresh Kuricheti — Hardware Engineer" />
-  <meta property="og:description" content="RTL design, functional verification, hardware–software co-design, and AI hardware acceleration." />
+  <meta property="og:description" content="RTL design, Design Verification, hardware–software co-design, and AI hardware acceleration." />
   <meta name="twitter:card" content="summary" />
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
@@ -107,8 +107,8 @@
     <h1 class="hero-name reveal">Asresh Kuricheti.</h1>
     <h2 class="hero-tagline reveal">I build things that run in silicon.</h2>
     <p class="hero-blurb reveal">
-      I'm a hardware engineer specializing in <strong>RTL design</strong>, <strong>functional
-      verification</strong>, and <strong>hardware&#8211;software co-design</strong>. Lately I'm focused on
+      I'm a hardware engineer specializing in <strong>RTL design</strong>, <strong>Design
+      Verification</strong>, and <strong>hardware&#8211;software co-design</strong>. Lately I'm focused on
       the digital blocks behind machine learning — quantized systolic GEMM, structured sparsity, and the
       GPU/SIMT dataflow primitives that ML kernels are built on. This site is a running portfolio of one
       hands-on hardware build a day.
@@ -130,52 +130,61 @@
     <div class="featured reveal">
       <div class="featured-content">
         <p class="featured-overline">Featured Build</p>
-        <h3 class="featured-title"><a href="https://github.com/Asresh/RTL-Projects-Everyday" target="_blank" rel="noopener">Output-Stationary Systolic-Array GEMM</a></h3>
+        <h3 class="featured-title"><a href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day17" target="_blank" rel="noopener">GPU Warp Scheduler + Register Scoreboard</a></h3>
         <div class="featured-desc">
           <p>
-            An <em>N&times;N</em> mesh of signed multiply-accumulate PEs in a TPU-tile, output-stationary
-            dataflow. Operands stream in nearest-neighbour — activations from the west, weights from the
-            south — with an automatic diagonal-skew scheduler that lines them up so every product lands in
-            the right accumulator. A start/busy/done handshake wraps the whole tile, verified against a
-            longint golden matmul scoreboard.
+            An NVIDIA-class SM issue front-end. A per-warp <em>register scoreboard</em> tracks in-flight
+            RAW/WAW hazards and gates each warp's readiness, while a <em>greedy-then-oldest</em> arbiter
+            picks one ready warp to issue every cycle — staying with the current warp until it stalls, then
+            falling back to the oldest. One deadlock-free instruction issue per clock, across the whole
+            warp pool.
           </p>
         </div>
         <ul class="tech-list">
-          <li>SystemVerilog</li><li>Systolic array</li><li>Signed MAC</li><li>Diagonal skew</li>
+          <li>SystemVerilog</li><li>GPU / SIMT</li><li>Scoreboarding</li><li>GTO arbitration</li>
         </ul>
         <div class="featured-links">
-          <a href="https://github.com/Asresh/RTL-Projects-Everyday" target="_blank" rel="noopener" aria-label="GitHub repository">
+          <a href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day17" target="_blank" rel="noopener" aria-label="GitHub repository">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
           </a>
         </div>
       </div>
       <div class="featured-visual" aria-hidden="true">
-        <!-- Systolic MAC mesh -->
+        <!-- GTO warp scheduler -->
         <svg viewBox="0 0 460 320" class="diagram" role="img">
-          <g class="dg-faint">
-            <text x="16" y="150" class="dg-label">A&#8594;</text>
-            <text x="220" y="26" class="dg-label" text-anchor="middle">B&#8595;</text>
+          <g class="dg-cell">
+            <rect x="20" y="44" width="118" height="40" rx="6"/>
+            <rect x="20" y="96" width="118" height="40" rx="6" class="dg-cell-hot"/>
+            <rect x="20" y="148" width="118" height="40" rx="6"/>
+            <rect x="20" y="200" width="118" height="40" rx="6"/>
           </g>
+          <g class="dg-blocktext">
+            <text x="79" y="68">W0 · stall</text>
+            <text x="79" y="120">W1 · ready</text>
+            <text x="79" y="172">W2 · stall</text>
+            <text x="79" y="224">W3 · ready</text>
+          </g>
+          <rect x="166" y="44" width="30" height="196" rx="5" class="dg-bus"/>
+          <text x="181" y="262" class="dg-buslabel" text-anchor="middle">scoreboard</text>
           <g class="dg-arrow">
-            <line x1="40" y1="96" x2="120" y2="96"/><line x1="40" y1="152" x2="120" y2="152"/>
-            <line x1="40" y1="208" x2="120" y2="208"/><line x1="40" y1="264" x2="120" y2="264"/>
-            <line x1="120" y1="40" x2="120" y2="70"/><line x1="176" y1="40" x2="176" y2="70"/>
-            <line x1="232" y1="40" x2="232" y2="70"/><line x1="288" y1="40" x2="288" y2="70"/>
+            <line x1="138" y1="64" x2="166" y2="64"/>
+            <line x1="138" y1="168" x2="166" y2="168"/>
+            <line x1="138" y1="220" x2="166" y2="220"/>
+          </g>
+          <g class="dg-arrow dg-out">
+            <line x1="138" y1="116" x2="166" y2="116"/>
+            <line x1="196" y1="116" x2="252" y2="140"/>
+            <line x1="372" y1="140" x2="424" y2="140"/>
           </g>
           <g class="dg-cell">
-            <!-- 4x4 grid of PEs -->
-            <rect x="120" y="72" width="48" height="48" rx="6"/><rect x="176" y="72" width="48" height="48" rx="6"/><rect x="232" y="72" width="48" height="48" rx="6"/><rect x="288" y="72" width="48" height="48" rx="6"/>
-            <rect x="120" y="128" width="48" height="48" rx="6"/><rect x="176" y="128" width="48" height="48" rx="6" class="dg-cell-hot"/><rect x="232" y="128" width="48" height="48" rx="6"/><rect x="288" y="128" width="48" height="48" rx="6"/>
-            <rect x="120" y="184" width="48" height="48" rx="6"/><rect x="176" y="184" width="48" height="48" rx="6"/><rect x="232" y="184" width="48" height="48" rx="6" class="dg-cell-hot"/><rect x="288" y="184" width="48" height="48" rx="6"/>
-            <rect x="120" y="240" width="48" height="48" rx="6"/><rect x="176" y="240" width="48" height="48" rx="6"/><rect x="232" y="240" width="48" height="48" rx="6"/><rect x="288" y="240" width="48" height="48" rx="6"/>
+            <rect x="252" y="104" width="120" height="72" rx="8" class="dg-cell-dut"/>
           </g>
-          <g class="dg-mac"><text x="144" y="101" text-anchor="middle">×+</text><text x="200" y="157" text-anchor="middle">×+</text><text x="256" y="213" text-anchor="middle">×+</text><text x="312" y="269" text-anchor="middle">×+</text></g>
-          <g class="dg-arrow dg-out">
-            <line x1="144" y1="288" x2="144" y2="312"/><line x1="200" y1="288" x2="200" y2="312"/>
-            <line x1="256" y1="288" x2="256" y2="312"/><line x1="312" y1="288" x2="312" y2="312"/>
+          <g class="dg-blocktext">
+            <text x="312" y="136">GTO arbiter</text>
+            <text x="312" y="156" class="dg-sub">greedy-then-oldest</text>
           </g>
-          <text x="392" y="152" class="dg-accum">&#931;</text>
-          <line x1="356" y1="150" x2="384" y2="150" class="dg-arrow"/>
+          <text x="424" y="126" class="dg-label" text-anchor="end">issue</text>
+          <text x="424" y="162" class="dg-sub" text-anchor="end">1 / clk</text>
         </svg>
       </div>
     </div>
@@ -183,64 +192,222 @@
     <ul class="projects-grid reveal">
       <li class="project-card">
         <div class="card-top">
-          <span class="card-folder" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
-          </span>
-          <a class="card-link" href="https://github.com/Asresh/RTL-Projects-Everyday" target="_blank" rel="noopener" aria-label="External link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day18" target="_blank" rel="noopener" aria-label="Open Day18 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
         </div>
-        <h4 class="card-title"><a href="https://github.com/Asresh/RTL-Projects-Everyday" target="_blank" rel="noopener">2:4 Structured-Sparsity Engine</a></h4>
-        <p class="card-desc">Ampere-style sparse-tensor-core primitive: 4 dense activations × 2 compressed non-zero weights via 2-bit metadata, in a 3-stage decode→multiply→reduce pipeline with malformed-metadata detection.</p>
-        <ul class="card-tech"><li>INT8</li><li>Sparsity</li><li>Pipelining</li></ul>
+        <h4 class="card-title"><a href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day18" target="_blank" rel="noopener">SIMT Reconvergence (IPDOM) Stack</a></h4>
+        <p class="card-desc">Per-warp LIFO of {pc, rpc, active-mask} performing immediate-post-dominator reconvergence for SIMT branch divergence, with exact per-lane mask conservation.</p>
+        <ul class="card-tech"><li>SIMT</li><li>Control-flow</li><li>Stack</li></ul>
       </li>
 
       <li class="project-card">
         <div class="card-top">
           <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
-          <a class="card-link" href="https://github.com/Asresh/RTL-Projects-Everyday" target="_blank" rel="noopener" aria-label="External link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+          <a class="card-link" href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day14" target="_blank" rel="noopener" aria-label="Open Day14 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
         </div>
-        <h4 class="card-title"><a href="https://github.com/Asresh/RTL-Projects-Everyday" target="_blank" rel="noopener">Pipelined IEEE-754 FP Adder</a></h4>
-        <p class="card-desc">binary32 add with exponent-align barrel shift, guard/round/sticky round-to-nearest-even, LZC normalize, and full subnormal / signed-zero / Inf / NaN handling — 3 stages, host-FPU golden model.</p>
-        <ul class="card-tech"><li>IEEE-754</li><li>3-stage</li><li>GRS rounding</li></ul>
+        <h4 class="card-title"><a href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day14" target="_blank" rel="noopener">Output-Stationary Systolic GEMM</a></h4>
+        <p class="card-desc">N×N output-stationary MAC mesh in TPU-style dataflow, with diagonal space-time skew scheduling and overflow-proof signed accumulators.</p>
+        <ul class="card-tech"><li>Systolic</li><li>GEMM</li><li>Signed MAC</li></ul>
       </li>
 
       <li class="project-card">
         <div class="card-top">
           <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
-          <a class="card-link" href="https://github.com/Asresh/RTL-Projects-Everyday" target="_blank" rel="noopener" aria-label="External link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+          <a class="card-link" href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day16" target="_blank" rel="noopener" aria-label="Open Day16 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
         </div>
-        <h4 class="card-title"><a href="https://github.com/Asresh/RTL-Projects-Everyday" target="_blank" rel="noopener">GPU Warp Scheduler (GTO)</a></h4>
-        <p class="card-desc">An NVIDIA-class SM issue front-end: per-warp RAW/WAW register scoreboarding with greedy-then-oldest arbitration, one deadlock-free instruction issue per cycle.</p>
-        <ul class="card-tech"><li>SIMT</li><li>Scoreboarding</li><li>Arbitration</li></ul>
+        <h4 class="card-title"><a href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day16" target="_blank" rel="noopener">SIMT Bank-Conflict Crossbar</a></h4>
+        <p class="card-desc">Shared-memory crossbar resolving bank conflicts by leader-select scheduling, with same-address broadcast collapsing and a pending-mask retire loop.</p>
+        <ul class="card-tech"><li>GPU</li><li>Crossbar</li><li>Shared-mem</li></ul>
       </li>
 
       <li class="project-card">
         <div class="card-top">
           <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
-          <a class="card-link" href="https://github.com/Asresh/RTL-Projects-Everyday" target="_blank" rel="noopener" aria-label="External link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+          <a class="card-link" href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day20" target="_blank" rel="noopener" aria-label="Open Day20 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
         </div>
-        <h4 class="card-title"><a href="https://github.com/Asresh/RTL-Projects-Everyday" target="_blank" rel="noopener">Streaming Top-K Selection Engine</a></h4>
-        <p class="card-desc">A systolic sorted-insertion array holding the K largest (key, tag) pairs of a 1-element/clock stream — the hardware behind LLM top-K sampling, beam search, k-NN and top-of-book.</p>
-        <ul class="card-tech"><li>Systolic</li><li>Priority insert</li><li>Parameterized</li></ul>
+        <h4 class="card-title"><a href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day20" target="_blank" rel="noopener">Memory-Coalescing Unit</a></h4>
+        <p class="card-desc">GPU LSU front-end coalescing per-lane byte addresses into the minimum aligned cache-line transactions via single-pass parallel leader detection.</p>
+        <ul class="card-tech"><li>GPU</li><li>LSU</li><li>Coalescing</li></ul>
       </li>
 
       <li class="project-card">
         <div class="card-top">
           <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
-          <a class="card-link" href="https://github.com/Asresh/RTL-Projects-Everyday" target="_blank" rel="noopener" aria-label="External link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+          <a class="card-link" href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day21" target="_blank" rel="noopener" aria-label="Open Day21 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
         </div>
-        <h4 class="card-title"><a href="https://github.com/Asresh/RTL-Projects-Everyday" target="_blank" rel="noopener">Async (Dual-Clock) FIFO</a></h4>
-        <p class="card-desc">A clock-domain-crossing FIFO with Gray-code read/write pointers and two-flop synchronizers, proven against a golden-queue self-checking testbench across non-commensurate clocks.</p>
-        <ul class="card-tech"><li>CDC</li><li>Gray-code</li><li>Metastability</li></ul>
+        <h4 class="card-title"><a href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day21" target="_blank" rel="noopener">2:4 Structured-Sparsity Engine</a></h4>
+        <p class="card-desc">Sparse Tensor-Core datapath computing dot-products over 2:4 structured-sparse weights, with per-group index-metadata decode and 4:1 selection.</p>
+        <ul class="card-tech"><li>Sparse tensor-core</li><li>INT8</li></ul>
       </li>
 
-      <li class="project-card card-more">
+      <li class="project-card">
         <div class="card-top">
-          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect></svg></span>
-          <a class="card-link" href="https://github.com/Asresh/RTL-Projects-Everyday" target="_blank" rel="noopener" aria-label="External link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day23" target="_blank" rel="noopener" aria-label="Open Day23 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
         </div>
-        <h4 class="card-title"><a href="https://github.com/Asresh/RTL-Projects-Everyday" target="_blank" rel="noopener">21 builds and counting</a></h4>
-        <p class="card-desc">SPI/UART/I²C controllers, restoring divider, radix-4 Booth × Wallace-tree multiplier, CORDIC, SECDED Hamming(72,64) ECC, Kogge-Stone scan, bitonic sort, SIMT divergence stack…</p>
-        <ul class="card-tech"><li>See the repo →</li></ul>
+        <h4 class="card-title"><a href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day23" target="_blank" rel="noopener">Hardware Priority Queue</a></h4>
+        <p class="card-desc">Systolic register-array min-priority-queue with single-cycle enqueue and extract-min at occupancy-independent latency, kept sorted by parallel compare / shift-insert.</p>
+        <ul class="card-tech"><li>Priority queue</li><li>Systolic</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day19" target="_blank" rel="noopener" aria-label="Open Day19 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day19" target="_blank" rel="noopener">Streaming Top-K Engine</a></h4>
+        <p class="card-desc">Systolic sorted-insertion array keeping the K largest (key, tag) pairs of a 1-element/clock stream — LLM top-K sampling, beam search, k-NN.</p>
+        <ul class="card-tech"><li>Top-K</li><li>Systolic</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day15" target="_blank" rel="noopener" aria-label="Open Day15 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day15" target="_blank" rel="noopener">Segmented Prefix-Sum (Kogge-Stone)</a></h4>
+        <p class="card-desc">Pipelined Kogge-Stone parallel prefix-sum with per-lane head-flag segmented scan and OR-scan flag propagation, one vector per clock.</p>
+        <ul class="card-tech"><li>Scan</li><li>Prefix-sum</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day13" target="_blank" rel="noopener" aria-label="Open Day13 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day13" target="_blank" rel="noopener">IEEE-754 binary32 FP Adder</a></h4>
+        <p class="card-desc">Single-precision adder with exponent-align barrel shift, round-to-nearest-even (guard/round/sticky), subnormals and Inf/NaN special-casing.</p>
+        <ul class="card-tech"><li>IEEE-754</li><li>Floating-point</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day12" target="_blank" rel="noopener" aria-label="Open Day12 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day12" target="_blank" rel="noopener">Radix-4 Booth Multiplier</a></h4>
+        <p class="card-desc">Modified-Booth recoding with a Wallace 3:2 carry-save reduction tree and final carry-propagate adder — one signed/unsigned multiply per clock.</p>
+        <ul class="card-tech"><li>Booth</li><li>Wallace-tree</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day22" target="_blank" rel="noopener" aria-label="Open Day22 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day22" target="_blank" rel="noopener">Parallel CRC-32 (Ethernet FCS)</a></h4>
+        <p class="card-desc">Reflected IEEE-802.3 CRC-32 unrolling the bit-serial LFSR into a single combinational GF(2) cone, N bytes per clock.</p>
+        <ul class="card-tech"><li>CRC-32</li><li>Ethernet</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day11" target="_blank" rel="noopener" aria-label="Open Day11 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day11" target="_blank" rel="noopener">Bitonic Sorting Network</a></h4>
+        <p class="card-desc">Batcher bitonic network with data-independent compare-exchange stages at constant latency — one vector per clock, signed/unsigned, asc/desc.</p>
+        <ul class="card-tech"><li>Bitonic</li><li>Sorting</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day9" target="_blank" rel="noopener" aria-label="Open Day9 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day9" target="_blank" rel="noopener">CORDIC Sine / Cosine</a></h4>
+        <p class="card-desc">Fully-unrolled rotation-mode CORDIC computing sin/cos multiplier-free (add &amp; shift) with quadrant folding and 1/K pre-scale, Q2.13.</p>
+        <ul class="card-tech"><li>CORDIC</li><li>Fixed-point</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day10" target="_blank" rel="noopener" aria-label="Open Day10 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day10" target="_blank" rel="noopener">SECDED (72,64) Hamming ECC</a></h4>
+        <p class="card-desc">Single-error-correct / double-error-detect codec with interleaved parity, syndrome decode and a 1-of-72 corrector, 2-stage pipeline.</p>
+        <ul class="card-tech"><li>ECC</li><li>Hamming</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day7" target="_blank" rel="noopener" aria-label="Open Day7 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day7" target="_blank" rel="noopener">AXI4-Lite Register Block</a></h4>
+        <p class="card-desc">Five-channel AXI4-Lite slave with VALID/READY handshakes, WSTRB byte strobes, OKAY/SLVERR responses and RW/RO/W1C register semantics.</p>
+        <ul class="card-tech"><li>AXI4-Lite</li><li>Registers</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day8" target="_blank" rel="noopener" aria-label="Open Day8 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day8" target="_blank" rel="noopener">I²C Master Controller</a></h4>
+        <p class="card-desc">Single-master open-drain controller: START/STOP, 7-bit addressing, per-byte ACK/NACK, four-phase SCL, clock-stretch aware.</p>
+        <ul class="card-tech"><li>I²C</li><li>Protocol</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day4" target="_blank" rel="noopener" aria-label="Open Day4 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day4" target="_blank" rel="noopener">Async (Dual-Clock) FIFO</a></h4>
+        <p class="card-desc">Dual-clock FIFO with Gray-code pointers and two-flop synchronizers for safe clock-domain crossing and full/empty generation.</p>
+        <ul class="card-tech"><li>CDC</li><li>Gray-code</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day3" target="_blank" rel="noopener" aria-label="Open Day3 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day3" target="_blank" rel="noopener">SPI Master (all 4 modes)</a></h4>
+        <p class="card-desc">SPI master supporting all four CPOL/CPHA modes with a programmable SCLK divider and a full-duplex shift engine.</p>
+        <ul class="card-tech"><li>SPI</li><li>Protocol</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day5" target="_blank" rel="noopener" aria-label="Open Day5 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day5" target="_blank" rel="noopener">UART (TX + RX)</a></h4>
+        <p class="card-desc">8-N-1 transceiver with run-time baud divider, mid-bit sampling, two-flop line sync and TX→RX loopback self-check.</p>
+        <ul class="card-tech"><li>UART</li><li>Serial</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day6" target="_blank" rel="noopener" aria-label="Open Day6 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day6" target="_blank" rel="noopener">Sequential Integer Divider</a></h4>
+        <p class="card-desc">Restoring shift-subtract multicycle FSM with start/busy/done handshake, quotient + remainder output and a divide-by-zero policy.</p>
+        <ul class="card-tech"><li>Divider</li><li>FSM</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day2" target="_blank" rel="noopener" aria-label="Open Day2 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day2" target="_blank" rel="noopener">Round-Robin Arbiter</a></h4>
+        <p class="card-desc">Parameterized fair rotating priority with one-hot grant, priority mask and wrap-around scheduling.</p>
+        <ul class="card-tech"><li>Arbiter</li><li>One-hot</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day1" target="_blank" rel="noopener" aria-label="Open Day1 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/RTL-Projects-Everyday/tree/main/Day1" target="_blank" rel="noopener">Synchronous FIFO</a></h4>
+        <p class="card-desc">Synchronous FIFO with occupancy counter and full/empty flag generation, verified by a self-checking testbench.</p>
+        <ul class="card-tech"><li>FIFO</li><li>Verification</li></ul>
       </li>
     </ul>
 
@@ -262,20 +429,20 @@
     <div class="featured featured-right reveal">
       <div class="featured-content">
         <p class="featured-overline">Featured Environment</p>
-        <h3 class="featured-title"><a href="https://github.com/Asresh/Design-Verification-Projects-Everyday" target="_blank" rel="noopener">UVM AXI4-Lite Register-Block Verification</a></h3>
+        <h3 class="featured-title"><a href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day15" target="_blank" rel="noopener">UVM SIMT Reconvergence-Stack Verification</a></h3>
         <div class="featured-desc">
           <p>
-            A complete five-channel AXI4-Lite agent — driver, monitor and sequencer — driving a register block
-            through layered and virtual sequences. A golden reference-model scoreboard checks every read and
-            write, functional coverage tracks the address/response space, and a bank of protocol SVA enforces
-            VALID/READY stability and legal response codes on every handshake.
+            A full UVM environment signing off a SIMT divergence/reconvergence stack — the control-flow heart
+            of a GPU. A shadow-stack predictor scoreboard mirrors every push, reconverge and pop; nested
+            divergence and mask-underflow corners are driven directly; and top-of-stack status SVA guards the
+            contract on every transaction.
           </p>
         </div>
         <ul class="tech-list">
-          <li>UVM</li><li>AXI4-Lite</li><li>SVA</li><li>Functional coverage</li>
+          <li>UVM</li><li>SIMT</li><li>Shadow scoreboard</li><li>SVA</li>
         </ul>
         <div class="featured-links">
-          <a href="https://github.com/Asresh/Design-Verification-Projects-Everyday" target="_blank" rel="noopener" aria-label="GitHub repository"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+          <a href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day15" target="_blank" rel="noopener" aria-label="GitHub repository"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
         </div>
       </div>
       <div class="featured-visual" aria-hidden="true">
@@ -314,61 +481,181 @@
       <li class="project-card">
         <div class="card-top">
           <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
-          <a class="card-link" href="https://github.com/Asresh/Design-Verification-Projects-Everyday" target="_blank" rel="noopener" aria-label="External link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+          <a class="card-link" href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day19" target="_blank" rel="noopener" aria-label="Open Day19 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
         </div>
-        <h4 class="card-title"><a href="https://github.com/Asresh/Design-Verification-Projects-Everyday" target="_blank" rel="noopener">UVM RAL Register Model</a></h4>
-        <p class="card-desc">A <code>uvm_reg</code> model over RW/RO/W1C fields with a <code>uvm_reg_adapter</code> and explicit predictor, exercising front-door and back-door access with built-in hw_reset and bit-bash sequences.</p>
+        <h4 class="card-title"><a href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day19" target="_blank" rel="noopener">BBO Top-of-Book Reduction-Tree</a></h4>
+        <p class="card-desc">UVM env for an argmax+argmin top-of-book reduction tree (FPGA matching engine) with a lowest-index tie-break golden model and coverage.</p>
+        <ul class="card-tech"><li>UVM</li><li>HFT</li><li>Reduction-tree</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day17" target="_blank" rel="noopener" aria-label="Open Day17 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day17" target="_blank" rel="noopener">Bitonic Sorting-Network Verification</a></h4>
+        <p class="card-desc">UVM env verifying a pipelined Batcher bitonic sort with an insertion-sort golden model, fixed-latency SVA and duplicate-key tie-break coverage.</p>
+        <ul class="card-tech"><li>UVM</li><li>Sorting</li><li>Golden-model</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day18" target="_blank" rel="noopener" aria-label="Open Day18 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day18" target="_blank" rel="noopener">Parallel Prefix-Sum (Scan) Verification</a></h4>
+        <p class="card-desc">UVM env verifying a Kogge-Stone inclusive/exclusive prefix-sum with a sequential modular-prefix golden model and mode/wrap coverage.</p>
+        <ul class="card-tech"><li>UVM</li><li>Scan</li><li>Coverage</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day16" target="_blank" rel="noopener" aria-label="Open Day16 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day16" target="_blank" rel="noopener">Bank-Conflict Serializer Verification</a></h4>
+        <p class="card-desc">UVM env verifying a shared-memory bank-conflict serializer (broadcast + serialization) with a beat-for-beat golden phase model.</p>
+        <ul class="card-tech"><li>UVM</li><li>GPU</li><li>Scoreboard</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day14" target="_blank" rel="noopener" aria-label="Open Day14 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day14" target="_blank" rel="noopener">Memory-Coalescing Unit Verification</a></h4>
+        <p class="card-desc">UVM env verifying a warp memory-coalescer, checking unique cache-line transactions and lossless / disjoint per-lane accounting.</p>
+        <ul class="card-tech"><li>UVM</li><li>GPU</li><li>Reference-model</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day13" target="_blank" rel="noopener" aria-label="Open Day13 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day13" target="_blank" rel="noopener">Tensor-Core MAC Verification</a></h4>
+        <p class="card-desc">UVM env verifying a streaming signed multiply-accumulate lane with a modular-accumulate golden scoreboard and length×sign coverage.</p>
+        <ul class="card-tech"><li>UVM</li><li>MAC</li><li>Coverage</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day5" target="_blank" rel="noopener" aria-label="Open Day5 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day5" target="_blank" rel="noopener">UVM RAL Register Model</a></h4>
+        <p class="card-desc">A <code>uvm_reg</code> model (RW/RO/W1C) with adapter and explicit predictor, exercising front-door and back-door access with hw_reset and bit-bash sequences.</p>
         <ul class="card-tech"><li>RAL</li><li>Predictor</li><li>Back-door</li></ul>
       </li>
 
       <li class="project-card">
         <div class="card-top">
           <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
-          <a class="card-link" href="https://github.com/Asresh/Design-Verification-Projects-Everyday" target="_blank" rel="noopener" aria-label="External link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+          <a class="card-link" href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day8" target="_blank" rel="noopener" aria-label="Open Day8 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
         </div>
-        <h4 class="card-title"><a href="https://github.com/Asresh/Design-Verification-Projects-Everyday" target="_blank" rel="noopener">Tensor-Core MAC Verification</a></h4>
-        <p class="card-desc">Verifies the streaming signed multiply-accumulate reduction lane at the heart of a GEMM/tensor core, with a golden dot-product scoreboard and magnitude-stress corners like −128 · −128.</p>
-        <ul class="card-tech"><li>UVM</li><li>2's-comp</li><li>Cross cov</li></ul>
+        <h4 class="card-title"><a href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day8" target="_blank" rel="noopener">Async-FIFO CDC Verification</a></h4>
+        <p class="card-desc">UVM env verifying a dual-clock Gray-pointer FIFO across a CDC with per-domain agents and an order/integrity golden-queue scoreboard.</p>
+        <ul class="card-tech"><li>UVM</li><li>CDC</li><li>Scoreboard</li></ul>
       </li>
 
       <li class="project-card">
         <div class="card-top">
           <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
-          <a class="card-link" href="https://github.com/Asresh/Design-Verification-Projects-Everyday" target="_blank" rel="noopener" aria-label="External link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+          <a class="card-link" href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day3" target="_blank" rel="noopener" aria-label="Open Day3 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
         </div>
-        <h4 class="card-title"><a href="https://github.com/Asresh/Design-Verification-Projects-Everyday" target="_blank" rel="noopener">Async-FIFO CDC Verification</a></h4>
-        <p class="card-desc">Drives a dual-clock Gray-pointer FIFO across non-commensurate clocks with independent multi-clock agents, a golden-queue scoreboard, and single-bit-Gray-transition SVA.</p>
-        <ul class="card-tech"><li>CDC</li><li>Multi-clock</li><li>Gray SVA</li></ul>
+        <h4 class="card-title"><a href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day3" target="_blank" rel="noopener">AXI4-Lite Register-Block Verification</a></h4>
+        <p class="card-desc">Full UVM env: five-channel AXI4-Lite agent, golden reference scoreboard, layered / virtual sequences and protocol SVA.</p>
+        <ul class="card-tech"><li>UVM</li><li>AXI4-Lite</li><li>SVA</li></ul>
       </li>
 
       <li class="project-card">
         <div class="card-top">
           <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
-          <a class="card-link" href="https://github.com/Asresh/Design-Verification-Projects-Everyday" target="_blank" rel="noopener" aria-label="External link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+          <a class="card-link" href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day11" target="_blank" rel="noopener" aria-label="Open Day11 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
         </div>
-        <h4 class="card-title"><a href="https://github.com/Asresh/Design-Verification-Projects-Everyday" target="_blank" rel="noopener">UVM APB4 Register-File</a></h4>
-        <p class="card-desc">A full UVM agent with a golden scoreboard, virtual sequencer and layered sequences, plus APB4 protocol SVA over the setup/access phases.</p>
-        <ul class="card-tech"><li>APB4</li><li>Virtual seq</li><li>Scoreboard</li></ul>
+        <h4 class="card-title"><a href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day11" target="_blank" rel="noopener">SPI Master Verification</a></h4>
+        <p class="card-desc">UVM env verifying an all-mode SPI master with an independent slave agent and a full-duplex golden reference scoreboard (MOSI/MISO).</p>
+        <ul class="card-tech"><li>UVM</li><li>SPI</li><li>Scoreboard</li></ul>
       </li>
 
       <li class="project-card">
         <div class="card-top">
           <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
-          <a class="card-link" href="https://github.com/Asresh/Design-Verification-Projects-Everyday" target="_blank" rel="noopener" aria-label="External link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+          <a class="card-link" href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day10" target="_blank" rel="noopener" aria-label="Open Day10 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
         </div>
-        <h4 class="card-title"><a href="https://github.com/Asresh/Design-Verification-Projects-Everyday" target="_blank" rel="noopener">Bitonic Sort-Network Verification</a></h4>
-        <p class="card-desc">Verifies a Batcher bitonic sort of an N-record warp with latency-independent FIFO-pairing in the monitor, an independent insertion-sort golden model, and duplicate-key tie-break coverage.</p>
-        <ul class="card-tech"><li>Fixed-latency SVA</li><li>Tie-break cov</li></ul>
+        <h4 class="card-title"><a href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day10" target="_blank" rel="noopener">AXI4-Stream Skid-Buffer Verification</a></h4>
+        <p class="card-desc">UVM env verifying a full-throughput AXI4-Stream skid buffer with source/sink agents and a lossless in-order queue scoreboard.</p>
+        <ul class="card-tech"><li>UVM</li><li>AXI-Stream</li><li>Backpressure</li></ul>
       </li>
 
-      <li class="project-card card-more">
+      <li class="project-card">
         <div class="card-top">
-          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect></svg></span>
-          <a class="card-link" href="https://github.com/Asresh/Design-Verification-Projects-Everyday" target="_blank" rel="noopener" aria-label="External link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day6" target="_blank" rel="noopener" aria-label="Open Day6 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
         </div>
-        <h4 class="card-title"><a href="https://github.com/Asresh/Design-Verification-Projects-Everyday" target="_blank" rel="noopener">18 environments and counting</a></h4>
-        <p class="card-desc">AXI4-Stream skid buffers, memory-coalescing units, SIMT reconvergence stacks, bank-conflict serializers, Kogge-Stone scan — each with its own scoreboard, coverage and assertions.</p>
-        <ul class="card-tech"><li>See the repo →</li></ul>
+        <h4 class="card-title"><a href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day6" target="_blank" rel="noopener">Packet-Router Verification</a></h4>
+        <p class="card-desc">UVM env verifying a 1→N store-and-forward packet router with a per-port FIFO golden scoreboard and backpressure / FIFO-full corners.</p>
+        <ul class="card-tech"><li>UVM</li><li>Router</li><li>Scoreboard</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day2" target="_blank" rel="noopener" aria-label="Open Day2 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day2" target="_blank" rel="noopener">APB4 Register-File Verification</a></h4>
+        <p class="card-desc">Full UVM env verifying an APB4 register file with driver/monitor/sequencer, golden scoreboard, virtual sequences and protocol SVA.</p>
+        <ul class="card-tech"><li>UVM</li><li>APB4</li><li>SVA</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day7" target="_blank" rel="noopener" aria-label="Open Day7 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day7" target="_blank" rel="noopener">Round-Robin Arbiter Verification</a></h4>
+        <p class="card-desc">UVM env verifying a round-robin arbiter with a pointer-tracking golden model, fairness / anti-starvation checks and one-hot-grant SVA.</p>
+        <ul class="card-tech"><li>UVM</li><li>Arbiter</li><li>Fairness</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day12" target="_blank" rel="noopener" aria-label="Open Day12 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day12" target="_blank" rel="noopener">Sequential Divider Verification</a></h4>
+        <p class="card-desc">UVM env verifying a restoring divider with a quotient/remainder golden model, divide-by-zero stress and handshake SVA.</p>
+        <ul class="card-tech"><li>UVM</li><li>Divider</li><li>Handshake</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day9" target="_blank" rel="noopener" aria-label="Open Day9 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day9" target="_blank" rel="noopener">ALU Functional-Coverage Verification</a></h4>
+        <p class="card-desc">UVM env verifying an 8-op ALU with a shared golden model, four-flag checking and opcode×flag cross coverage.</p>
+        <ul class="card-tech"><li>UVM</li><li>ALU</li><li>Coverage</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day4" target="_blank" rel="noopener" aria-label="Open Day4 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day4" target="_blank" rel="noopener">UART Verification Environment</a></h4>
+        <p class="card-desc">UVM env with TX/RX byte-reconstructing monitors, a dual scoreboard, data×baud coverage and start/stop framing SVA.</p>
+        <ul class="card-tech"><li>UVM</li><li>UART</li><li>Coverage</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day1" target="_blank" rel="noopener" aria-label="Open Day1 on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/Day1" target="_blank" rel="noopener">Constrained-Random FIFO Scoreboard</a></h4>
+        <p class="card-desc">Pre-UVM env: a queue-based reference-model scoreboard with directed + constrained-random stimulus, functional coverage and SVA.</p>
+        <ul class="card-tech"><li>SystemVerilog</li><li>Scoreboard</li><li>Coverage</li></ul>
       </li>
     </ul>
 
@@ -391,7 +678,7 @@
     <div class="featured reveal">
       <div class="featured-content">
         <p class="featured-overline">Featured Accelerator</p>
-        <h3 class="featured-title"><a href="https://github.com/Asresh/Hardware-Software-Codesign-Projects-Everyday" target="_blank" rel="noopener">INT8 Systolic GEMM Accelerator</a></h3>
+        <h3 class="featured-title"><a href="https://github.com/Asresh/Hardware-Software-Codesign-Projects-Everyday/tree/main/day2%20-%20systolic_gemm_accelerator" target="_blank" rel="noopener">INT8 Systolic GEMM Accelerator</a></h3>
         <div class="featured-desc">
           <p>
             An 8×8 INT8 output-stationary MAC array with K-accumulate tiling, driven over a Wishbone&nbsp;B4
@@ -404,7 +691,7 @@
           <li>SystemVerilog + C</li><li>Wishbone B4</li><li>INT8</li><li>Differential TB</li>
         </ul>
         <div class="featured-links">
-          <a href="https://github.com/Asresh/Hardware-Software-Codesign-Projects-Everyday" target="_blank" rel="noopener" aria-label="GitHub repository"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+          <a href="https://github.com/Asresh/Hardware-Software-Codesign-Projects-Everyday/tree/main/day2%20-%20systolic_gemm_accelerator" target="_blank" rel="noopener" aria-label="GitHub repository"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
         </div>
       </div>
       <div class="featured-visual" aria-hidden="true">
@@ -441,11 +728,21 @@
       <li class="project-card">
         <div class="card-top">
           <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
-          <span class="card-metric">441×</span>
+          <span class="card-metric">83×</span>
         </div>
-        <h4 class="card-title"><a href="https://github.com/Asresh/Hardware-Software-Codesign-Projects-Everyday" target="_blank" rel="noopener">Philox Counter-Based RNG</a></h4>
-        <p class="card-desc">A 4-lane SIMD Philox-4×32-10 engine emitting one 128-bit block per lane per clock — 512 random bits/clock — validated against Random123 known-answer vectors over an MMIO mailbox/doorbell/IRQ interface.</p>
-        <ul class="card-tech"><li>SIMD</li><li>Pipelined</li><li>Masked DMA</li></ul>
+        <h4 class="card-title"><a href="https://github.com/Asresh/Hardware-Software-Codesign-Projects-Everyday/tree/main/day9%20-%20gpu_alpha_signal_engine" target="_blank" rel="noopener">HFT Alpha-Signal Engine</a></h4>
+        <p class="card-desc">Per-symbol EWMA + variance in a single-cycle read-modify-write symbol RAM, feeding a 32-stage sqrt and 48-stage divider — one tick per clock.</p>
+        <ul class="card-tech"><li>AXI4-Stream</li><li>HFT</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <span class="card-metric">200×</span>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/Hardware-Software-Codesign-Projects-Everyday/tree/main/day8%20-%20gpu_order_book_engine" target="_blank" rel="noopener">CAM Limit Order-Book / BBO</a></h4>
+        <p class="card-desc">Content-addressable 32-level price map with single-cycle (side, price) match/update and dual BBO comparator trees, ~1 message per clock.</p>
+        <ul class="card-tech"><li>CAM</li><li>HFT</li></ul>
       </li>
 
       <li class="project-card">
@@ -453,9 +750,19 @@
           <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
           <span class="card-metric">35×</span>
         </div>
-        <h4 class="card-title"><a href="https://github.com/Asresh/Hardware-Software-Codesign-Projects-Everyday" target="_blank" rel="noopener">CORDIC Special-Function Unit</a></h4>
-        <p class="card-desc">A 4-lane SIMD iterative shift-and-add CORDIC computing sin/cos/exp/cosh/atan2/hypot/ln/sqrt from a shared submission/completion ring — ~23 bits accurate (1.15e-7 max error vs libm).</p>
-        <ul class="card-tech"><li>CORDIC</li><li>Ring buffer</li><li>Gather/scatter</li></ul>
+        <h4 class="card-title"><a href="https://github.com/Asresh/Hardware-Software-Codesign-Projects-Everyday/tree/main/day7%20-%20gpu_cordic_sfu_engine" target="_blank" rel="noopener">CORDIC Special-Function Unit</a></h4>
+        <p class="card-desc">Unified circular/hyperbolic CORDIC computing sin/cos/exp/ln/sqrt/atan2/hypot on one shift-add datapath across 4 SIMD lanes.</p>
+        <ul class="card-tech"><li>CORDIC</li><li>SIMD</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <span class="card-metric">441×</span>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/Hardware-Software-Codesign-Projects-Everyday/tree/main/day6%20-%20gpu_philox_rng_engine" target="_blank" rel="noopener">Philox Counter-Based RNG</a></h4>
+        <p class="card-desc">Fully-pipelined Philox-4×32-10 with 4-lane SIMD retiring one 128-bit block/lane/clock — 512 random bits/clock — over an MMIO mailbox/doorbell.</p>
+        <ul class="card-tech"><li>RNG</li><li>SIMD</li></ul>
       </li>
 
       <li class="project-card">
@@ -463,19 +770,19 @@
           <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
           <span class="card-metric">116×</span>
         </div>
-        <h4 class="card-title"><a href="https://github.com/Asresh/Hardware-Software-Codesign-Projects-Everyday" target="_blank" rel="noopener">Tiled Bitonic Sort</a></h4>
-        <p class="card-desc">A 10-stage / 80-cell Batcher sorting network retiring one 16-key (512-bit) tile per clock, fed by a coalesced wide-DMA master.</p>
-        <ul class="card-tech"><li>Sorting network</li><li>Wide DMA</li></ul>
+        <h4 class="card-title"><a href="https://github.com/Asresh/Hardware-Software-Codesign-Projects-Everyday/tree/main/day4%20-%20bitonic_sort_accelerator" target="_blank" rel="noopener">Tiled Bitonic Sort</a></h4>
+        <p class="card-desc">Pipelined Batcher network (10-stage / 80-cell compare-exchange) retiring one 16-key 512-bit tile per clock over a wide-DMA master.</p>
+        <ul class="card-tech"><li>Bitonic</li><li>Wide DMA</li></ul>
       </li>
 
       <li class="project-card">
         <div class="card-top">
           <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
-          <span class="card-metric">7.9×</span>
+          <span class="card-metric">45×</span>
         </div>
-        <h4 class="card-title"><a href="https://github.com/Asresh/Hardware-Software-Codesign-Projects-Everyday" target="_blank" rel="noopener">Streaming FIR Accelerator</a></h4>
-        <p class="card-desc">A transposed-form FIR at 8 MAC/cycle and ~1 sample/clock over AXI4-Lite control + AXI4-Stream data, with FIFO backpressure and a bare-metal C driver.</p>
-        <ul class="card-tech"><li>AXI-Lite/Stream</li><li>Backpressure</li></ul>
+        <h4 class="card-title"><a href="https://github.com/Asresh/Hardware-Software-Codesign-Projects-Everyday/tree/main/day3%20-%20scan_prefix_sum_engine" target="_blank" rel="noopener">Parallel Prefix-Sum (Scan)</a></h4>
+        <p class="card-desc">A 16-lane Kogge-Stone prefix tree with carry chaining and descriptor-driven wide DMA over APB, ~15 words per cycle.</p>
+        <ul class="card-tech"><li>Scan</li><li>APB</li></ul>
       </li>
 
       <li class="project-card">
@@ -483,19 +790,19 @@
           <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
           <span class="card-metric">32×</span>
         </div>
-        <h4 class="card-title"><a href="https://github.com/Asresh/Hardware-Software-Codesign-Projects-Everyday" target="_blank" rel="noopener">Bilinear Texture-Filter Engine</a></h4>
-        <p class="card-desc">A two-row line-buffer window with 2×2 texel gather and Q16.16 bilinear blend, emitting one filtered pixel per clock over a mailbox/doorbell interface with a coalesced memory master.</p>
+        <h4 class="card-title"><a href="https://github.com/Asresh/Hardware-Software-Codesign-Projects-Everyday/tree/main/day5%20-%20gpu_texture_filter_engine" target="_blank" rel="noopener">Bilinear Texture-Filter Engine</a></h4>
+        <p class="card-desc">A two-row line-buffer window with 2×2 texel gather and Q16.16 bilinear blend, one filtered pixel per clock via a coalesced memory master.</p>
         <ul class="card-tech"><li>Q16.16</li><li>Line buffers</li></ul>
       </li>
 
-      <li class="project-card card-more">
+      <li class="project-card">
         <div class="card-top">
-          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect></svg></span>
-          <a class="card-link" href="https://github.com/Asresh/Hardware-Software-Codesign-Projects-Everyday" target="_blank" rel="noopener" aria-label="External link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <span class="card-metric">7.9×</span>
         </div>
-        <h4 class="card-title"><a href="https://github.com/Asresh/Hardware-Software-Codesign-Projects-Everyday" target="_blank" rel="noopener">RTL + C + CI, every build</a></h4>
-        <p class="card-desc">A Kogge-Stone scan engine (45×) rounds out the set. Every accelerator carries a MANIFEST index, MIT license, hand-drawn SVG block diagrams, and a green GitHub Actions run.</p>
-        <ul class="card-tech"><li>See the repo →</li></ul>
+        <h4 class="card-title"><a href="https://github.com/Asresh/Hardware-Software-Codesign-Projects-Everyday/tree/main/day1%20-%20fir_stream_accelerator" target="_blank" rel="noopener">Streaming FIR Accelerator</a></h4>
+        <p class="card-desc">A transposed-form FIR at 8 MAC/cycle and ~1 sample/clock over AXI4-Lite control + AXI4-Stream data, with FIFO backpressure and a bare-metal C driver.</p>
+        <ul class="card-tech"><li>AXI-Lite/Stream</li><li>FIR</li></ul>
       </li>
     </ul>
 
