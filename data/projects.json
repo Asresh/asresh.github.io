@@ -259,6 +259,13 @@
           "desc": "HFT tick-to-trade instrumentation stage — measure end-to-end latency in the fabric (no CPU / no syscall / no observer effect)…",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "Day31",
+          "title": "Tick-to-Trade Marketable-Order Trigger Engine",
+          "desc": "The trade-decision node of the HFT tick-to-trade path — sits between Day 27's book/BBO engine and Day 26's pre-trade risk gate…",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -454,6 +461,13 @@
           "id": "Day20",
           "title": "UVM Pre-Trade Risk-Check Gate (\"Fat-Finger\" Order-Validation Gateway) Verification",
           "desc": "Fully-pipelined, fixed-latency (LAT=PIPE+1) pre-trade risk gate — the first…",
+          "tags": [],
+          "new": true
+        },
+        {
+          "id": "Day21",
+          "title": "UVM Market-Data Sequence Gap Detector &amp; Duplicate Suppressor Verification",
+          "desc": "Cut-through, fixed-latency (LAT=PIPE+1) feed-handler front end — the first…",
           "tags": [],
           "new": true
         }
@@ -744,6 +758,13 @@
             "Arbiter",
             "Fairness"
           ]
+        },
+        {
+          "id": "Day22",
+          "title": "Fully-Pipelined Newton-Raphson Fixed-Point Reciprocal Unit (`1/x`)",
+          "desc": "GPU Special-Function-Unit reciprocal primitive (MUFU.RCP/__frcp_rn) &amp; ultra-low-latency HFT / FPGA divide substrate (VWAP, price ratios…",
+          "tags": [],
+          "new": true
         }
       ]
     }
