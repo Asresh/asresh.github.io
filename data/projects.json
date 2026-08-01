@@ -470,6 +470,13 @@
           "desc": "Cut-through, fixed-latency (LAT=PIPE+1) feed-handler front end — the first…",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "Day22",
+          "title": "UVM Token-Bucket Order-Rate Limiter (\"Exchange Gateway Throttle\") Verification",
+          "desc": "Cut-through…",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -568,6 +575,14 @@
           "tags": [],
           "metric": "20.76×",
           "new": true
+        },
+        {
+          "id": "day11 - gpu_crc_feed_integrity_engine",
+          "title": "GPU CRC Feed Integrity Engine",
+          "desc": "GPU/FPGA-style line-rate market-data feed-integrity engine: a combinational GF(2) CRC-32/FCS fold checks four payload bytes per clock while an…",
+          "tags": [],
+          "new": true,
+          "metric": "31.02×"
         }
       ]
     },
