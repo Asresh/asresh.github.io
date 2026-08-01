@@ -66,9 +66,7 @@ This repo is a `<user>.github.io` site, so GitHub Pages serves it automatically 
 
 ## Customize
 
-One spot is still a placeholder — search `index.html` for `TODO`:
-
-- **Contact email** — `you@example.com` in `index.html` (left rail, right rail, and the *Say Hello* button)
+Content for the four generated sections lives in [`data/projects.json`](data/projects.json) (see above). Everything else — hero copy, the AI section, contact email and social links — is directly in `index.html`.
 
 ## Credits
 
