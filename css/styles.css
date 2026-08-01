@@ -186,7 +186,6 @@ em { color: var(--light-slate); font-style: normal; }
 }
 .nav-links a:hover { color: var(--green); }
 .nav-num { color: var(--green); margin-right: 5px; font-size: 12px; }
-.resume-btn { margin-left: 10px; }
 
 /* hamburger — hidden on desktop */
 .menu-btn { display: none; }
