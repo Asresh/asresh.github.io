@@ -287,6 +287,13 @@
           "desc": "The hash workhorse under TLS records / Git objects / secure-boot &amp; software-update signing / HMAC / PBKDF2 / IPFS / Bitcoin proof-of-work — a…",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "Day35",
+          "title": "8b/10b Line Encoder (Widmer / Franaszek)",
+          "desc": "The physical-coding-sublayer (PCS) workhorse between byte-domain logic and the SerDes of PCIe Gen1/2 / SATA / 1000BASE-X GbE / USB 3.0 / DisplayPort…",
+          "tags": [],
+          "new": true
         }
       ]
     },
