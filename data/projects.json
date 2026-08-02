@@ -266,6 +266,20 @@
           "desc": "The trade-decision node of the HFT tick-to-trade path — sits between Day 27's book/BBO engine and Day 26's pre-trade risk gate…",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "Day32",
+          "title": "Reed–Solomon RS(n,k) Systematic Encoder over GF(2^M)",
+          "desc": "The workhorse symbol-level ECC of the real world (CD/DVD/Blu-ray, QR, DVB/ATSC, DSL, RAID-6, deep-space CCSDS…",
+          "tags": [],
+          "new": true
+        },
+        {
+          "id": "Day33",
+          "title": "AES-128 Block-Cipher Encryption Core (iterative, FIPS-197)",
+          "desc": "The symmetric block cipher under MACsec (802.1AE) / IPsec / TLS record / self-encrypting drives — a synthesizable AES-128 encryptor that turns one…",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -778,6 +792,13 @@
           "id": "Day22",
           "title": "Fully-Pipelined Newton-Raphson Fixed-Point Reciprocal Unit (`1/x`)",
           "desc": "GPU Special-Function-Unit reciprocal primitive (MUFU.RCP/__frcp_rn) &amp; ultra-low-latency HFT / FPGA divide substrate (VWAP, price ratios…",
+          "tags": [],
+          "new": true
+        },
+        {
+          "id": "Day23",
+          "title": "N-Way Set-Associative Write-Back Cache with Tree-PLRU Replacement",
+          "desc": "Set-associative memory hierarchy, parallel tag compare across WAYS…",
           "tags": [],
           "new": true
         }
