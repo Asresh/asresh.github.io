@@ -505,6 +505,13 @@
           "desc": "Byte-serial one-byte-per-cycle reflected CRC-32 / ISO-HDLC engine (the zlib / PNG / IEEE-802.3 Ethernet Frame-Check-Sequence block, poly 0xEDB88320…",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "Day24",
+          "title": "UVM SECDED (72,64) Extended-Hamming ECC Encoder/Decoder Verification",
+          "desc": "Parameterized Single-Error-Correct / Double-Error-Detect extended-Hamming ECC engine — the integrity guard inside memory (every ECC DRAM DIMM…",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -828,6 +835,13 @@
           "id": "Day24",
           "title": "gshare Correlating Branch Predictor",
           "desc": "Dynamic correlating prediction (McFarling gshare), Global History Register XOR-folded with the PC to index a PHT of 2-bit saturating counters…",
+          "tags": [],
+          "new": true
+        },
+        {
+          "id": "Day25",
+          "title": "Classic 5-Stage Pipelined RV32I Core (forwarding + hazard stall + branch flush)",
+          "desc": "Instruction pipelining (Patterson &amp; Hennessy IF/ID/EX/MEM/WB), one-instruction-per-cycle overlap via pipeline registers…",
           "tags": [],
           "new": true
         }
