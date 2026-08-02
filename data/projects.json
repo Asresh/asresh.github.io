@@ -280,6 +280,13 @@
           "desc": "The symmetric block cipher under MACsec (802.1AE) / IPsec / TLS record / self-encrypting drives — a synthesizable AES-128 encryptor that turns one…",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "Day34",
+          "title": "SHA-256 Cryptographic Hash Core (iterative, FIPS 180-4)",
+          "desc": "The hash workhorse under TLS records / Git objects / secure-boot &amp; software-update signing / HMAC / PBKDF2 / IPFS / Bitcoin proof-of-work — a…",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -491,6 +498,13 @@
           "desc": "Cut-through…",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "Day23",
+          "title": "UVM Streaming CRC-32 (Ethernet FCS) Generator/Checker Verification",
+          "desc": "Byte-serial one-byte-per-cycle reflected CRC-32 / ISO-HDLC engine (the zlib / PNG / IEEE-802.3 Ethernet Frame-Check-Sequence block, poly 0xEDB88320…",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -597,6 +611,14 @@
           "tags": [],
           "new": true,
           "metric": "31.02×"
+        },
+        {
+          "id": "day12 - gpu_pretrade_risk_engine",
+          "title": "GPU Pretrade Risk Engine",
+          "desc": "GPU/FPGA line-rate pre-trade risk / market-access gateway (SEC 15c3-5 style): every 128-bit AXI4-Stream order runs six heterogeneous risk gates (kill…",
+          "tags": [],
+          "new": true,
+          "metric": "53.39×"
         }
       ]
     },
@@ -799,6 +821,13 @@
           "id": "Day23",
           "title": "N-Way Set-Associative Write-Back Cache with Tree-PLRU Replacement",
           "desc": "Set-associative memory hierarchy, parallel tag compare across WAYS…",
+          "tags": [],
+          "new": true
+        },
+        {
+          "id": "Day24",
+          "title": "gshare Correlating Branch Predictor",
+          "desc": "Dynamic correlating prediction (McFarling gshare), Global History Register XOR-folded with the PC to index a PHT of 2-bit saturating counters…",
           "tags": [],
           "new": true
         }
