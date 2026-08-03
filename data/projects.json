@@ -294,6 +294,13 @@
           "desc": "The physical-coding-sublayer (PCS) workhorse between byte-domain logic and the SerDes of PCIe Gen1/2 / SATA / 1000BASE-X GbE / USB 3.0 / DisplayPort…",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "Day36",
+          "title": "Hard-Decision Viterbi Decoder (rate-1/2, K=3 (7,5))",
+          "desc": "The maximum-likelihood decoder for a convolutional code — the forward-error-correction workhorse behind 802.11a/g Wi-Fi, GSM, DVB…",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -519,6 +526,13 @@
           "desc": "Parameterized Single-Error-Correct / Double-Error-Detect extended-Hamming ECC engine — the integrity guard inside memory (every ECC DRAM DIMM…",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "Day25",
+          "title": "UVM Rotation-Mode CORDIC (Hardware sin/cos &amp; Vector Rotator) Verification",
+          "desc": "Fully-pipelined rotation-mode CORDIC — the multiplier-free shift-and-add vector rotator behind every hardware sin/cos generator…",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -633,6 +647,14 @@
           "tags": [],
           "new": true,
           "metric": "53.39×"
+        },
+        {
+          "id": "day13 - gpu_moe_router_engine",
+          "title": "GPU Moe Router Engine",
+          "desc": "GPU/heterogeneous-inference Mixture-of-Experts top-k routing/gating engine: per token it selects the top-2 experts via a log-depth argmax tree…",
+          "tags": [],
+          "new": true,
+          "metric": "116.94×"
         }
       ]
     },
@@ -849,6 +871,13 @@
           "id": "Day25",
           "title": "Classic 5-Stage Pipelined RV32I Core (forwarding + hazard stall + branch flush)",
           "desc": "Instruction pipelining (Patterson &amp; Hennessy IF/ID/EX/MEM/WB), one-instruction-per-cycle overlap via pipeline registers…",
+          "tags": [],
+          "new": true
+        },
+        {
+          "id": "Day26",
+          "title": "Branch Target Buffer (BTB) + Return Address Stack (RAS)",
+          "desc": "Fetch-stage target prediction (the \"where does it jump?\" the Day 6 / Day 24 direction predictors don't answer)…",
           "tags": [],
           "new": true
         }
