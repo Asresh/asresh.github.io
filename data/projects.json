@@ -308,6 +308,13 @@
           "desc": "The workhorse of DSP — the transform under OFDM (Wi-Fi 802.11a/g/n/ac, LTE/5G, DVB, DSL), pulse-Doppler &amp; synthetic-aperture radar, spectrometry…",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "Day38",
+          "title": "5-Stage Pipelined RISC-V RV32I Integer Core",
+          "desc": "The canonical \"put-it-all-together\" RTL building block — a synthesizable, in-order…",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -547,6 +554,13 @@
           "desc": "Single-master open-drain I²C controller (the two-wire SDA/SCL bus behind every board-level sensor / EEPROM / RTC / codec / PMIC) — the classic serial…",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "Day27",
+          "title": "UVM Self-Synchronizing Scrambler/Descrambler (10GBASE-R PCS) Verification",
+          "desc": "Parameterized WIDTH-bit-parallel multiplicative (self-synchronizing) scrambler/descrambler — the SerDes physical-layer data-whitening block (IEEE…",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -677,6 +691,14 @@
           "tags": [],
           "new": true,
           "metric": "51.65×"
+        },
+        {
+          "id": "day15 - gpu_ann_search_engine",
+          "title": "GPU Ann Search Engine",
+          "desc": "GPU/heterogeneous-inference vector-search (ANN) top-K engine - the retrieval primitive behind RAG and embedding search (FAISS-GPU style…",
+          "tags": [],
+          "new": true,
+          "metric": "21.80×"
         }
       ]
     },
@@ -907,6 +929,13 @@
           "id": "Day27",
           "title": "Stride Prefetcher (Reference Prediction Table)",
           "desc": "Hardware data prefetching / memory-latency hiding (Chen–Baer RPT)…",
+          "tags": [],
+          "new": true
+        },
+        {
+          "id": "Day28",
+          "title": "Explicit Register Renaming Unit (RAT + Free List)",
+          "desc": "Out-of-order front-end dependency breaking, Register Alias Table (RAT[a]=current physical mapping…",
           "tags": [],
           "new": true
         }
