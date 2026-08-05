@@ -58,9 +58,30 @@
           obs.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      // A ratio threshold is a trap here: the single-column project grids
+      // are ~10000px tall on a phone, so 12% of them never fits in an
+      // 800px viewport and they would stay at opacity 0 forever. Trigger
+      // on first pixel instead, pulled up a little so the fade still
+      // reads as "on scroll" rather than "already there".
+    }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
 
     revealEls.forEach(function (el) { io.observe(el); });
+
+    // Belt and braces: nothing on this page may stay invisible. If the
+    // observer never fires for something already on screen (layout shift
+    // during font/image load, or a grid so tall its top scrolled past
+    // before observation began), reveal it once the page has settled.
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        revealEls.forEach(function (el) {
+          if (el.classList.contains('revealed')) return;
+          var r = el.getBoundingClientRect();
+          if (r.top < window.innerHeight && r.bottom > 0) {
+            el.classList.add('revealed');
+          }
+        });
+      }, 300);
+    });
   } else {
     // No IO support — just show everything.
     revealEls.forEach(function (el) { el.classList.add('revealed'); });
