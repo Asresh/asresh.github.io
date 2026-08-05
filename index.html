@@ -44,6 +44,8 @@
 
     <div class="nav-inner">
       <ol class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
         <li><a href="#rtl"><span class="nav-num">01.</span> RTL Design</a></li>
         <li><a href="#verification"><span class="nav-num">02.</span> Verification</a></li>
         <li><a href="#codesign"><span class="nav-num">03.</span> Co-Design</a></li>
@@ -61,6 +63,8 @@
 <aside id="mobile-menu" class="mobile-menu" aria-hidden="true">
   <nav aria-label="Mobile">
     <ol class="mobile-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
       <li><a href="#rtl"><span class="nav-num">01.</span> RTL Design</a></li>
       <li><a href="#verification"><span class="nav-num">02.</span> Verification</a></li>
       <li><a href="#codesign"><span class="nav-num">03.</span> Co-Design</a></li>
@@ -110,9 +114,192 @@
       GPU/SIMT dataflow primitives that ML kernels are built on. This site is a running portfolio of one
       hands-on hardware build a day.
     </p>
-    <div class="reveal">
+    <div class="hero-actions reveal">
       <a href="#rtl" class="btn btn-lg">See what I've built</a>
+      <a href="#about" class="btn-text">Start with the short version &rarr;</a>
+      <p class="hero-meta">
+        <span class="dot" aria-hidden="true"></span>
+        <span>
+          Hardware / Design Verification Engineer at Cisco &nbsp;&middot;&nbsp; San Jose, CA &nbsp;&middot;&nbsp;
+          MS Computer Engineering, NC State
+        </span>
+      </p>
     </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="about" class="numbered-section">
+    <h2 class="numbered-heading reveal">About Me</h2>
+
+    <div class="about-grid">
+      <div class="about-copy reveal">
+        <p class="lede">
+          Every chip starts out as code. I write that code &mdash; and then I prove it's right before anyone
+          commits it to silicon, where a single missed bug costs millions to fix.
+        </p>
+        <p>
+          Those are the two halves of my work. <strong>RTL design</strong> is describing real hardware &mdash;
+          pipelines, arbiters, memories, math units &mdash; in SystemVerilog, so a compiler can turn it into
+          millions of gates. <strong>Design verification</strong> is the adversarial half: building a
+          testbench that hammers that hardware with millions of randomized scenarios and refuses to sign
+          off until every corner is covered. Tape-out is a one-way door. Verification is how you know
+          you're ready to walk through it.
+        </p>
+        <p>
+          At <strong>Cisco</strong> I do both on the system FPGA inside enterprise firewalls: UVM
+          environments in SystemVerilog for an egress packet scheduler with DWRR queue arbitration, a
+          reusable I2C agent, register test suites across AXI, AHB and APB, power-sequencer telemetry
+          validated across 61 rails, and the RTL for a CDC-clean, timing-closed TDM link that carries
+          traffic between two FPGAs. I work on both sides of the hardware&#8211;software line &mdash; the FPGA
+          logic, and the Python HAL drivers and diagnostics that drive it on real boards.
+        </p>
+        <p>
+          Then there's the part of my week that's entirely my own. I'm building toward
+          <strong>AI accelerator design</strong>, and the way I get there is by building: one
+          self-contained hardware block a day, finished, tested, and pushed. Warp schedulers and SIMT
+          reconvergence stacks. INT8 systolic GEMM arrays and 2:4 structured sparsity. Reorder buffers,
+          CORDIC function units, order-book engines. Every build ships with a golden-reference scoreboard
+          and runs in continuous integration, so <em>working</em> is a claim you can check, not one you
+          have to take my word for. All of it is below, and all of it is on GitHub.
+        </p>
+      </div>
+
+      <aside class="about-side reveal" aria-label="At a glance">
+        <ul class="stats">
+          <li>
+            <span class="stat-num" data-count-projects>100+</span>
+            <span class="stat-label">hardware builds shipped, one a day</span>
+          </li>
+          <li>
+            <span class="stat-num">3+ yrs</span>
+            <span class="stat-label">industry experience in FPGA/ASIC design &amp; verification</span>
+          </li>
+          <li>
+            <span class="stat-num">4</span>
+            <span class="stat-label">domains: RTL, verification, co-design, architecture</span>
+          </li>
+          <li>
+            <span class="stat-num">100%</span>
+            <span class="stat-label">of it self-checking and regression-tested in CI</span>
+          </li>
+        </ul>
+      </aside>
+    </div>
+
+    <h3 class="sub-heading reveal">What I bring to a team</h3>
+    <div class="skills-grid">
+      <div class="skill-group reveal">
+        <p class="skill-label">Design</p>
+        <ul class="chips">
+          <li>SystemVerilog</li><li>Verilog</li><li>RTL micro&#8209;architecture</li><li>Pipelining</li>
+          <li>CDC &amp; async FIFOs</li><li>AXI4 / AHB / APB</li><li>AXI4&#8209;Stream</li>
+          <li>IEEE&#8209;754 arithmetic</li><li>Timing closure</li><li>FSM &amp; arbiter design</li>
+        </ul>
+      </div>
+      <div class="skill-group reveal">
+        <p class="skill-label">Verification</p>
+        <ul class="chips">
+          <li>UVM</li><li>Constrained&#8209;random</li><li>Functional coverage closure</li>
+          <li>SVA assertions</li><li>Reusable agents &amp; BFMs</li><li>Scoreboarding</li>
+          <li>RAL / register tests</li><li>Regression &amp; triage</li><li>Error injection</li>
+        </ul>
+      </div>
+      <div class="skill-group reveal">
+        <p class="skill-label">Architecture &amp; AI hardware</p>
+        <ul class="chips">
+          <li>GPU / SIMT</li><li>Out&#8209;of&#8209;order execution</li><li>Caches &amp; coherence</li>
+          <li>Branch prediction</li><li>Systolic arrays</li><li>INT8 quantization</li>
+          <li>Structured sparsity</li><li>Dataflow &amp; scheduling</li>
+        </ul>
+      </div>
+      <div class="skill-group reveal">
+        <p class="skill-label">Software &amp; tools</p>
+        <ul class="chips">
+          <li>Python</li><li>C / C++</li><li>HAL &amp; device drivers</li><li>Synopsys VCS</li>
+          <li>QuestaSim</li><li>SpyGlass CDC</li><li>Vivado</li><li>Icarus</li><li>Verilator</li>
+          <li>Git &amp; CI</li><li>Linux</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EXPERIENCE ============ -->
+  <section id="experience" class="numbered-section">
+    <h2 class="numbered-heading reveal">Where I've Worked</h2>
+    <p class="section-intro reveal">
+      Three years of shipping hardware that customers actually run &mdash; verification and RTL on production
+      networking silicon, plus a master's in computer engineering along the way.
+    </p>
+
+    <ol class="timeline">
+      <li class="tl-item reveal">
+        <div class="tl-head">
+          <h3 class="tl-role">Hardware / Design Verification Engineer <span class="tl-at">at</span> <span class="tl-co">Cisco</span></h3>
+          <p class="tl-when">May 2023 &#8211; Present &nbsp;&middot;&nbsp; San Jose, CA</p>
+        </div>
+        <ul class="tl-points">
+          <li>
+            Own end-to-end verification of the system FPGA inside Cisco firewalls &mdash; LED and reset control,
+            power sequencing, UART, SFP, PoE, USB and eMMC &mdash; the logic that brings the whole box up.
+          </li>
+          <li>
+            Verified a high-performance egress packet scheduler in UVM/SystemVerilog: DWRR queue
+            arbitration, traffic prioritization, flow control, FIFO error injection and corner cases,
+            closed out with constrained-random testing and full functional coverage.
+          </li>
+          <li>
+            Architected a reusable I2C slave UVM agent and register test suites over AXI, AHB and APB &mdash;
+            then cut testbench development time roughly in half with LLM-assisted workflows.
+          </li>
+          <li>
+            Wrote the RTL for a TDM link carrying FPGA-to-FPGA traffic, closed timing and cleared clock
+            domain crossings with Synopsys SpyGlass.
+          </li>
+          <li>
+            Built the software side too: Python HAL drivers for FPGA-controlled I2C/PMBus sensors,
+            regulators and optical transceivers, plus automated diagnostics that validated telemetry
+            across 61 power rails and caught real PMBus decoding bugs.
+          </li>
+        </ul>
+      </li>
+
+      <li class="tl-item reveal">
+        <div class="tl-head">
+          <h3 class="tl-role">Associate Software Engineer <span class="tl-at">at</span> <span class="tl-co">Robert Bosch</span></h3>
+          <p class="tl-when">Apr 2021 &#8211; May 2022</p>
+        </div>
+        <ul class="tl-points">
+          <li>
+            Developed EMI/EMC test protocols and ran RF emissions and immunity testing on automotive ECUs &mdash;
+            hardware validated against the physics, not just the spec.
+          </li>
+        </ul>
+      </li>
+
+      <li class="tl-item reveal">
+        <div class="tl-head">
+          <h3 class="tl-role">Assistant System Engineer <span class="tl-at">at</span> <span class="tl-co">Tata Consultancy Services</span></h3>
+          <p class="tl-when">Aug 2020 &#8211; Mar 2021</p>
+        </div>
+        <ul class="tl-points">
+          <li>Supported system integration testing and defect tracking across enterprise software delivery.</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h3 class="sub-heading reveal">Education</h3>
+    <ul class="edu-list">
+      <li class="edu-item reveal">
+        <p class="edu-degree">MS, Computer Engineering</p>
+        <p class="edu-where">North Carolina State University &nbsp;&middot;&nbsp; GPA 3.7/4</p>
+        <p class="edu-when">2022 &#8211; 2024</p>
+      </li>
+      <li class="edu-item reveal">
+        <p class="edu-degree">BE, Electronics &amp; Communication Engineering</p>
+        <p class="edu-where">Visvesvaraya Technological University &nbsp;&middot;&nbsp; GPA 4/4</p>
+        <p class="edu-when">2016 &#8211; 2020</p>
+      </li>
+    </ul>
   </section>
 
   <!-- ============ 01. RTL DESIGN ============ -->

@@ -301,6 +301,35 @@ em { color: var(--light-slate); font-style: normal; }
 .hero-blurb { max-width: 560px; margin-top: 24px; font-size: clamp(16px, 1.2vw, 19px); }
 .hero-blurb strong { color: var(--green); font-weight: 500; }
 
+/* -------------------------- hero actions ------------------------ */
+.hero-actions { display: flex; flex-direction: column; align-items: flex-start; }
+.hero-actions .btn-lg { margin-bottom: 4px; }
+.btn-text {
+  display: inline-block;
+  margin-top: 18px;
+  color: var(--green);
+  font-family: var(--font-mono);
+  font-size: var(--fz-xs);
+}
+.btn-text:hover, .btn-text:focus-visible { text-decoration: underline; }
+.hero-meta {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 34px;
+  color: var(--slate);
+  font-family: var(--font-mono);
+  font-size: var(--fz-xs);
+  line-height: 1.6;
+}
+.hero-meta .dot {
+  width: 8px; height: 8px; flex: none;
+  margin-top: 7px; /* optically centre on the first line of text */
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 4px var(--green-tint);
+}
+
 /* ---------------------- numbered heading ------------------------ */
 .numbered-heading {
   display: flex;
@@ -513,6 +542,136 @@ em { color: var(--light-slate); font-style: normal; }
 .footer-sub a { color: var(--slate); border-bottom: 1px dotted var(--dark-slate); }
 .footer-sub a:hover { color: var(--green); }
 
+/* ============================ about ============================= */
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  gap: 50px;
+  align-items: start;
+  margin-bottom: 80px;
+}
+.about-copy p { margin-bottom: 15px; max-width: 640px; }
+.about-copy p:last-child { margin-bottom: 0; }
+.about-copy strong { color: var(--lightest-slate); font-weight: 500; }
+.about-copy em { color: var(--green); font-style: italic; }
+.about-copy .lede {
+  color: var(--light-slate);
+  font-size: clamp(18px, 1.5vw, 22px);
+  line-height: 1.5;
+  border-left: 2px solid var(--green);
+  padding-left: 20px;
+  margin-bottom: 26px;
+}
+
+.stats { display: grid; gap: 2px; }
+.stats li {
+  background: var(--light-navy);
+  border-radius: var(--border-radius);
+  padding: 22px 24px;
+  transition: var(--transition);
+}
+.stats li:hover { transform: translateY(-3px); box-shadow: 0 14px 26px -18px var(--navy-shadow); }
+.stat-num {
+  display: block;
+  color: var(--green);
+  font-family: var(--font-mono);
+  font-size: clamp(26px, 3vw, 34px);
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+.stat-label { display: block; color: var(--slate); font-size: 14.5px; line-height: 1.45; }
+
+/* --------------------- sub-heading + skills --------------------- */
+.sub-heading {
+  color: var(--lightest-slate);
+  font-size: clamp(20px, 2.4vw, 24px);
+  margin: 0 0 28px;
+}
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 34px 50px;
+}
+.skill-label {
+  color: var(--green);
+  font-family: var(--font-mono);
+  font-size: var(--fz-xs);
+  margin-bottom: 14px;
+}
+.skill-group .chips li { font-size: 12.5px; }
+
+/* ========================== timeline =========================== */
+.timeline { display: grid; gap: 2px; margin-bottom: 80px; }
+.tl-item {
+  position: relative;
+  background: var(--light-navy);
+  border-left: 2px solid var(--lightest-navy);
+  border-radius: var(--border-radius);
+  padding: 28px 30px;
+  transition: var(--transition);
+}
+.tl-item:hover { border-left-color: var(--green); }
+.tl-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px 20px;
+  margin-bottom: 16px;
+}
+.tl-role { color: var(--lightest-slate); font-size: clamp(17px, 2vw, 21px); margin: 0; }
+.tl-at { color: var(--slate); font-weight: 400; }
+.tl-co { color: var(--green); }
+.tl-when {
+  color: var(--slate);
+  font-family: var(--font-mono);
+  font-size: var(--fz-xs);
+  white-space: nowrap;
+}
+.tl-points { display: grid; gap: 10px; }
+.tl-points li { position: relative; padding-left: 24px; color: var(--slate); font-size: 15.5px; line-height: 1.5; }
+.tl-points li::before {
+  content: '\25B9';
+  position: absolute;
+  left: 0;
+  color: var(--green);
+}
+
+/* --------------------------- education -------------------------- */
+.edu-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.edu-item {
+  background: var(--light-navy);
+  border-radius: var(--border-radius);
+  padding: 24px 26px;
+  transition: var(--transition);
+}
+.edu-item:hover { transform: translateY(-4px); box-shadow: 0 16px 28px -18px var(--navy-shadow); }
+.edu-degree { color: var(--lightest-slate); font-size: 17px; font-weight: 500; margin-bottom: 6px; }
+.edu-where { color: var(--slate); font-size: 15px; margin-bottom: 8px; }
+.edu-when { color: var(--green); font-family: var(--font-mono); font-size: var(--fz-xs); margin: 0; }
+
+/* =================== collapsible project grids ================== */
+/* The grids run 15-38 cards. JS hides everything past the first few
+   and adds the toggle below, so the page stays walkable; with JS off
+   nothing is hidden and every card is still in the document. */
+.project-card[hidden] { display: none; }
+
+.grid-more {
+  display: block;
+  margin: 34px auto 44px; /* keep clear of the toolbox chips below */
+  padding: 1rem 1.5rem;
+  background: transparent;
+  border: 1px solid var(--green);
+  border-radius: var(--border-radius);
+  color: var(--green);
+  font-family: var(--font-mono);
+  font-size: var(--fz-xs);
+  line-height: 1;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.grid-more:hover, .grid-more:focus-visible { background: var(--green-tint); }
+
 /* ========================== reveal anim ========================= */
 .js .reveal {
   opacity: 0;
@@ -530,6 +689,9 @@ em { color: var(--light-slate); font-style: normal; }
 
 /* =========================== responsive ========================= */
 @media (max-width: 1080px) {
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .about-copy p, .about-copy .lede { max-width: none; }
+  .stats { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
   .featured-content { grid-column: 1 / 9; }
   .featured-visual  { grid-column: 7 / -1; }
   .featured-right .featured-content { grid-column: 5 / -1; }
@@ -578,6 +740,13 @@ em { color: var(--light-slate); font-style: normal; }
   .numbered-section { padding: 70px 0; }
   .project-card { padding: 26px 22px; }
   .btn-lg { width: auto; }
+  .stats li { padding: 18px 20px; }
+  .about-copy .lede { padding-left: 16px; }
+  .skills-grid { grid-template-columns: 1fr; gap: 28px; }
+  .tl-item { padding: 24px 22px; }
+  .tl-head { flex-direction: column; }
+  .tl-when { white-space: normal; }
+  .grid-more { width: 100%; }
 }
 
 /* ====================== reduced motion / no-js ================== */

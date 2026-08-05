@@ -88,6 +88,80 @@
   }
 
   /* ---------------------------------------------------------------
+     2c) Collapse the long project grids.
+
+     The domain grids run 15-38 cards each; left open, the page is
+     ~45,000px on a phone and nobody reaches section 03. Show the first
+     few and put the rest behind a toggle.
+
+     This runs at load rather than being written into index.html on
+     purpose: scripts/sync.py regenerates each <ul class="projects-grid">
+     wholesale between its AUTO markers, so any button committed inside
+     the grid would be erased on the next sync. Doing it here also means
+     that with JS off every card is still in the document.
+  --------------------------------------------------------------- */
+  var GRID_PREVIEW = 6;
+
+  Array.prototype.forEach.call(document.querySelectorAll('.projects-grid'), function (grid, i) {
+    var cards = Array.prototype.slice.call(grid.querySelectorAll('.project-card'));
+    // Two or three cards behind a toggle isn't worth the extra click.
+    if (cards.length <= GRID_PREVIEW + 2) return;
+
+    var hidden = cards.slice(GRID_PREVIEW);
+    var section = grid.parentNode;
+    while (section && section.nodeName !== 'SECTION') section = section.parentNode;
+    if (!grid.id) grid.id = 'grid-' + (section && section.id ? section.id : i);
+
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'grid-more';
+    btn.setAttribute('aria-controls', grid.id);
+
+    function apply(open) {
+      hidden.forEach(function (card) { card.hidden = !open; });
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.textContent = open
+        ? 'Show fewer'
+        : 'Show all ' + cards.length + ' builds';
+    }
+
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      apply(!open);
+      // Collapsing from the bottom of a 38-card grid would leave the
+      // reader stranded in whitespace — put them back at the grid.
+      if (open && grid.getBoundingClientRect().top < 0) {
+        grid.scrollIntoView({ block: 'start' });
+      }
+    });
+
+    apply(false);
+    grid.parentNode.insertBefore(btn, grid.nextSibling);
+  });
+
+  /* ---------------------------------------------------------------
+     2d) Keep the "builds shipped" stat honest: count what's actually
+         on the page rather than trusting a hand-typed number. The AI
+         section cross-links builds from the four domain sections, so
+         it is deliberately excluded from the tally. Collapsed cards
+         still count — they are hidden, not absent.
+  --------------------------------------------------------------- */
+  var counters = document.querySelectorAll('[data-count-projects]');
+
+  if (counters.length) {
+    var builds = 0;
+    ['#rtl', '#verification', '#codesign', '#comparch'].forEach(function (sel) {
+      var sec = document.querySelector(sel);
+      if (!sec) return;
+      builds += sec.querySelectorAll('.project-card').length;
+      builds += sec.querySelectorAll('.featured').length; // featured build sits outside its grid
+    });
+    if (builds > 1) {
+      Array.prototype.forEach.call(counters, function (el) { el.textContent = builds; });
+    }
+  }
+
+  /* ---------------------------------------------------------------
      3) Mobile menu.
   --------------------------------------------------------------- */
   function openMenu() {
