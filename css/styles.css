@@ -228,6 +228,45 @@ em { color: var(--light-slate); font-style: normal; }
   backdrop-filter: blur(2px);
 }
 
+/* ============================ RAILS ============================= */
+.rail { position: fixed; bottom: 0; z-index: 40; color: var(--light-slate); }
+.rail-left { left: clamp(14px, 3vw, 40px); }
+.rail-right { right: clamp(14px, 3vw, 40px); }
+
+.social-list { display: flex; flex-direction: column; align-items: center; gap: 22px; margin: 0; }
+.social-list::after,
+.rail-right::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 90px;
+  margin: 0 auto;
+  background: var(--light-slate);
+}
+.social-list::after { margin-top: 6px; }
+.social-list a { color: var(--light-slate); padding: 2px; }
+.social-list a:hover { color: var(--green); transform: translateY(-3px); }
+
+.rail-right { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.email-vertical {
+  writing-mode: vertical-rl;
+  color: var(--light-slate);
+  font-family: var(--font-mono);
+  font-size: var(--fz-xs);
+  letter-spacing: 0.1em;
+  padding: 10px;
+}
+.email-vertical:hover { color: var(--green); transform: translateY(-3px); }
+
+/* Shown at every width per request; shrink the icons and connector
+   line on narrow screens so the rails don't crowd page content. */
+@media (max-width: 600px) {
+  .social-list { gap: 16px; }
+  .social-list svg { width: 17px; height: 17px; }
+  .social-list::after, .rail-right::after { height: 50px; }
+  .email-vertical { font-size: 10px; padding: 8px; }
+}
+
 /* ============================ LAYOUT ============================ */
 #content {
   max-width: var(--max);
@@ -650,6 +689,11 @@ em { color: var(--light-slate); font-style: normal; }
 }
 
 @media (max-width: 600px) {
+  /* The rails are position:fixed, so on a phone — with no page margin
+     outside #content the way a wide desktop viewport has — they'd sit
+     on top of whatever text happens to scroll to the bottom of the
+     screen. Reserve a slim gutter on both sides so that never happens. */
+  #content { padding: 0 46px; }
   .numbered-section { padding: 70px 0; }
   .project-card { padding: 26px 22px; }
   .btn-lg { width: auto; }
