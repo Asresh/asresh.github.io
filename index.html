@@ -146,12 +146,10 @@
           you're ready to walk through it.
         </p>
         <p>
-          At <strong>Cisco</strong> I do both on the system FPGA inside enterprise firewalls: UVM
-          environments in SystemVerilog for an egress packet scheduler with DWRR queue arbitration, a
-          reusable I2C agent, register test suites across AXI, AHB and APB, power-sequencer telemetry
-          validated across 61 rails, and the RTL for a CDC-clean, timing-closed TDM link that carries
-          traffic between two FPGAs. I work on both sides of the hardware&#8211;software line &mdash; the FPGA
-          logic, and the Python HAL drivers and diagnostics that drive it on real boards.
+          At <strong>Cisco</strong> I do both on the system FPGA inside enterprise firewalls, and I work
+          both sides of the hardware&#8211;software line: the FPGA logic itself, and the Python HAL drivers
+          and diagnostics that drive it on real boards. The specifics are in
+          <a href="#experience">Where I've Worked</a>.
         </p>
         <p>
           Then there's the part of my week that's entirely my own. I'm building toward
@@ -168,22 +166,75 @@
         <ul class="stats">
           <li>
             <span class="stat-num" data-count-projects>100+</span>
-            <span class="stat-label">hardware builds shipped, one a day</span>
+            <span class="stat-label">Open-source RTL and verification builds</span>
           </li>
           <li>
             <span class="stat-num">3+ yrs</span>
-            <span class="stat-label">industry experience in FPGA/ASIC design &amp; verification</span>
+            <span class="stat-label">Industry experience in FPGA design and verification</span>
           </li>
           <li>
-            <span class="stat-num">4</span>
-            <span class="stat-label">domains: RTL, verification, co-design, architecture</span>
+            <span class="stat-num">5</span>
+            <span class="stat-label">Domains covered, from RTL and UVM through computer architecture and AI hardware</span>
           </li>
           <li>
             <span class="stat-num">100%</span>
-            <span class="stat-label">of it self-checking and regression-tested in CI</span>
+            <span class="stat-label">Self-checking testbenches, regression-tested in CI</span>
           </li>
         </ul>
       </aside>
+    </div>
+
+    <h3 class="sub-heading reveal">Hardware&#8211;software co-design at Cisco</h3>
+    <p class="sub-intro reveal">
+      The FPGA is only half the job. This is the software side that brings it up, drives it and proves it
+      works on real boards.
+    </p>
+    <div class="disclosures reveal">
+      <details class="disc">
+        <summary>Drivers &amp; HAL integration</summary>
+        <ul class="disc-points">
+          <li>
+            Developed Python HAL drivers for FPGA-controlled I&sup2;C/PMBus sensors, hot-swap controllers,
+            voltage regulators, power sequencers and optical transceivers.
+          </li>
+          <li>
+            Integrated devices into board HAL trees, platform data, sensor models and initialization flows.
+          </li>
+          <li>Enabled end-to-end transceiver EEPROM access through the HAL and FPGA I&sup2;C stack.</li>
+          <li>
+            Ported embedded C diagnostics into a modular Python framework, preserving register behavior,
+            telemetry conversion and initialization sequencing.
+          </li>
+        </ul>
+      </details>
+
+      <details class="disc">
+        <summary>Board bring-up &amp; debug</summary>
+        <ul class="disc-points">
+          <li>
+            Brought up and debugged FPGA I&sup2;C controllers on real hardware, resolving bus routing, mux,
+            addressing, FIFO, NACK, retry and controller-busy issues.
+          </li>
+        </ul>
+      </details>
+
+      <details class="disc">
+        <summary>Validation &amp; automation</summary>
+        <ul class="disc-points">
+          <li>
+            Automated hardware validation with CLI scripts, protocol tracing, negative tests,
+            register-access checks and pass/fail reporting.
+          </li>
+          <li>
+            Validated power-sequencer telemetry across 61 rails and corrected PMBus decoding, byte
+            ordering and register definitions.
+          </li>
+          <li>
+            Delivered production-ready diagnostic drivers against code-review feedback without disrupting
+            the existing framework.
+          </li>
+        </ul>
+      </details>
     </div>
 
     <h3 class="sub-heading reveal">What I bring to a team</h3>
@@ -248,8 +299,8 @@
             closed out with constrained-random testing and full functional coverage.
           </li>
           <li>
-            Architected a reusable I2C slave UVM agent and register test suites over AXI, AHB and APB &mdash;
-            then cut testbench development time roughly in half with LLM-assisted workflows.
+            Architected a reusable I2C slave UVM agent, and cut testbench development time roughly in
+            half with LLM-assisted workflows.
           </li>
           <li>
             Wrote the RTL for a TDM link carrying FPGA-to-FPGA traffic, closed timing and cleared clock
