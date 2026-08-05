@@ -44,13 +44,12 @@
 
     <div class="nav-inner">
       <ol class="nav-links">
-        <li><a href="#about">About</a></li>
         <li><a href="#experience">Experience</a></li>
-        <li><a href="#rtl"><span class="nav-num">01.</span> RTL Design</a></li>
-        <li><a href="#verification"><span class="nav-num">02.</span> Verification</a></li>
-        <li><a href="#codesign"><span class="nav-num">03.</span> Co-Design</a></li>
-        <li><a href="#comparch"><span class="nav-num">04.</span> Architecture</a></li>
-        <li><a href="#ai"><span class="nav-num">05.</span> AI</a></li>
+        <li><a href="#rtl">RTL Design</a></li>
+        <li><a href="#verification">Verification</a></li>
+        <li><a href="#codesign">Co-Design</a></li>
+        <li><a href="#comparch">Architecture</a></li>
+        <li><a href="#ai">AI</a></li>
       </ol>
     </div>
 
@@ -63,43 +62,16 @@
 <aside id="mobile-menu" class="mobile-menu" aria-hidden="true">
   <nav aria-label="Mobile">
     <ol class="mobile-links">
-      <li><a href="#about">About</a></li>
       <li><a href="#experience">Experience</a></li>
-      <li><a href="#rtl"><span class="nav-num">01.</span> RTL Design</a></li>
-      <li><a href="#verification"><span class="nav-num">02.</span> Verification</a></li>
-      <li><a href="#codesign"><span class="nav-num">03.</span> Co-Design</a></li>
-      <li><a href="#comparch"><span class="nav-num">04.</span> Computer Architecture</a></li>
-      <li><a href="#ai"><span class="nav-num">05.</span> AI</a></li>
+      <li><a href="#rtl">RTL Design</a></li>
+      <li><a href="#verification">Verification</a></li>
+      <li><a href="#codesign">Co-Design</a></li>
+      <li><a href="#comparch">Computer Architecture</a></li>
+      <li><a href="#ai">AI</a></li>
     </ol>
   </nav>
 </aside>
 <div id="menu-scrim" class="menu-scrim" hidden></div>
-
-<!-- Fixed left social rail -->
-<aside class="rail rail-left" aria-hidden="false">
-  <ul class="social-list">
-    <li>
-      <a href="https://github.com/Asresh" target="_blank" rel="noopener" aria-label="GitHub">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-      </a>
-    </li>
-    <li>
-      <a href="https://www.linkedin.com/in/asresh-kuricheti/" target="_blank" rel="noopener" aria-label="LinkedIn">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-      </a>
-    </li>
-    <li>
-      <a href="mailto:kasresh402@gmail.com" aria-label="Email">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-10 6L2 7"></path></svg>
-      </a>
-    </li>
-  </ul>
-</aside>
-
-<!-- Fixed right email rail -->
-<aside class="rail rail-right" aria-hidden="false">
-  <a href="mailto:kasresh402@gmail.com" class="email-vertical">kasresh402@gmail.com</a>
-</aside>
 
 <main id="content">
   <!-- ============ HERO ============ -->
@@ -116,7 +88,6 @@
     </p>
     <div class="hero-actions reveal">
       <a href="#rtl" class="btn btn-lg">See what I've built</a>
-      <a href="#about" class="btn-text">Start with the short version &rarr;</a>
       <p class="hero-meta">
         <span class="dot" aria-hidden="true"></span>
         <span>
@@ -124,100 +95,6 @@
           MS Computer Engineering, NC State
         </span>
       </p>
-    </div>
-  </section>
-
-  <!-- ============ ABOUT ============ -->
-  <section id="about" class="numbered-section">
-    <h2 class="numbered-heading reveal">About Me</h2>
-
-    <div class="about-grid">
-      <div class="about-copy reveal">
-        <p class="lede">
-          Every chip starts out as code. I write that code &mdash; and then I prove it's right before anyone
-          commits it to silicon, where a single missed bug costs millions to fix.
-        </p>
-        <p>
-          Those are the two halves of my work. <strong>RTL design</strong> is describing real hardware &mdash;
-          pipelines, arbiters, memories, math units &mdash; in SystemVerilog, so a compiler can turn it into
-          millions of gates. <strong>Design verification</strong> is the adversarial half: building a
-          testbench that hammers that hardware with millions of randomized scenarios and refuses to sign
-          off until every corner is covered. Tape-out is a one-way door. Verification is how you know
-          you're ready to walk through it.
-        </p>
-        <p>
-          At <strong>Cisco</strong> I do both on the system FPGA inside enterprise firewalls, and I work
-          both sides of the hardware&#8211;software line: the FPGA logic itself, and the Python HAL drivers
-          and diagnostics that drive it on real boards. The specifics are in
-          <a href="#experience">Where I've Worked</a>.
-        </p>
-        <p>
-          Then there's the part of my week that's entirely my own. I'm building toward
-          <strong>AI accelerator design</strong>, and the way I get there is by building: one
-          self-contained hardware block a day, finished, tested, and pushed. Warp schedulers and SIMT
-          reconvergence stacks. INT8 systolic GEMM arrays and 2:4 structured sparsity. Reorder buffers,
-          CORDIC function units, order-book engines. Every build ships with a golden-reference scoreboard
-          and runs in continuous integration, so <em>working</em> is a claim you can check, not one you
-          have to take my word for. All of it is below, and all of it is on GitHub.
-        </p>
-      </div>
-
-      <aside class="about-side reveal" aria-label="At a glance">
-        <ul class="stats">
-          <li>
-            <span class="stat-num" data-count-projects>100+</span>
-            <span class="stat-label">Open-source RTL and verification builds</span>
-          </li>
-          <li>
-            <span class="stat-num">3+ yrs</span>
-            <span class="stat-label">Industry experience in FPGA design and verification</span>
-          </li>
-          <li>
-            <span class="stat-num">5</span>
-            <span class="stat-label">Domains covered, from RTL and UVM through computer architecture and AI hardware</span>
-          </li>
-          <li>
-            <span class="stat-num">100%</span>
-            <span class="stat-label">Self-checking testbenches, regression-tested in CI</span>
-          </li>
-        </ul>
-      </aside>
-    </div>
-
-    <h3 class="sub-heading reveal">What I bring to a team</h3>
-    <div class="skills-grid">
-      <div class="skill-group reveal">
-        <p class="skill-label">Design</p>
-        <ul class="chips">
-          <li>SystemVerilog</li><li>Verilog</li><li>RTL micro&#8209;architecture</li><li>Pipelining</li>
-          <li>CDC &amp; async FIFOs</li><li>AXI4 / AHB / APB</li><li>AXI4&#8209;Stream</li>
-          <li>IEEE&#8209;754 arithmetic</li><li>Timing closure</li><li>FSM &amp; arbiter design</li>
-        </ul>
-      </div>
-      <div class="skill-group reveal">
-        <p class="skill-label">Verification</p>
-        <ul class="chips">
-          <li>UVM</li><li>Constrained&#8209;random</li><li>Functional coverage closure</li>
-          <li>SVA assertions</li><li>Reusable agents &amp; BFMs</li><li>Scoreboarding</li>
-          <li>RAL / register tests</li><li>Regression &amp; triage</li><li>Error injection</li>
-        </ul>
-      </div>
-      <div class="skill-group reveal">
-        <p class="skill-label">Architecture &amp; AI hardware</p>
-        <ul class="chips">
-          <li>GPU / SIMT</li><li>Out&#8209;of&#8209;order execution</li><li>Caches &amp; coherence</li>
-          <li>Branch prediction</li><li>Systolic arrays</li><li>INT8 quantization</li>
-          <li>Structured sparsity</li><li>Dataflow &amp; scheduling</li>
-        </ul>
-      </div>
-      <div class="skill-group reveal">
-        <p class="skill-label">Software &amp; tools</p>
-        <ul class="chips">
-          <li>Python</li><li>C / C++</li><li>HAL &amp; device drivers</li><li>Synopsys VCS</li>
-          <li>QuestaSim</li><li>SpyGlass CDC</li><li>Vivado</li><li>Icarus</li><li>Verilator</li>
-          <li>Git &amp; CI</li><li>Linux</li>
-        </ul>
-      </div>
     </div>
   </section>
 
@@ -1792,7 +1669,6 @@
     <li><a href="https://www.linkedin.com/in/asresh-kuricheti/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a></li>
   </ul>
   <p class="footer-credit">Designed &amp; built by Asresh Kuricheti</p>
-  <p class="footer-sub">Layout inspired by <a href="https://v4.brittanychiang.com" target="_blank" rel="noopener">Brittany Chiang's v4</a>.</p>
 </footer>
 
 <script src="js/main.js"></script>
