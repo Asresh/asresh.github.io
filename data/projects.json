@@ -322,6 +322,13 @@
           "desc": "The block that feeds the [Day 38](./Day38) core — where a design stops being a datapath and becomes a memory system: a synthesizable 4 KB (64 sets x…",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "Day40",
+          "title": "RISC-V Sv32 MMU (TLB + hardware page-table walker)",
+          "desc": "The block that turns an address into a permission decision — the OS substrate under [Day 38](./Day38)'s core and [Day 39](./Day39)'s cache:…",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -575,6 +582,13 @@
           "desc": "Fully-pipelined IEEE-754 binary32 (single-precision) floating-point adder/subtractor — the block inside every FPU, GPU shader core…",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "Day29",
+          "title": "UVM 8b/10b Line-Code Encoder/Decoder Verification",
+          "desc": "The SerDes physical-layer line code behind Gigabit Ethernet (802.3 cl.36), PCIe gen1/2, SATA…",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -721,6 +735,14 @@
           "tags": [],
           "new": true,
           "metric": "13.02×"
+        },
+        {
+          "id": "day17 - gpu_embedding_gather_engine",
+          "title": "GPU Embedding Gather Engine",
+          "desc": "GPU/heterogeneous-inference sharded embedding gather-reduce engine - the nn.EmbeddingBag lookup path of a multi-GPU recommender (DLRM / TorchRec)…",
+          "tags": [],
+          "new": true,
+          "metric": "1.667×"
         }
       ]
     },
@@ -965,6 +987,13 @@
           "id": "Day29",
           "title": "Out-of-Order Issue Queue (Reservation Stations)",
           "desc": "The scheduler between Day 28 rename and Day 12 retire: dispatched instructions wait only on their own operands and launch out of program order…",
+          "tags": [],
+          "new": true
+        },
+        {
+          "id": "Day30",
+          "title": "MESI Snooping Cache-Coherence Controller",
+          "desc": "Multicore cache coherence (Papamarcos &amp; Patel Illinois protocol) — the shift from caches as a private latency optimisation to caches as the enforcers…",
           "tags": [],
           "new": true
         }
