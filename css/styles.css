@@ -497,6 +497,25 @@ em { color: var(--light-slate); font-style: normal; }
   color: var(--light-slate);
 }
 
+/* --------------------- sub-heading + skills --------------------- */
+.sub-heading {
+  color: var(--lightest-slate);
+  font-size: clamp(20px, 2.4vw, 24px);
+  margin: 0 0 28px;
+}
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 34px 50px;
+}
+.skill-label {
+  color: var(--green);
+  font-family: var(--font-mono);
+  font-size: var(--fz-xs);
+  margin-bottom: 14px;
+}
+.skill-group .chips li { font-size: 12.5px; }
+
 /* ========================== timeline =========================== */
 .timeline { display: grid; gap: 2px; margin-bottom: 80px; }
 .tl-item {
@@ -634,6 +653,7 @@ em { color: var(--light-slate); font-style: normal; }
   .numbered-section { padding: 70px 0; }
   .project-card { padding: 26px 22px; }
   .btn-lg { width: auto; }
+  .skills-grid { grid-template-columns: 1fr; gap: 28px; }
   .tl-item { padding: 24px 22px; }
   .tl-head { flex-direction: column; }
   .tl-when { white-space: normal; }
