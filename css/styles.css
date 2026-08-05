@@ -600,55 +600,6 @@ em { color: var(--light-slate); font-style: normal; }
 }
 .skill-group .chips li { font-size: 12.5px; }
 
-/* ------------------- disclosures (native details) ---------------- */
-/* Detail work that would run to a page of bullets, folded away so the
-   About section stays scannable. Collapsed costs ~3 rows, not ~3
-   screens; no JS, and the content is in the document either way. */
-.sub-intro { max-width: 640px; margin: -14px 0 24px; color: var(--slate); font-size: 15.5px; }
-.disclosures { display: grid; gap: 2px; margin-bottom: 80px; }
-.disc {
-  background: var(--light-navy);
-  border-left: 2px solid var(--lightest-navy);
-  border-radius: var(--border-radius);
-  transition: var(--transition);
-}
-.disc:hover, .disc[open] { border-left-color: var(--green); }
-.disc > summary {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  padding: 18px 24px;
-  color: var(--lightest-slate);
-  font-family: var(--font-mono);
-  font-size: var(--fz-xs);
-  line-height: 1.4;
-  cursor: pointer;
-  list-style: none;
-}
-.disc > summary::-webkit-details-marker { display: none; }
-.disc > summary::before {
-  content: '+';
-  flex: none;
-  width: 1ch;
-  color: var(--green);
-}
-.disc[open] > summary::before { content: '\2212'; }
-.disc > summary:hover, .disc > summary:focus-visible { color: var(--green); }
-.disc-points { display: grid; gap: 10px; padding: 0 24px 22px 48px; }
-.disc-points li {
-  position: relative;
-  padding-left: 24px;
-  color: var(--slate);
-  font-size: 15px;
-  line-height: 1.5;
-}
-.disc-points li::before {
-  content: '\25B9';
-  position: absolute;
-  left: 0;
-  color: var(--green);
-}
-
 /* ========================== timeline =========================== */
 .timeline { display: grid; gap: 2px; margin-bottom: 80px; }
 .tl-item {
@@ -792,8 +743,6 @@ em { color: var(--light-slate); font-style: normal; }
   .stats li { padding: 18px 20px; }
   .about-copy .lede { padding-left: 16px; }
   .skills-grid { grid-template-columns: 1fr; gap: 28px; }
-  .disc-points { padding-left: 28px; }
-  .disc > summary { padding: 14px 20px; font-size: 14.5px; }
   .tl-item { padding: 24px 22px; }
   .tl-head { flex-direction: column; }
   .tl-when { white-space: normal; }

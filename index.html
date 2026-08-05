@@ -184,59 +184,6 @@
       </aside>
     </div>
 
-    <h3 class="sub-heading reveal">Hardware&#8211;software co-design at Cisco</h3>
-    <p class="sub-intro reveal">
-      The FPGA is only half the job. This is the software side that brings it up, drives it and proves it
-      works on real boards.
-    </p>
-    <div class="disclosures reveal">
-      <details class="disc">
-        <summary>Drivers &amp; HAL integration</summary>
-        <ul class="disc-points">
-          <li>
-            Developed Python HAL drivers for FPGA-controlled I&sup2;C/PMBus sensors, hot-swap controllers,
-            voltage regulators, power sequencers and optical transceivers.
-          </li>
-          <li>
-            Integrated devices into board HAL trees, platform data, sensor models and initialization flows.
-          </li>
-          <li>Enabled end-to-end transceiver EEPROM access through the HAL and FPGA I&sup2;C stack.</li>
-          <li>
-            Ported embedded C diagnostics into a modular Python framework, preserving register behavior,
-            telemetry conversion and initialization sequencing.
-          </li>
-        </ul>
-      </details>
-
-      <details class="disc">
-        <summary>Board bring-up &amp; debug</summary>
-        <ul class="disc-points">
-          <li>
-            Brought up and debugged FPGA I&sup2;C controllers on real hardware, resolving bus routing, mux,
-            addressing, FIFO, NACK, retry and controller-busy issues.
-          </li>
-        </ul>
-      </details>
-
-      <details class="disc">
-        <summary>Validation &amp; automation</summary>
-        <ul class="disc-points">
-          <li>
-            Automated hardware validation with CLI scripts, protocol tracing, negative tests,
-            register-access checks and pass/fail reporting.
-          </li>
-          <li>
-            Validated power-sequencer telemetry across 61 rails and corrected PMBus decoding, byte
-            ordering and register definitions.
-          </li>
-          <li>
-            Delivered production-ready diagnostic drivers against code-review feedback without disrupting
-            the existing framework.
-          </li>
-        </ul>
-      </details>
-    </div>
-
     <h3 class="sub-heading reveal">What I bring to a team</h3>
     <div class="skills-grid">
       <div class="skill-group reveal">
@@ -307,9 +254,24 @@
             domain crossings with Synopsys SpyGlass.
           </li>
           <li>
-            Built the software side too: Python HAL drivers for FPGA-controlled I2C/PMBus sensors,
-            regulators and optical transceivers, plus automated diagnostics that validated telemetry
-            across 61 power rails and caught real PMBus decoding bugs.
+            <strong>Hardware–software co-design:</strong> Developed Python HAL drivers for
+            FPGA-controlled I²C/PMBus sensors, hot-swap controllers, voltage regulators, power
+            sequencers and optical transceivers; integrated devices into board HAL trees and
+            initialization flows.
+          </li>
+          <li>
+            Brought up and debugged FPGA I²C controllers on real hardware, resolving bus routing,
+            mux, addressing, FIFO, NACK, retry and controller-busy issues.
+          </li>
+          <li>
+            Automated hardware validation with CLI scripts, protocol tracing, negative tests and
+            register-access checks; validated power-sequencer telemetry across 61 rails and corrected
+            PMBus decoding, byte ordering and register definitions.
+          </li>
+          <li>
+            Enabled end-to-end transceiver EEPROM access through the HAL and FPGA I²C stack; ported
+            embedded C diagnostics into a modular Python framework while preserving register behavior,
+            telemetry conversion and initialization sequencing.
           </li>
         </ul>
       </li>
