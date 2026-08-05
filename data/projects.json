@@ -315,6 +315,13 @@
           "desc": "The canonical \"put-it-all-together\" RTL building block — a synthesizable, in-order…",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "Day39",
+          "title": "4-Way Set-Associative Write-Back L1 Data Cache",
+          "desc": "The block that feeds the [Day 38](./Day38) core — where a design stops being a datapath and becomes a memory system: a synthesizable 4 KB (64 sets x…",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -561,6 +568,13 @@
           "desc": "Parameterized WIDTH-bit-parallel multiplicative (self-synchronizing) scrambler/descrambler — the SerDes physical-layer data-whitening block (IEEE…",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "Day28",
+          "title": "UVM IEEE-754 binary32 Floating-Point Adder/Subtractor Verification",
+          "desc": "Fully-pipelined IEEE-754 binary32 (single-precision) floating-point adder/subtractor — the block inside every FPU, GPU shader core…",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -699,6 +713,14 @@
           "tags": [],
           "new": true,
           "metric": "21.80×"
+        },
+        {
+          "id": "day16 - gpu_kv_cache_paging_engine",
+          "title": "GPU Kv Cache Paging Engine",
+          "desc": "GPU/heterogeneous-inference KV-cache paging engine - the paged-attention (vLLM PagedAttention) block-table front end of an LLM serving stack: the…",
+          "tags": [],
+          "new": true,
+          "metric": "13.02×"
         }
       ]
     },
@@ -936,6 +958,13 @@
           "id": "Day28",
           "title": "Explicit Register Renaming Unit (RAT + Free List)",
           "desc": "Out-of-order front-end dependency breaking, Register Alias Table (RAT[a]=current physical mapping…",
+          "tags": [],
+          "new": true
+        },
+        {
+          "id": "Day29",
+          "title": "Out-of-Order Issue Queue (Reservation Stations)",
+          "desc": "The scheduler between Day 28 rename and Day 12 retire: dispatched instructions wait only on their own operands and launch out of program order…",
           "tags": [],
           "new": true
         }
