@@ -329,6 +329,13 @@
           "desc": "The block that turns an address into a permission decision — the OS substrate under [Day 38](./Day38)'s core and [Day 39](./Day39)'s cache:…",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "Day41",
+          "title": "Out-of-Order Execution Engine (Tomasulo + Reorder Buffer)",
+          "desc": "The day the in-order constraint from [Day 38](./Day38) is removed: a synthesizable out-of-order core — in-order dispatch…",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -589,6 +596,13 @@
           "desc": "The SerDes physical-layer line code behind Gigabit Ethernet (802.3 cl.36), PCIe gen1/2, SATA…",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "Day30",
+          "title": "UVM IEEE 1149.1 JTAG TAP Controller Verification",
+          "desc": "The most widely implemented state machine in digital hardware — the four-wire JTAG Test Access Port (TCK/TMS/TDI/TDO) inside nearly every chip made…",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -743,6 +757,14 @@
           "tags": [],
           "new": true,
           "metric": "1.667×"
+        },
+        {
+          "id": "day18 - gpu_kernel_dag_scheduler",
+          "title": "GPU Kernel Dag Scheduler",
+          "desc": "A hardware command processor that launches a CUDA-Graph-shaped DAG of kernels onto the GPUs of a node by itself: an associative dependency scoreboard…",
+          "tags": [],
+          "new": true,
+          "metric": "2.583×"
         }
       ]
     },
@@ -994,6 +1016,13 @@
           "id": "Day30",
           "title": "MESI Snooping Cache-Coherence Controller",
           "desc": "Multicore cache coherence (Papamarcos &amp; Patel Illinois protocol) — the shift from caches as a private latency optimisation to caches as the enforcers…",
+          "tags": [],
+          "new": true
+        },
+        {
+          "id": "Day31",
+          "title": "Non-Blocking (Lockup-Free) Cache MSHR File",
+          "desc": "The structure (Kroft…",
           "tags": [],
           "new": true
         }
