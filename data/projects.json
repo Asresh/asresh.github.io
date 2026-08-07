@@ -336,6 +336,20 @@
           "desc": "The day the in-order constraint from [Day 38](./Day38) is removed: a synthesizable out-of-order core — in-order dispatch…",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "Day42",
+          "title": "SIMT Register-File Operand Collector",
+          "desc": "The GPU SM stage between warp scheduling and CUDA/Tensor execution: COLLECTORS multi-warp instruction slots independently gather as many as three…",
+          "tags": [],
+          "new": true
+        },
+        {
+          "id": "Day43",
+          "title": "Wormhole Virtual-Channel NoC Router (5-port mesh node)",
+          "desc": "The switch at every tile of a mesh network-on-chip…",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -601,6 +615,13 @@
           "id": "Day30",
           "title": "UVM IEEE 1149.1 JTAG TAP Controller Verification",
           "desc": "The most widely implemented state machine in digital hardware — the four-wire JTAG Test Access Port (TCK/TMS/TDI/TDO) inside nearly every chip made…",
+          "tags": [],
+          "new": true
+        },
+        {
+          "id": "Day31",
+          "title": "UVM Write-Back / Write-Allocate Cache Controller Verification",
+          "desc": "The first block most engineers meet where the design is deliberately, continuously wrong and that is the point: after a store hits a write-back cache…",
           "tags": [],
           "new": true
         }
@@ -1023,6 +1044,13 @@
           "id": "Day31",
           "title": "Non-Blocking (Lockup-Free) Cache MSHR File",
           "desc": "The structure (Kroft…",
+          "tags": [],
+          "new": true
+        },
+        {
+          "id": "Day32",
+          "title": "FR-FCFS DRAM Memory-Access Scheduler",
+          "desc": "The level below the Day 31 MSHR file: once misses leave the chip in parallel, something has to decide the ORDER DRAM serves them in…",
           "tags": [],
           "new": true
         }
