@@ -1,5 +1,6 @@
-# I miss you
+# Moved
 
-I miss you. When you don’t share how you feel, I feel lost and lonely — like I’m loving you from the outside. I’m sad and I want to understand you. Can we talk? I’m listening, always.
+This project has moved to the DNU directory inside this repository:
 
-— From Asresh
+https://asresh.github.io/DNU/GF_repo_effects/
+

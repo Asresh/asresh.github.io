@@ -1,5 +1,6 @@
-# I'm so sorry
+# Moved
 
-I'm sorry for hurting you. I was wrong and I miss you. Please forgive me — you mean the world to me.
+This project has moved to the DNU directory inside this repository:
 
-— From Asresh
+https://asresh.github.io/DNU/GF_repo/
+

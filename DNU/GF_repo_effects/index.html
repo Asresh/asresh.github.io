@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>I miss you — I'm sorry</title>
+  <style>
+    :root{--bg1:#fff6f8;--bg2:#fff1f3;--card:#ffffff;--accent:#d93b63;--text:#3a0b0f}
+    html,body{height:100%;margin:0}
+    body{background:linear-gradient(160deg,var(--bg1),var(--bg2));font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:var(--text);display:flex;align-items:center;justify-content:center}
+
+    /* single subtle effect: slow floating emoji hearts with soft glow */
+    .emojis{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+    .emoji{position:absolute;font-size:28px;opacity:0.95;filter:drop-shadow(0 6px 12px rgba(217,59,99,0.12));will-change:transform,opacity}
+
+    /* different sizes and timings for variety */
+    .e1{left:8%;top:25%;animation:float 36s linear infinite;transform-origin:center; font-size:36px}
+    .e2{left:72%;top:10%;animation:float 44s linear infinite;font-size:28px}
+    .e3{left:50%;top:78%;animation:float 52s linear infinite;font-size:32px}
+    .e4{left:88%;top:62%;animation:float 48s linear infinite;font-size:30px}
+    .e5{left:22%;top:64%;animation:float 60s linear infinite;font-size:26px}
+
+    @keyframes float {
+      0%{transform:translate3d(0,0,0) rotate(0deg) scale(1); opacity:0.95}
+      25%{transform:translate3d(18px,-12px,0) rotate(-4deg) scale(1.03); opacity:0.98}
+      50%{transform:translate3d(-24px,8px,0) rotate(2deg) scale(0.99); opacity:0.92}
+      75%{transform:translate3d(12px,18px,0) rotate(3deg) scale(1.02); opacity:0.97}
+      100%{transform:translate3d(0,0,0) rotate(0deg) scale(1); opacity:0.95}
+    }
+
+    /* subtle pulsing glow on hover for desktop, not poppy */
+    .emoji:hover{filter:drop-shadow(0 10px 30px rgba(217,59,99,0.18));transform:scale(1.06)}
+
+    /* card */
+    .card{position:relative;z-index:2;background:var(--card);padding:2.25rem 2.5rem;border-radius:14px;box-shadow:0 12px 40px rgba(58,11,15,0.12);max-width:720px;text-align:left}
+    h1{margin:0 0 0.4rem 0;font-size:1.9rem}
+    p{margin:0.6rem 0 1rem 0;line-height:1.45;color:var(--text);font-size:1.05rem}
+    .muted{color:#7a3a43;font-size:0.95rem}
+    .heart{display:inline-block;background:linear-gradient(90deg,#ff7b9c,#e83e6b);color:white;padding:0.35rem 0.6rem;border-radius:999px;font-weight:600;margin-right:0.5rem}
+    .actions{margin-top:1rem}
+    .btn{display:inline-block;padding:0.55rem 0.95rem;border-radius:10px;background:var(--accent);color:#fff;text-decoration:none}
+
+    /* inline emojis in text style */
+    .emoji-inline{font-size:1.05rem;margin-right:6px}
+
+    /* reduce motion preference */
+    @media (prefers-reduced-motion:reduce){
+      .emoji{animation:none}
+      .emoji:hover{transform:none;filter:none}
+    }
+
+    /* responsive tweaks */
+    @media (max-width:520px){.card{margin:1rem;padding:1.5rem}.emoji{font-size:22px}}
+  </style>
+</head>
+<body>
+  <!-- decorative emojis (single subtle effect) -->
+  <div class="emojis" aria-hidden="true">
+    <div class="emoji e1">💔</div>
+    <div class="emoji e2">😔</div>
+    <div class="emoji e3">🌧️</div>
+    <div class="emoji e4">💬</div>
+    <div class="emoji e5">❤️</div>
+  </div>
+
+  <main class="card" role="main">
+    <div style="display:flex;align-items:center;margin-bottom:0.6rem">
+      <div class="heart">♥</div>
+      <h1>I'm sorry. I miss you. <span aria-hidden="true">😔💔</span></h1>
+    </div>
+
+    <p>
+      I’m carrying a sadness I haven't been able to put into words until now. When you keep your feelings to yourself, I feel distant and alone — like I’m loving you from the outside. I don’t want to blame you; I only want to understand you and be there for you. <span class="emoji-inline" aria-hidden="true">🌧️</span>
+    </p>
+
+    <p class="muted">
+      If you can, tell me one small thing you felt today. I’ll start: I felt lonely after we didn’t talk tonight. That’s all — one small truth. When you share, I feel closer to you. <span aria-hidden="true">💬❤️</span>
+    </p>
+
+    <div class="actions">
+      <a class="btn" href="mailto:?subject=I%20heard%20you&body=I%20want%20to%20share">Tell me something</a>
+    </div>
+
+    <p style="margin-top:1rem;color:#7a3a43;font-size:0.95rem">— From Asresh</p>
+  </main>
+</body>
+</html>
