@@ -786,6 +786,14 @@
           "tags": [],
           "new": true,
           "metric": "2.583×"
+        },
+        {
+          "id": "day19 - gpu_p2p_transport_engine",
+          "title": "GPU P2P Transport Engine",
+          "desc": "The interconnect layer under a multi-GPU collective: an RDMA-style transport engine that drains a work-queue ring…",
+          "tags": [],
+          "new": true,
+          "metric": "10.30×"
         }
       ]
     },
