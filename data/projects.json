@@ -350,6 +350,13 @@
           "desc": "The switch at every tile of a mesh network-on-chip…",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "Day44",
+          "title": "FR-FCFS DRAM Memory Controller (JEDEC-style bank scheduler)",
+          "desc": "The far end of the memory path: a DDR-style controller that turns a stream of read/write transactions into legal DRAM commands…",
+          "tags": [],
+          "new": true
         }
       ]
     },
