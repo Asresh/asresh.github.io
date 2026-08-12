@@ -357,6 +357,13 @@
           "desc": "The far end of the memory path: a DDR-style controller that turns a stream of read/write transactions into legal DRAM commands…",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "Day45",
+          "title": "MESI Snooping Cache-Coherence Complex (4-core, cache-to-cache)",
+          "desc": "The project that removes the single-requester assumption every earlier memory-system day relied on: four write-back, write-allocate L1 data caches…",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -801,6 +808,14 @@
           "tags": [],
           "new": true,
           "metric": "10.30×"
+        },
+        {
+          "id": "day20 - gpu_spec_decode_verifier",
+          "title": "GPU Spec Decode Verifier",
+          "desc": "The acceptance step of tree-based speculative decoding…",
+          "tags": [],
+          "new": true,
+          "metric": "10.44×"
         }
       ]
     },
