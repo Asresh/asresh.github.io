@@ -816,6 +816,14 @@
           "tags": [],
           "new": true,
           "metric": "10.44×"
+        },
+        {
+          "id": "day21 - gpu_mx_cast_riscv_unit",
+          "title": "GPU Mx Cast Riscv Unit",
+          "desc": "Five custom instructions in the execute stage of a three-stage RV32I core…",
+          "tags": [],
+          "new": true,
+          "metric": "11.96×"
         }
       ]
     },
