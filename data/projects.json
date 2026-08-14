@@ -214,154 +214,175 @@
         {
           "id": "Day24",
           "title": "Pipelined Ternary CAM (TCAM) Lookup Engine",
-          "desc": "Line-rate networking + HFT/FPGA \"search-in-hardware\" primitive (router forwarding tables / ACLs / longest-prefix-match…",
+          "desc": "Fully parallel ternary content-addressable memory for longest-prefix-match lookups.",
           "tags": [],
           "new": true
         },
         {
           "id": "Day25",
           "title": "Cut-Through Streaming Market-Data Feed Parser",
-          "desc": "Front door of the HFT tick-to-trade path — a line-rate FPGA feed handler that turns raw exchange bytes into normalized market-data events inline on…",
+          "desc": "Line-rate byte-router that decodes a simplified ITCH-style feed with deterministic latency.",
           "tags": [],
           "new": true
         },
         {
           "id": "Day26",
-          "title": "Pre-Trade Risk Check Gate (Market-Access \"Risk Firewall\")",
-          "desc": "Mandatory last hop of the HFT tick-to-trade path — the hardware gate every child order must clear before egress…",
+          "title": "Pre-Trade Risk Check Gate (Market-Access Firewall)",
+          "desc": "Parallel five-limit market-access risk firewall with single-cycle accept/reject decisions.",
           "tags": [],
           "new": true
         },
         {
           "id": "Day27",
           "title": "Direct-Mapped L2 Limit Order Book + BBO Engine",
-          "desc": "Compute heart of the HFT tick-to-trade path (sits between Day 25's feed parser and Day 26's risk gate) — the live L2 book + the one pair of numbers a…",
+          "desc": "Price-indexed order book with combinational best-bid/best-offer extraction every cycle.",
           "tags": [],
           "new": true
         },
         {
           "id": "Day28",
-          "title": "Redundant A/B Market-Data Feed Arbiter (line arbitration)",
-          "desc": "The very front door of the HFT tick-to-trade path — the ingest stage in front of Day 25's parser that collapses the exchange's two redundant…",
+          "title": "Redundant A/B Market-Data Feed Arbiter",
+          "desc": "Deduplicates and reorders two redundant exchange feed lines into one in-order stream.",
           "tags": [],
           "new": true
         },
         {
           "id": "Day29",
-          "title": "Cut-Through Order-Entry Egress Serializer (wire encoder)",
-          "desc": "The last hop of the HFT tick-to-trade path — the egress stage behind Day 26's risk gate that turns an accepted parallel order descriptor {token, side…",
+          "title": "Cut-Through Order-Entry Egress Serializer",
+          "desc": "Serializes an order descriptor into an OUCH-style wire message with a skid-buffer backpressure interface.",
           "tags": [],
           "new": true
         },
         {
           "id": "Day30",
           "title": "Hardware Nanosecond-Timestamp &amp; Tick-to-Trade Latency Monitor",
-          "desc": "HFT tick-to-trade instrumentation stage — measure end-to-end latency in the fabric (no CPU / no syscall / no observer effect)…",
+          "desc": "NCO-based nanosecond timestamping with tag-matched latency histogram capture.",
           "tags": [],
           "new": true
         },
         {
           "id": "Day31",
           "title": "Tick-to-Trade Marketable-Order Trigger Engine",
-          "desc": "The trade-decision node of the HFT tick-to-trade path — sits between Day 27's book/BBO engine and Day 26's pre-trade risk gate…",
+          "desc": "Evaluates resting strategy rules against live BBO and fires child orders with throttling.",
           "tags": [],
           "new": true
         },
         {
           "id": "Day32",
           "title": "Reed–Solomon RS(n,k) Systematic Encoder over GF(2^M)",
-          "desc": "The workhorse symbol-level ECC of the real world (CD/DVD/Blu-ray, QR, DVB/ATSC, DSL, RAID-6, deep-space CCSDS…",
+          "desc": "Elaboration-derived Galois-field LFSR encoder generating parity symbols for burst-error correction.",
           "tags": [],
           "new": true
         },
         {
           "id": "Day33",
-          "title": "AES-128 Block-Cipher Encryption Core (iterative, FIPS-197)",
-          "desc": "The symmetric block cipher under MACsec (802.1AE) / IPsec / TLS record / self-encrypting drives — a synthesizable AES-128 encryptor that turns one…",
+          "title": "AES-128 Block-Cipher Encryption Core (FIPS-197)",
+          "desc": "Iterative 11-cycle AES-128 encryptor with an on-the-fly key schedule.",
           "tags": [],
           "new": true
         },
         {
           "id": "Day34",
-          "title": "SHA-256 Cryptographic Hash Core (iterative, FIPS 180-4)",
-          "desc": "The hash workhorse under TLS records / Git objects / secure-boot &amp; software-update signing / HMAC / PBKDF2 / IPFS / Bitcoin proof-of-work — a…",
+          "title": "SHA-256 Cryptographic Hash Core (FIPS 180-4)",
+          "desc": "Iterative 66-cycle SHA-256 compression function with a circular-window message schedule.",
           "tags": [],
           "new": true
         },
         {
           "id": "Day35",
-          "title": "8b/10b Line Encoder (Widmer / Franaszek)",
-          "desc": "The physical-coding-sublayer (PCS) workhorse between byte-domain logic and the SerDes of PCIe Gen1/2 / SATA / 1000BASE-X GbE / USB 3.0 / DisplayPort…",
+          "title": "8b/10b Line Encoder (Widmer/Franaszek)",
+          "desc": "DC-balanced, transition-rich line coding with running-disparity tracking for SerDes PHYs.",
           "tags": [],
           "new": true
         },
         {
           "id": "Day36",
-          "title": "Hard-Decision Viterbi Decoder (rate-1/2, K=3 (7,5))",
-          "desc": "The maximum-likelihood decoder for a convolutional code — the forward-error-correction workhorse behind 802.11a/g Wi-Fi, GSM, DVB…",
+          "title": "Hard-Decision Viterbi Decoder (rate-1/2, K=3)",
+          "desc": "Maximum-likelihood convolutional decoder using add-compare-select butterflies and register-exchange survivor memory.",
           "tags": [],
           "new": true
         },
         {
           "id": "Day37",
           "title": "Pipelined Radix-2 DIT FFT (N=16, Q1.15)",
-          "desc": "The workhorse of DSP — the transform under OFDM (Wi-Fi 802.11a/g/n/ac, LTE/5G, DVB, DSL), pulse-Doppler &amp; synthetic-aperture radar, spectrometry…",
+          "desc": "Fully pipelined 16-point FFT with an elaboration-derived twiddle ROM, one transform per clock.",
           "tags": [],
           "new": true
         },
         {
           "id": "Day38",
           "title": "5-Stage Pipelined RISC-V RV32I Integer Core",
-          "desc": "The canonical \"put-it-all-together\" RTL building block — a synthesizable, in-order…",
+          "desc": "In-order RV32I core with full data forwarding, load-use hazard interlock, and branch resolution in EX.",
           "tags": [],
           "new": true
         },
         {
           "id": "Day39",
           "title": "4-Way Set-Associative Write-Back L1 Data Cache",
-          "desc": "The block that feeds the [Day 38](./Day38) core — where a design stops being a datapath and becomes a memory system: a synthesizable 4 KB (64 sets x…",
+          "desc": "True-LRU cache with write-back/write-allocate stores and burst eviction/refill.",
           "tags": [],
           "new": true
         },
         {
           "id": "Day40",
           "title": "RISC-V Sv32 MMU (TLB + hardware page-table walker)",
-          "desc": "The block that turns an address into a permission decision — the OS substrate under [Day 38](./Day38)'s core and [Day 39](./Day39)'s cache:…",
+          "desc": "Fully-associative TLB with a two-level hardware page-table walk and full permission checking.",
           "tags": [],
           "new": true
         },
         {
           "id": "Day41",
           "title": "Out-of-Order Execution Engine (Tomasulo + Reorder Buffer)",
-          "desc": "The day the in-order constraint from [Day 38](./Day38) is removed: a synthesizable out-of-order core — in-order dispatch…",
+          "desc": "Register renaming, reservation stations, and a reorder buffer for precise out-of-order execution.",
           "tags": [],
           "new": true
         },
         {
           "id": "Day42",
           "title": "SIMT Register-File Operand Collector",
-          "desc": "The GPU SM stage between warp scheduling and CUDA/Tensor execution: COLLECTORS multi-warp instruction slots independently gather as many as three…",
+          "desc": "Multi-warp operand-gathering stage with banked register-file arbitration and operand reuse caching.",
           "tags": [],
           "new": true
         },
         {
           "id": "Day43",
           "title": "Wormhole Virtual-Channel NoC Router (5-port mesh node)",
-          "desc": "The switch at every tile of a mesh network-on-chip…",
+          "desc": "Deadlock-free XY-routed virtual-channel router with credit-based flow control.",
           "tags": [],
           "new": true
         },
         {
           "id": "Day44",
           "title": "FR-FCFS DRAM Memory Controller (JEDEC-style bank scheduler)",
-          "desc": "The far end of the memory path: a DDR-style controller that turns a stream of read/write transactions into legal DRAM commands…",
+          "desc": "Bank-scheduling DRAM controller enforcing full JEDEC timing with row-hit-locality reordering.",
           "tags": [],
           "new": true
         },
         {
           "id": "Day45",
           "title": "MESI Snooping Cache-Coherence Complex (4-core, cache-to-cache)",
-          "desc": "The project that removes the single-requester assumption every earlier memory-system day relied on: four write-back, write-allocate L1 data caches…",
+          "desc": "Four-core MESI protocol with a snooping bus and cache-to-cache intervention.",
+          "tags": [],
+          "new": true
+        },
+        {
+          "id": "Day46",
+          "title": "Descriptor-Driven 2D Strided DMA Engine",
+          "desc": "Queued-descriptor DMA supporting independent source/destination strides and partial final beats.",
+          "tags": [],
+          "new": true
+        },
+        {
+          "id": "Day47",
+          "title": "Out-of-Order Load/Store Queue with Store-to-Load Forwarding",
+          "desc": "Age-ordered LQ/SQ with store-to-load forwarding and speculative memory disambiguation.",
+          "tags": [],
+          "new": true
+        },
+        {
+          "id": "Day48",
+          "title": "PCIe-Style Link Training and Status State Machine",
+          "desc": "Multi-lane TS1/TS2 qualification, width negotiation, bounded retries, and speed/link-loss recovery.",
           "tags": [],
           "new": true
         }
@@ -638,6 +659,20 @@
           "desc": "The first block most engineers meet where the design is deliberately, continuously wrong and that is the point: after a store hits a write-back cache…",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "Day32",
+          "title": "UVM MESI Snooping Cache-Coherence Verification",
+          "desc": "Day 31 verified one write-back cache; this is what happens when a second one sits next to it. Two MESI L1s on a shared snoop bus (round-robin arbiter…",
+          "tags": [],
+          "new": true
+        },
+        {
+          "id": "Day33",
+          "title": "UVM NoC Router Verification",
+          "desc": "Parameterized 3×3 ready/valid NoC router with per-input elastic buffers and independent per-output round-robin arbitration; three active source…",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -824,6 +859,14 @@
           "tags": [],
           "new": true,
           "metric": "11.96×"
+        },
+        {
+          "id": "day22 - hid_touch_fusion_engine",
+          "title": "Hid Touch Fusion Engine",
+          "desc": "SPI-controlled HID sensor-fusion accelerator for two four-quadrant touch/force tiles: hardware clamps calibrated baselines…",
+          "tags": [],
+          "new": true,
+          "metric": "4.47×"
         }
       ]
     },
@@ -1017,78 +1060,85 @@
         },
         {
           "id": "Day22",
-          "title": "Fully-Pipelined Newton-Raphson Fixed-Point Reciprocal Unit (`1/x`)",
-          "desc": "GPU Special-Function-Unit reciprocal primitive (MUFU.RCP/__frcp_rn) &amp; ultra-low-latency HFT / FPGA divide substrate (VWAP, price ratios…",
+          "title": "Fully-Pipelined Newton-Raphson Fixed-Point Reciprocal Unit",
+          "desc": "A fixed-latency 1/x reciprocal engine using range reduction, a seed ROM, and two Newton-Raphson refinement steps.",
           "tags": [],
           "new": true
         },
         {
           "id": "Day23",
           "title": "N-Way Set-Associative Write-Back Cache with Tree-PLRU Replacement",
-          "desc": "Set-associative memory hierarchy, parallel tag compare across WAYS…",
+          "desc": "An associative cache with per-set tree-based pseudo-LRU replacement, extending Day 7's direct-mapped design.",
           "tags": [],
           "new": true
         },
         {
           "id": "Day24",
           "title": "gshare Correlating Branch Predictor",
-          "desc": "Dynamic correlating prediction (McFarling gshare), Global History Register XOR-folded with the PC to index a PHT of 2-bit saturating counters…",
+          "desc": "A dynamic predictor that XOR-folds global branch history with the PC to index a PHT, capturing inter-branch correlation.",
           "tags": [],
           "new": true
         },
         {
           "id": "Day25",
-          "title": "Classic 5-Stage Pipelined RV32I Core (forwarding + hazard stall + branch flush)",
-          "desc": "Instruction pipelining (Patterson &amp; Hennessy IF/ID/EX/MEM/WB), one-instruction-per-cycle overlap via pipeline registers…",
+          "title": "Classic 5-Stage Pipelined RV32I Core",
+          "desc": "A pipelined IF/ID/EX/MEM/WB RISC-V core with full data forwarding, load-use hazard stalls, and branch-misprediction flush.",
           "tags": [],
           "new": true
         },
         {
           "id": "Day26",
           "title": "Branch Target Buffer (BTB) + Return Address Stack (RAS)",
-          "desc": "Fetch-stage target prediction (the \"where does it jump?\" the Day 6 / Day 24 direction predictors don't answer)…",
+          "desc": "Fetch-stage target prediction: a BTB predicting branch/jump targets and a RAS predicting function-return addresses.",
           "tags": [],
           "new": true
         },
         {
           "id": "Day27",
           "title": "Stride Prefetcher (Reference Prediction Table)",
-          "desc": "Hardware data prefetching / memory-latency hiding (Chen–Baer RPT)…",
+          "desc": "A PC-indexed prefetcher that learns constant-stride address patterns per load instruction and fetches ahead of demand misses.",
           "tags": [],
           "new": true
         },
         {
           "id": "Day28",
           "title": "Explicit Register Renaming Unit (RAT + Free List)",
-          "desc": "Out-of-order front-end dependency breaking, Register Alias Table (RAT[a]=current physical mapping…",
+          "desc": "A Register Alias Table plus free-list front-end that maps architectural registers to physical registers, eliminating false WAW/WAR hazards.",
           "tags": [],
           "new": true
         },
         {
           "id": "Day29",
           "title": "Out-of-Order Issue Queue (Reservation Stations)",
-          "desc": "The scheduler between Day 28 rename and Day 12 retire: dispatched instructions wait only on their own operands and launch out of program order…",
+          "desc": "A Tomasulo-style scheduler with associative wakeup and age-matrix oldest-ready-first select for out-of-order instruction issue.",
           "tags": [],
           "new": true
         },
         {
           "id": "Day30",
           "title": "MESI Snooping Cache-Coherence Controller",
-          "desc": "Multicore cache coherence (Papamarcos &amp; Patel Illinois protocol) — the shift from caches as a private latency optimisation to caches as the enforcers…",
+          "desc": "A per-core write-back cache implementing the four-state MESI snooping coherence protocol across a shared bus.",
           "tags": [],
           "new": true
         },
         {
           "id": "Day31",
           "title": "Non-Blocking (Lockup-Free) Cache MSHR File",
-          "desc": "The structure (Kroft…",
+          "desc": "A Miss Status Holding Register file that turns a blocking cache into a lockup-free one, enabling memory-level parallelism.",
           "tags": [],
           "new": true
         },
         {
           "id": "Day32",
           "title": "FR-FCFS DRAM Memory-Access Scheduler",
-          "desc": "The level below the Day 31 MSHR file: once misses leave the chip in parallel, something has to decide the ORDER DRAM serves them in…",
+          "desc": "A memory-controller scheduler implementing first-ready/first-come-first-served DRAM command ordering with a fairness bypass cap.",
+          "tags": [],
+          "new": true
+        },
+        {
+          "id": "Day33",
+          "title": "Out-of-Order Load/Store Queue",
+          "desc": "A speculative memory-disambiguation engine with youngest-store forwarding, memory-order violation detection, and pointer-checkpoint recovery.",
           "tags": [],
           "new": true
         }
