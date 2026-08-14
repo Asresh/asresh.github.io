@@ -881,6 +881,14 @@
           "tags": [],
           "new": true,
           "metric": "4.47×"
+        },
+        {
+          "id": "day23-ddr_ras_scrub_engine",
+          "title": "Ddr Ras Scrub Engine",
+          "desc": "Descriptor-DMA DDR patrol scrubber repairs single-bit SECDED faults in place and reports double-bit faults without writeback. Measured 734-cycle…",
+          "tags": [],
+          "new": true,
+          "metric": "38.128×"
         }
       ]
     },
