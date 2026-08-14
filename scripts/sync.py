@@ -26,7 +26,7 @@ import os
 import re
 import sys
 import urllib.request
-from urllib.parse import quote
+from urllib.parse import quote, unquote
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "data", "projects.json")
@@ -101,8 +101,10 @@ def parse_readme_table(text):
         if len(cells) < 3 or not cells[0].isdigit():
             continue
         day = int(cells[0])
+        folder_match = re.search(r"\]\((?:\./)?([^)]*?)/?\)", cells[-1])
+        folder = unquote(folder_match.group(1)) if folder_match else f"Day{day}"
         out[day] = {
-            "id": f"Day{day}",
+            "id": folder,
             "title": html.escape(cells[1], quote=False),
             "desc": html.escape(trim(cells[2]), quote=False),
             "metric": None,
@@ -110,7 +112,7 @@ def parse_readme_table(text):
     return out
 
 
-def parse_manifest(text):
+def parse_manifest(text, folders=None):
     """MANIFEST.json -> {day -> {id,title,desc,metric}}."""
     out = {}
     for p in json.loads(text).get("projects", []):
@@ -118,11 +120,25 @@ def parse_manifest(text):
         name = p.get("name", f"day{day}")
         summary = p.get("summary", "")
         out[day] = {
-            "id": f"day{day} - {name}",
+            "id": (folders or {}).get(day, f"day{day:02d} - {name}"),
             "title": html.escape(fix_caps(name.replace("_", " ").title()), quote=False),
             "desc": html.escape(trim(summary, 150), quote=False),
             "metric": extract_speedup(summary),
         }
+    return out
+
+
+def parse_folder_links(text):
+    """Extract exact day-folder names from a README index, including linked days."""
+    out = {}
+    for line in text.splitlines():
+        if not line.strip().startswith("|"):
+            continue
+        cells = [c.strip() for c in line.strip().strip("|").split("|")]
+        day_match = re.search(r"(?:^|\[)(\d+)(?:$|\])", cells[0]) if cells else None
+        folder_match = re.search(r"\]\((?:\./)?([^)]*?)/?\)", line)
+        if day_match and folder_match:
+            out[int(day_match.group(1))] = unquote(folder_match.group(1))
     return out
 
 
@@ -131,7 +147,11 @@ def source_map(section):
     base = f"https://raw.githubusercontent.com/Asresh/{repo}/main/"
     if src == "table":
         return parse_readme_table(fetch(base + "README.md"))
-    return parse_manifest(fetch(base + "MANIFEST.json"))
+    try:
+        folders = parse_folder_links(fetch(base + "README.md"))
+    except Exception:
+        folders = {}
+    return parse_manifest(fetch(base + "MANIFEST.json"), folders)
 
 
 def day_of(pid):
@@ -150,6 +170,8 @@ def sync_section(section):
     smap = source_map(section)
     existing = {day_of(p["id"]): p for p in section["projects"] if day_of(p["id"])}
     featured = day_of(section.get("featured", ""))
+    if featured in smap:
+        section["featured"] = smap[featured]["id"]
     added = []
     for day in sorted(smap):
         if day == featured:
@@ -157,6 +179,9 @@ def sync_section(section):
         info = smap[day]
         if day in existing:
             p = existing[day]
+            # Folder names are repository-owned and may be renamed even when the
+            # card's curated title, description, ordering and tags stay frozen.
+            p["id"] = info["id"]
             if p.get("new"):                       # auto entry -> refresh from source
                 p["title"], p["desc"] = info["title"], info["desc"]
                 if info["metric"] and section.get("cardStyle") == "metric":

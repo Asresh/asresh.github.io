@@ -6,11 +6,11 @@
       "repo": "RTL-Projects-Everyday",
       "src": "table",
       "cardStyle": "link",
-      "featured": "Day17",
+      "featured": "day17-warp_scheduler",
       "hrefBase": "https://github.com/Asresh/RTL-Projects-Everyday/tree/main/",
       "projects": [
         {
-          "id": "Day18",
+          "id": "day18-simt_divergence_stack",
           "title": "SIMT Reconvergence (IPDOM) Stack",
           "desc": "Per-warp LIFO of {pc, rpc, active-mask} performing immediate-post-dominator reconvergence for SIMT branch divergence, with exact per-lane mask conservation.",
           "tags": [
@@ -20,7 +20,7 @@
           ]
         },
         {
-          "id": "Day14",
+          "id": "day14-systolic_gemm",
           "title": "Output-Stationary Systolic GEMM",
           "desc": "N×N output-stationary MAC mesh in TPU-style dataflow, with diagonal space-time skew scheduling and overflow-proof signed accumulators.",
           "tags": [
@@ -30,7 +30,7 @@
           ]
         },
         {
-          "id": "Day16",
+          "id": "day16-bank_conflict_crossbar",
           "title": "SIMT Bank-Conflict Crossbar",
           "desc": "Shared-memory crossbar resolving bank conflicts by leader-select scheduling, with same-address broadcast collapsing and a pending-mask retire loop.",
           "tags": [
@@ -40,7 +40,7 @@
           ]
         },
         {
-          "id": "Day20",
+          "id": "day20-memory_coalescing_unit",
           "title": "Memory-Coalescing Unit",
           "desc": "GPU LSU front-end coalescing per-lane byte addresses into the minimum aligned cache-line transactions via single-pass parallel leader detection.",
           "tags": [
@@ -50,7 +50,7 @@
           ]
         },
         {
-          "id": "Day21",
+          "id": "day21-sparse_dot_product",
           "title": "2:4 Structured-Sparsity Engine",
           "desc": "Sparse Tensor-Core datapath computing dot-products over 2:4 structured-sparse weights, with per-group index-metadata decode and 4:1 selection.",
           "tags": [
@@ -59,7 +59,7 @@
           ]
         },
         {
-          "id": "Day23",
+          "id": "day23-priority_queue",
           "title": "Hardware Priority Queue",
           "desc": "Systolic register-array min-priority-queue with single-cycle enqueue and extract-min at occupancy-independent latency, kept sorted by parallel compare / shift-insert.",
           "tags": [
@@ -68,7 +68,7 @@
           ]
         },
         {
-          "id": "Day19",
+          "id": "day19-top_k_selection",
           "title": "Streaming Top-K Engine",
           "desc": "Systolic sorted-insertion array keeping the K largest (key, tag) pairs of a 1-element/clock stream — LLM top-K sampling, beam search, k-NN.",
           "tags": [
@@ -77,7 +77,7 @@
           ]
         },
         {
-          "id": "Day15",
+          "id": "day15-prefix_sum_scan",
           "title": "Segmented Prefix-Sum (Kogge-Stone)",
           "desc": "Pipelined Kogge-Stone parallel prefix-sum with per-lane head-flag segmented scan and OR-scan flag propagation, one vector per clock.",
           "tags": [
@@ -86,7 +86,7 @@
           ]
         },
         {
-          "id": "Day13",
+          "id": "day13-fp_adder",
           "title": "IEEE-754 binary32 FP Adder",
           "desc": "Single-precision adder with exponent-align barrel shift, round-to-nearest-even (guard/round/sticky), subnormals and Inf/NaN special-casing.",
           "tags": [
@@ -95,7 +95,7 @@
           ]
         },
         {
-          "id": "Day12",
+          "id": "day12-booth_multiplier",
           "title": "Radix-4 Booth Multiplier",
           "desc": "Modified-Booth recoding with a Wallace 3:2 carry-save reduction tree and final carry-propagate adder — one signed/unsigned multiply per clock.",
           "tags": [
@@ -104,7 +104,7 @@
           ]
         },
         {
-          "id": "Day22",
+          "id": "day22-crc32_engine",
           "title": "Parallel CRC-32 (Ethernet FCS)",
           "desc": "Reflected IEEE-802.3 CRC-32 unrolling the bit-serial LFSR into a single combinational GF(2) cone, N bytes per clock.",
           "tags": [
@@ -113,7 +113,7 @@
           ]
         },
         {
-          "id": "Day11",
+          "id": "day11-bitonic_sorter",
           "title": "Bitonic Sorting Network",
           "desc": "Batcher bitonic network with data-independent compare-exchange stages at constant latency — one vector per clock, signed/unsigned, asc/desc.",
           "tags": [
@@ -122,7 +122,7 @@
           ]
         },
         {
-          "id": "Day9",
+          "id": "day09-cordic_sincos",
           "title": "CORDIC Sine / Cosine",
           "desc": "Fully-unrolled rotation-mode CORDIC computing sin/cos multiplier-free (add &amp; shift) with quadrant folding and 1/K pre-scale, Q2.13.",
           "tags": [
@@ -131,7 +131,7 @@
           ]
         },
         {
-          "id": "Day10",
+          "id": "day10-hamming_secded",
           "title": "SECDED (72,64) Hamming ECC",
           "desc": "Single-error-correct / double-error-detect codec with interleaved parity, syndrome decode and a 1-of-72 corrector, 2-stage pipeline.",
           "tags": [
@@ -140,7 +140,7 @@
           ]
         },
         {
-          "id": "Day7",
+          "id": "day07-axi4lite_regs",
           "title": "AXI4-Lite Register Block",
           "desc": "Five-channel AXI4-Lite slave with VALID/READY handshakes, WSTRB byte strobes, OKAY/SLVERR responses and RW/RO/W1C register semantics.",
           "tags": [
@@ -149,7 +149,7 @@
           ]
         },
         {
-          "id": "Day8",
+          "id": "day08-i2c_master",
           "title": "I²C Master Controller",
           "desc": "Single-master open-drain controller: START/STOP, 7-bit addressing, per-byte ACK/NACK, four-phase SCL, clock-stretch aware.",
           "tags": [
@@ -158,7 +158,7 @@
           ]
         },
         {
-          "id": "Day4",
+          "id": "day04-async_fifo",
           "title": "Async (Dual-Clock) FIFO",
           "desc": "Dual-clock FIFO with Gray-code pointers and two-flop synchronizers for safe clock-domain crossing and full/empty generation.",
           "tags": [
@@ -167,7 +167,7 @@
           ]
         },
         {
-          "id": "Day3",
+          "id": "day03-spi_master",
           "title": "SPI Master (all 4 modes)",
           "desc": "SPI master supporting all four CPOL/CPHA modes with a programmable SCLK divider and a full-duplex shift engine.",
           "tags": [
@@ -176,7 +176,7 @@
           ]
         },
         {
-          "id": "Day5",
+          "id": "day05-uart_transceiver",
           "title": "UART (TX + RX)",
           "desc": "8-N-1 transceiver with run-time baud divider, mid-bit sampling, two-flop line sync and TX→RX loopback self-check.",
           "tags": [
@@ -185,7 +185,7 @@
           ]
         },
         {
-          "id": "Day6",
+          "id": "day06-sequential_divider",
           "title": "Sequential Integer Divider",
           "desc": "Restoring shift-subtract multicycle FSM with start/busy/done handshake, quotient + remainder output and a divide-by-zero policy.",
           "tags": [
@@ -194,7 +194,7 @@
           ]
         },
         {
-          "id": "Day2",
+          "id": "day02-round_robin_arbiter",
           "title": "Round-Robin Arbiter",
           "desc": "Parameterized fair rotating priority with one-hot grant, priority mask and wrap-around scheduling.",
           "tags": [
@@ -203,7 +203,7 @@
           ]
         },
         {
-          "id": "Day1",
+          "id": "day01-sync_fifo",
           "title": "Synchronous FIFO",
           "desc": "Synchronous FIFO with occupancy counter and full/empty flag generation, verified by a self-checking testbench.",
           "tags": [
@@ -212,175 +212,175 @@
           ]
         },
         {
-          "id": "Day24",
+          "id": "day24-tcam_lookup",
           "title": "Pipelined Ternary CAM (TCAM) Lookup Engine",
           "desc": "Fully parallel ternary content-addressable memory for longest-prefix-match lookups.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day25",
+          "id": "day25-market_data_parser",
           "title": "Cut-Through Streaming Market-Data Feed Parser",
           "desc": "Line-rate byte-router that decodes a simplified ITCH-style feed with deterministic latency.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day26",
+          "id": "day26-risk_check_gate",
           "title": "Pre-Trade Risk Check Gate (Market-Access Firewall)",
           "desc": "Parallel five-limit market-access risk firewall with single-cycle accept/reject decisions.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day27",
+          "id": "day27-limit_order_book",
           "title": "Direct-Mapped L2 Limit Order Book + BBO Engine",
           "desc": "Price-indexed order book with combinational best-bid/best-offer extraction every cycle.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day28",
+          "id": "day28-feed_arbiter",
           "title": "Redundant A/B Market-Data Feed Arbiter",
           "desc": "Deduplicates and reorders two redundant exchange feed lines into one in-order stream.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day29",
+          "id": "day29-order_entry_serializer",
           "title": "Cut-Through Order-Entry Egress Serializer",
           "desc": "Serializes an order descriptor into an OUCH-style wire message with a skid-buffer backpressure interface.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day30",
+          "id": "day30-latency_monitor",
           "title": "Hardware Nanosecond-Timestamp &amp; Tick-to-Trade Latency Monitor",
           "desc": "NCO-based nanosecond timestamping with tag-matched latency histogram capture.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day31",
+          "id": "day31-order_trigger_engine",
           "title": "Tick-to-Trade Marketable-Order Trigger Engine",
           "desc": "Evaluates resting strategy rules against live BBO and fires child orders with throttling.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day32",
+          "id": "day32-reed_solomon_encoder",
           "title": "Reed–Solomon RS(n,k) Systematic Encoder over GF(2^M)",
           "desc": "Elaboration-derived Galois-field LFSR encoder generating parity symbols for burst-error correction.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day33",
+          "id": "day33-aes128_encryption",
           "title": "AES-128 Block-Cipher Encryption Core (FIPS-197)",
           "desc": "Iterative 11-cycle AES-128 encryptor with an on-the-fly key schedule.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day34",
+          "id": "day34-sha256_hash_core",
           "title": "SHA-256 Cryptographic Hash Core (FIPS 180-4)",
           "desc": "Iterative 66-cycle SHA-256 compression function with a circular-window message schedule.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day35",
+          "id": "day35-line_encoder_8b10b",
           "title": "8b/10b Line Encoder (Widmer/Franaszek)",
           "desc": "DC-balanced, transition-rich line coding with running-disparity tracking for SerDes PHYs.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day36",
+          "id": "day36-viterbi_decoder",
           "title": "Hard-Decision Viterbi Decoder (rate-1/2, K=3)",
           "desc": "Maximum-likelihood convolutional decoder using add-compare-select butterflies and register-exchange survivor memory.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day37",
+          "id": "day37-fft_radix2",
           "title": "Pipelined Radix-2 DIT FFT (N=16, Q1.15)",
           "desc": "Fully pipelined 16-point FFT with an elaboration-derived twiddle ROM, one transform per clock.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day38",
+          "id": "day38-riscv_pipeline_core",
           "title": "5-Stage Pipelined RISC-V RV32I Integer Core",
           "desc": "In-order RV32I core with full data forwarding, load-use hazard interlock, and branch resolution in EX.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day39",
+          "id": "day39-l1_data_cache",
           "title": "4-Way Set-Associative Write-Back L1 Data Cache",
           "desc": "True-LRU cache with write-back/write-allocate stores and burst eviction/refill.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day40",
+          "id": "day40-riscv_mmu",
           "title": "RISC-V Sv32 MMU (TLB + hardware page-table walker)",
           "desc": "Fully-associative TLB with a two-level hardware page-table walk and full permission checking.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day41",
+          "id": "day41-out_of_order_engine",
           "title": "Out-of-Order Execution Engine (Tomasulo + Reorder Buffer)",
           "desc": "Register renaming, reservation stations, and a reorder buffer for precise out-of-order execution.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day42",
+          "id": "day42-operand_collector",
           "title": "SIMT Register-File Operand Collector",
           "desc": "Multi-warp operand-gathering stage with banked register-file arbitration and operand reuse caching.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day43",
+          "id": "day43-noc_router",
           "title": "Wormhole Virtual-Channel NoC Router (5-port mesh node)",
           "desc": "Deadlock-free XY-routed virtual-channel router with credit-based flow control.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day44",
+          "id": "day44-dram_controller",
           "title": "FR-FCFS DRAM Memory Controller (JEDEC-style bank scheduler)",
           "desc": "Bank-scheduling DRAM controller enforcing full JEDEC timing with row-hit-locality reordering.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day45",
+          "id": "day45-mesi_cache_coherence",
           "title": "MESI Snooping Cache-Coherence Complex (4-core, cache-to-cache)",
           "desc": "Four-core MESI protocol with a snooping bus and cache-to-cache intervention.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day46",
+          "id": "day46-dma_engine",
           "title": "Descriptor-Driven 2D Strided DMA Engine",
           "desc": "Queued-descriptor DMA supporting independent source/destination strides and partial final beats.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day47",
+          "id": "day47-load_store_queue",
           "title": "Out-of-Order Load/Store Queue with Store-to-Load Forwarding",
           "desc": "Age-ordered LQ/SQ with store-to-load forwarding and speculative memory disambiguation.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day48",
+          "id": "day48-pcie_ltssm",
           "title": "PCIe-Style Link Training and Status State Machine",
           "desc": "Multi-lane TS1/TS2 qualification, width negotiation, bounded retries, and speed/link-loss recovery.",
           "tags": [],
@@ -393,11 +393,11 @@
       "repo": "Design-Verification-Projects-Everyday",
       "src": "table",
       "cardStyle": "link",
-      "featured": "Day15",
+      "featured": "day15-simt_reconvergence_stack",
       "hrefBase": "https://github.com/Asresh/Design-Verification-Projects-Everyday/tree/main/",
       "projects": [
         {
-          "id": "Day19",
+          "id": "day19-bbo_reduction_tree",
           "title": "BBO Top-of-Book Reduction-Tree",
           "desc": "UVM env for an argmax+argmin top-of-book reduction tree (FPGA matching engine) with a lowest-index tie-break golden model and coverage.",
           "tags": [
@@ -407,7 +407,7 @@
           ]
         },
         {
-          "id": "Day17",
+          "id": "day17-bitonic_sorting_network",
           "title": "Bitonic Sorting-Network Verification",
           "desc": "UVM env verifying a pipelined Batcher bitonic sort with an insertion-sort golden model, fixed-latency SVA and duplicate-key tie-break coverage.",
           "tags": [
@@ -417,7 +417,7 @@
           ]
         },
         {
-          "id": "Day18",
+          "id": "day18-prefix_sum_scan",
           "title": "Parallel Prefix-Sum (Scan) Verification",
           "desc": "UVM env verifying a Kogge-Stone inclusive/exclusive prefix-sum with a sequential modular-prefix golden model and mode/wrap coverage.",
           "tags": [
@@ -427,7 +427,7 @@
           ]
         },
         {
-          "id": "Day16",
+          "id": "day16-bank_conflict_serializer",
           "title": "Bank-Conflict Serializer Verification",
           "desc": "UVM env verifying a shared-memory bank-conflict serializer (broadcast + serialization) with a beat-for-beat golden phase model.",
           "tags": [
@@ -437,7 +437,7 @@
           ]
         },
         {
-          "id": "Day14",
+          "id": "day14-memory_coalescing_unit",
           "title": "Memory-Coalescing Unit Verification",
           "desc": "UVM env verifying a warp memory-coalescer, checking unique cache-line transactions and lossless / disjoint per-lane accounting.",
           "tags": [
@@ -447,7 +447,7 @@
           ]
         },
         {
-          "id": "Day13",
+          "id": "day13-tensor_core_dotproduct",
           "title": "Tensor-Core MAC Verification",
           "desc": "UVM env verifying a streaming signed multiply-accumulate lane with a modular-accumulate golden scoreboard and length×sign coverage.",
           "tags": [
@@ -457,7 +457,7 @@
           ]
         },
         {
-          "id": "Day5",
+          "id": "day05-ral_demo",
           "title": "UVM RAL Register Model",
           "desc": "A <code>uvm_reg</code> model (RW/RO/W1C) with adapter and explicit predictor, exercising front-door and back-door access with hw_reset and bit-bash sequences.",
           "tags": [
@@ -467,7 +467,7 @@
           ]
         },
         {
-          "id": "Day8",
+          "id": "day08-async_fifo_cdc",
           "title": "Async-FIFO CDC Verification",
           "desc": "UVM env verifying a dual-clock Gray-pointer FIFO across a CDC with per-domain agents and an order/integrity golden-queue scoreboard.",
           "tags": [
@@ -477,7 +477,7 @@
           ]
         },
         {
-          "id": "Day3",
+          "id": "day03-axi4_lite_regblock",
           "title": "AXI4-Lite Register-Block Verification",
           "desc": "Full UVM env: five-channel AXI4-Lite agent, golden reference scoreboard, layered / virtual sequences and protocol SVA.",
           "tags": [
@@ -487,7 +487,7 @@
           ]
         },
         {
-          "id": "Day11",
+          "id": "day11-spi_master",
           "title": "SPI Master Verification",
           "desc": "UVM env verifying an all-mode SPI master with an independent slave agent and a full-duplex golden reference scoreboard (MOSI/MISO).",
           "tags": [
@@ -497,7 +497,7 @@
           ]
         },
         {
-          "id": "Day10",
+          "id": "day10-axi4_stream_skid_buffer",
           "title": "AXI4-Stream Skid-Buffer Verification",
           "desc": "UVM env verifying a full-throughput AXI4-Stream skid buffer with source/sink agents and a lossless in-order queue scoreboard.",
           "tags": [
@@ -507,7 +507,7 @@
           ]
         },
         {
-          "id": "Day6",
+          "id": "day06-packet_router",
           "title": "Packet-Router Verification",
           "desc": "UVM env verifying a 1→N store-and-forward packet router with a per-port FIFO golden scoreboard and backpressure / FIFO-full corners.",
           "tags": [
@@ -517,7 +517,7 @@
           ]
         },
         {
-          "id": "Day2",
+          "id": "day02-apb4_register_file",
           "title": "APB4 Register-File Verification",
           "desc": "Full UVM env verifying an APB4 register file with driver/monitor/sequencer, golden scoreboard, virtual sequences and protocol SVA.",
           "tags": [
@@ -527,7 +527,7 @@
           ]
         },
         {
-          "id": "Day7",
+          "id": "day07-round_robin_arbiter",
           "title": "Round-Robin Arbiter Verification",
           "desc": "UVM env verifying a round-robin arbiter with a pointer-tracking golden model, fairness / anti-starvation checks and one-hot-grant SVA.",
           "tags": [
@@ -537,7 +537,7 @@
           ]
         },
         {
-          "id": "Day12",
+          "id": "day12-sequential_divider",
           "title": "Sequential Divider Verification",
           "desc": "UVM env verifying a restoring divider with a quotient/remainder golden model, divide-by-zero stress and handshake SVA.",
           "tags": [
@@ -547,7 +547,7 @@
           ]
         },
         {
-          "id": "Day9",
+          "id": "day09-alu_coverage",
           "title": "ALU Functional-Coverage Verification",
           "desc": "UVM env verifying an 8-op ALU with a shared golden model, four-flag checking and opcode×flag cross coverage.",
           "tags": [
@@ -557,7 +557,7 @@
           ]
         },
         {
-          "id": "Day4",
+          "id": "day04-uart_verification",
           "title": "UART Verification Environment",
           "desc": "UVM env with TX/RX byte-reconstructing monitors, a dual scoreboard, data×baud coverage and start/stop framing SVA.",
           "tags": [
@@ -567,7 +567,7 @@
           ]
         },
         {
-          "id": "Day1",
+          "id": "day01-fifo_scoreboard",
           "title": "Constrained-Random FIFO Scoreboard",
           "desc": "Pre-UVM env: a queue-based reference-model scoreboard with directed + constrained-random stimulus, functional coverage and SVA.",
           "tags": [
@@ -577,98 +577,98 @@
           ]
         },
         {
-          "id": "Day20",
+          "id": "day20-risk_check_gate",
           "title": "UVM Pre-Trade Risk-Check Gate (\"Fat-Finger\" Order-Validation Gateway) Verification",
           "desc": "Fully-pipelined, fixed-latency (LAT=PIPE+1) pre-trade risk gate — the first…",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day21",
+          "id": "day21-gap_detector",
           "title": "UVM Market-Data Sequence Gap Detector &amp; Duplicate Suppressor Verification",
           "desc": "Cut-through, fixed-latency (LAT=PIPE+1) feed-handler front end — the first…",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day22",
+          "id": "day22-token_bucket_limiter",
           "title": "UVM Token-Bucket Order-Rate Limiter (\"Exchange Gateway Throttle\") Verification",
           "desc": "Cut-through…",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day23",
+          "id": "day23-crc32_codec",
           "title": "UVM Streaming CRC-32 (Ethernet FCS) Generator/Checker Verification",
           "desc": "Byte-serial one-byte-per-cycle reflected CRC-32 / ISO-HDLC engine (the zlib / PNG / IEEE-802.3 Ethernet Frame-Check-Sequence block, poly 0xEDB88320…",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day24",
+          "id": "day24-secded_ecc",
           "title": "UVM SECDED (72,64) Extended-Hamming ECC Encoder/Decoder Verification",
           "desc": "Parameterized Single-Error-Correct / Double-Error-Detect extended-Hamming ECC engine — the integrity guard inside memory (every ECC DRAM DIMM…",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day25",
+          "id": "day25-cordic_rotator",
           "title": "UVM Rotation-Mode CORDIC (Hardware sin/cos &amp; Vector Rotator) Verification",
           "desc": "Fully-pipelined rotation-mode CORDIC — the multiplier-free shift-and-add vector rotator behind every hardware sin/cos generator…",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day26",
+          "id": "day26-i2c_master",
           "title": "UVM I²C Master Controller Verification",
           "desc": "Single-master open-drain I²C controller (the two-wire SDA/SCL bus behind every board-level sensor / EEPROM / RTC / codec / PMIC) — the classic serial…",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day27",
+          "id": "day27-scrambler_descrambler",
           "title": "UVM Self-Synchronizing Scrambler/Descrambler (10GBASE-R PCS) Verification",
           "desc": "Parameterized WIDTH-bit-parallel multiplicative (self-synchronizing) scrambler/descrambler — the SerDes physical-layer data-whitening block (IEEE…",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day28",
+          "id": "day28-fp_adder_subtractor",
           "title": "UVM IEEE-754 binary32 Floating-Point Adder/Subtractor Verification",
           "desc": "Fully-pipelined IEEE-754 binary32 (single-precision) floating-point adder/subtractor — the block inside every FPU, GPU shader core…",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day29",
+          "id": "day29-line_code_8b10b",
           "title": "UVM 8b/10b Line-Code Encoder/Decoder Verification",
           "desc": "The SerDes physical-layer line code behind Gigabit Ethernet (802.3 cl.36), PCIe gen1/2, SATA…",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day30",
+          "id": "day30-jtag_tap_controller",
           "title": "UVM IEEE 1149.1 JTAG TAP Controller Verification",
           "desc": "The most widely implemented state machine in digital hardware — the four-wire JTAG Test Access Port (TCK/TMS/TDI/TDO) inside nearly every chip made…",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day31",
+          "id": "day31-writeback_cache_controller",
           "title": "UVM Write-Back / Write-Allocate Cache Controller Verification",
           "desc": "The first block most engineers meet where the design is deliberately, continuously wrong and that is the point: after a store hits a write-back cache…",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day32",
+          "id": "day32-mesi_cache_coherence",
           "title": "UVM MESI Snooping Cache-Coherence Verification",
           "desc": "Day 31 verified one write-back cache; this is what happens when a second one sits next to it. Two MESI L1s on a shared snoop bus (round-robin arbiter…",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day33",
+          "id": "day33-noc_router",
           "title": "UVM NoC Router Verification",
           "desc": "Parameterized 3×3 ready/valid NoC router with per-input elastic buffers and independent per-output round-robin arbitration; three active source…",
           "tags": [],
@@ -681,11 +681,11 @@
       "repo": "Hardware-Software-Codesign-Projects-Everyday",
       "src": "manifest",
       "cardStyle": "metric",
-      "featured": "day2 - systolic_gemm_accelerator",
+      "featured": "day02 - systolic_gemm_accelerator",
       "hrefBase": "https://github.com/Asresh/Hardware-Software-Codesign-Projects-Everyday/tree/main/",
       "projects": [
         {
-          "id": "day9 - gpu_alpha_signal_engine",
+          "id": "day09 - gpu_alpha_signal_engine",
           "metric": "83×",
           "title": "HFT Alpha-Signal Engine",
           "desc": "Per-symbol EWMA + variance in a single-cycle read-modify-write symbol RAM, feeding a 32-stage sqrt and 48-stage divider — one tick per clock.",
@@ -695,7 +695,7 @@
           ]
         },
         {
-          "id": "day8 - gpu_order_book_engine",
+          "id": "day08 - gpu_order_book_engine",
           "metric": "200×",
           "title": "CAM Limit Order-Book / BBO",
           "desc": "Content-addressable 32-level price map with single-cycle (side, price) match/update and dual BBO comparator trees, ~1 message per clock.",
@@ -705,7 +705,7 @@
           ]
         },
         {
-          "id": "day7 - gpu_cordic_sfu_engine",
+          "id": "day07 - gpu_cordic_sfu_engine",
           "metric": "35×",
           "title": "CORDIC Special-Function Unit",
           "desc": "Unified circular/hyperbolic CORDIC computing sin/cos/exp/ln/sqrt/atan2/hypot on one shift-add datapath across 4 SIMD lanes.",
@@ -715,7 +715,7 @@
           ]
         },
         {
-          "id": "day6 - gpu_philox_rng_engine",
+          "id": "day06 - gpu_philox_rng_engine",
           "metric": "441×",
           "title": "Philox Counter-Based RNG",
           "desc": "Fully-pipelined Philox-4×32-10 with 4-lane SIMD retiring one 128-bit block/lane/clock — 512 random bits/clock — over an MMIO mailbox/doorbell.",
@@ -725,7 +725,7 @@
           ]
         },
         {
-          "id": "day4 - bitonic_sort_accelerator",
+          "id": "day04 - bitonic_sort_accelerator",
           "metric": "116×",
           "title": "Tiled Bitonic Sort",
           "desc": "Pipelined Batcher network (10-stage / 80-cell compare-exchange) retiring one 16-key 512-bit tile per clock over a wide-DMA master.",
@@ -735,7 +735,7 @@
           ]
         },
         {
-          "id": "day3 - scan_prefix_sum_engine",
+          "id": "day03 - scan_prefix_sum_engine",
           "metric": "45×",
           "title": "Parallel Prefix-Sum (Scan)",
           "desc": "A 16-lane Kogge-Stone prefix tree with carry chaining and descriptor-driven wide DMA over APB, ~15 words per cycle.",
@@ -745,7 +745,7 @@
           ]
         },
         {
-          "id": "day5 - gpu_texture_filter_engine",
+          "id": "day05 - gpu_texture_filter_engine",
           "metric": "32×",
           "title": "Bilinear Texture-Filter Engine",
           "desc": "A two-row line-buffer window with 2×2 texel gather and Q16.16 bilinear blend, one filtered pixel per clock via a coalesced memory master.",
@@ -755,7 +755,7 @@
           ]
         },
         {
-          "id": "day1 - fir_stream_accelerator",
+          "id": "day01 - fir_stream_accelerator",
           "metric": "7.9×",
           "title": "Streaming FIR Accelerator",
           "desc": "A transposed-form FIR at 8 MAC/cycle and ~1 sample/clock over AXI4-Lite control + AXI4-Stream data, with FIFO backpressure and a bare-metal C driver.",
@@ -861,7 +861,7 @@
           "metric": "11.96×"
         },
         {
-          "id": "day22 - hid_touch_fusion_engine",
+          "id": "day22-hid_touch_fusion_engine",
           "title": "Hid Touch Fusion Engine",
           "desc": "SPI-controlled HID sensor-fusion accelerator for two four-quadrant touch/force tiles: hardware clamps calibrated baselines…",
           "tags": [],
@@ -875,11 +875,11 @@
       "repo": "Computer-Architecture-Projects-Everyday",
       "src": "table",
       "cardStyle": "link",
-      "featured": "Day12",
+      "featured": "day12-reorder_buffer",
       "hrefBase": "https://github.com/Asresh/Computer-Architecture-Projects-Everyday/tree/main/",
       "projects": [
         {
-          "id": "Day13",
+          "id": "day13-systolic_array",
           "title": "Output-Stationary Systolic Array",
           "desc": "GPU Tensor-Core / TPU-MXU dataflow — an N×N grid of MAC PEs with output-stationary accumulation and diagonally-skewed A/B operand streaming, O(N³) MACs at O(N) edge bandwidth.",
           "tags": [
@@ -888,7 +888,7 @@
           ]
         },
         {
-          "id": "Day14",
+          "id": "day14-simt_reconvergence_stack",
           "title": "SIMT Reconvergence (PDOM) Stack",
           "desc": "Per-warp post-dominator stack of {mask, pc, rpc} groups: divergent-branch split, uniform-branch retarget and immediate-post-dominator reconvergence with arbitrary nesting.",
           "tags": [
@@ -897,7 +897,7 @@
           ]
         },
         {
-          "id": "Day15",
+          "id": "day15-memory_coalescing_unit",
           "title": "GPU Memory-Coalescing Unit",
           "desc": "Per-lane addresses coalesced into aligned cache-line segments — one transaction per unique segment via lowest-lane leader election, with coalescing-efficiency popcounts.",
           "tags": [
@@ -906,7 +906,7 @@
           ]
         },
         {
-          "id": "Day16",
+          "id": "day16-bank_conflict_detector",
           "title": "Shared-Memory Bank-Conflict Serializer",
           "desc": "Shared-memory bank map (addr/BYTES) mod NBANKS with broadcast detection and conflict serialization — a replay-phase schedule sized to the worst bank.",
           "tags": [
@@ -915,7 +915,7 @@
           ]
         },
         {
-          "id": "Day5",
+          "id": "day05-single_cycle_core",
           "title": "Single-Cycle RV32I Core",
           "desc": "Full integer core integrating ALU, register file, decoder, LSU and PC/imem — jal/jalr next-PC and ALU-reuse branch resolution, checked against an independent ISS golden trace.",
           "tags": [
@@ -924,7 +924,7 @@
           ]
         },
         {
-          "id": "Day11",
+          "id": "day11-store_buffer",
           "title": "Store Buffer + Store-to-Load Forwarding",
           "desc": "In-order circular store queue forwarding the youngest matching store to loads, with program-order drain to memory and full/empty backpressure.",
           "tags": [
@@ -933,7 +933,7 @@
           ]
         },
         {
-          "id": "Day10",
+          "id": "day10-fully_associative_tlb",
           "title": "Fully-Associative TLB (True-LRU)",
           "desc": "VPN→PPN translation via a fully-associative CAM with true-LRU replacement from an N×N age matrix, single-page invalidate and full sfence flush.",
           "tags": [
@@ -942,7 +942,7 @@
           ]
         },
         {
-          "id": "Day7",
+          "id": "day07-direct_mapped_cache",
           "title": "Write-Back / Write-Allocate Data Cache",
           "desc": "Direct-mapped cache with valid/dirty bits and write-back / write-allocate policy — conflict-miss eviction through a LOOKUP→WRITEBACK→ALLOCATE miss FSM.",
           "tags": [
@@ -951,7 +951,7 @@
           ]
         },
         {
-          "id": "Day19",
+          "id": "day19-argmax_reduction_tree",
           "title": "Argmax / Argmin Reduction Tree",
           "desc": "Balanced log₂N reduction tree carrying {value, index} for best-bid / best-offer top-of-book, with deterministic lowest-index tie-break and empty-book handling.",
           "tags": [
@@ -960,7 +960,7 @@
           ]
         },
         {
-          "id": "Day20",
+          "id": "day20-priority_queue",
           "title": "Systolic Priority Queue (min-heap)",
           "desc": "Shift-register hardware min-heap: single-cycle O(1) enqueue (parallel sorted insert) and extract-min, cells kept packed and sorted with price-time tie ordering.",
           "tags": [
@@ -969,7 +969,7 @@
           ]
         },
         {
-          "id": "Day21",
+          "id": "day21-cordic_engine",
           "title": "Dual-Mode CORDIC Engine",
           "desc": "Multiplier-free circular CORDIC in rotation (cos/sin) and vectoring (magnitude/atan2) modes — one micro-step per stage, fully pipelined 1 result/cycle at fixed latency.",
           "tags": [
@@ -978,7 +978,7 @@
           ]
         },
         {
-          "id": "Day17",
+          "id": "day17-bitonic_sorter",
           "title": "Pipelined Bitonic Sorting Network",
           "desc": "Batcher bitonic network of L·(L+1)/2 compare-exchange layers, one registered layer per step for 1-vector/cycle throughput at fixed data-independent latency.",
           "tags": [
@@ -987,7 +987,7 @@
           ]
         },
         {
-          "id": "Day18",
+          "id": "day18-prefix_scan_unit",
           "title": "Kogge-Stone Prefix-Sum (Scan)",
           "desc": "Kogge-Stone log₂N-depth parallel-prefix recurrence, inclusive/exclusive, one registered stage per level for zero-bubble 1-vector/cycle scan.",
           "tags": [
@@ -996,7 +996,7 @@
           ]
         },
         {
-          "id": "Day6",
+          "id": "day06-bimodal_branch_predictor",
           "title": "Bimodal 2-bit Branch Predictor",
           "desc": "Dynamic predictor: a PC-indexed pattern-history table of 2-bit saturating counters with hysteresis and independent predict / update ports.",
           "tags": [
@@ -1005,7 +1005,7 @@
           ]
         },
         {
-          "id": "Day8",
+          "id": "day08-booth_multiplier",
           "title": "Radix-4 Booth Signed Multiplier",
           "desc": "Radix-4 modified-Booth sequential multiplier — 2 bits/cycle add-shift with arithmetic right shift and no sign correction, start/busy/done handshake.",
           "tags": [
@@ -1014,7 +1014,7 @@
           ]
         },
         {
-          "id": "Day3",
+          "id": "day03-instruction_decoder",
           "title": "RV32I Decoder + Immediate Gen",
           "desc": "Combinational RV32I control decode (opcode/funct3/funct7) with datapath control lines, ALU-control mapping and I/S/B/U/J immediate generation.",
           "tags": [
@@ -1023,7 +1023,7 @@
           ]
         },
         {
-          "id": "Day4",
+          "id": "day04-load_store_unit",
           "title": "RV32I Load/Store Unit + Memory",
           "desc": "Byte-addressable little-endian data memory — lb/lh/lw/lbu/lhu/sb/sh/sw with byte-lane select, sign vs zero extension and per-byte write enables.",
           "tags": [
@@ -1032,7 +1032,7 @@
           ]
         },
         {
-          "id": "Day2",
+          "id": "day02-register_file",
           "title": "RV32I Register File (2R / 1W)",
           "desc": "Architectural register file — dual combinational read ports, synchronous write, x0 hardwired to zero and internal WB→ID write-forwarding.",
           "tags": [
@@ -1041,7 +1041,7 @@
           ]
         },
         {
-          "id": "Day1",
+          "id": "day01-integer_alu",
           "title": "Single-Cycle RV32I ALU",
           "desc": "Combinational RV32I integer ALU: add/sub, logic, arithmetic vs logical shifts, signed vs unsigned compare and a zero flag.",
           "tags": [
@@ -1050,7 +1050,7 @@
           ]
         },
         {
-          "id": "Day9",
+          "id": "day09-round_robin_arbiter",
           "title": "Round-Robin Arbiter",
           "desc": "Rotating-priority arbiter with a provable no-starvation bound — one-hot grant, isolate-lowest-set-bit priority pick and a single registered rotate pointer.",
           "tags": [
@@ -1059,86 +1059,93 @@
           ]
         },
         {
-          "id": "Day22",
+          "id": "day22-newton_raphson_reciprocal",
           "title": "Fully-Pipelined Newton-Raphson Fixed-Point Reciprocal Unit",
           "desc": "A fixed-latency 1/x reciprocal engine using range reduction, a seed ROM, and two Newton-Raphson refinement steps.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day23",
+          "id": "day23-set_associative_cache",
           "title": "N-Way Set-Associative Write-Back Cache with Tree-PLRU Replacement",
           "desc": "An associative cache with per-set tree-based pseudo-LRU replacement, extending Day 7's direct-mapped design.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day24",
+          "id": "day24-gshare_branch_predictor",
           "title": "gshare Correlating Branch Predictor",
           "desc": "A dynamic predictor that XOR-folds global branch history with the PC to index a PHT, capturing inter-branch correlation.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day25",
+          "id": "day25-pipelined_rv32i_core",
           "title": "Classic 5-Stage Pipelined RV32I Core",
           "desc": "A pipelined IF/ID/EX/MEM/WB RISC-V core with full data forwarding, load-use hazard stalls, and branch-misprediction flush.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day26",
+          "id": "day26-btb_and_ras",
           "title": "Branch Target Buffer (BTB) + Return Address Stack (RAS)",
           "desc": "Fetch-stage target prediction: a BTB predicting branch/jump targets and a RAS predicting function-return addresses.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day27",
+          "id": "day27-stride_prefetcher",
           "title": "Stride Prefetcher (Reference Prediction Table)",
           "desc": "A PC-indexed prefetcher that learns constant-stride address patterns per load instruction and fetches ahead of demand misses.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day28",
+          "id": "day28-register_renaming_unit",
           "title": "Explicit Register Renaming Unit (RAT + Free List)",
           "desc": "A Register Alias Table plus free-list front-end that maps architectural registers to physical registers, eliminating false WAW/WAR hazards.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day29",
+          "id": "day29-issue_queue",
           "title": "Out-of-Order Issue Queue (Reservation Stations)",
           "desc": "A Tomasulo-style scheduler with associative wakeup and age-matrix oldest-ready-first select for out-of-order instruction issue.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day30",
+          "id": "day30-mesi_cache_coherence",
           "title": "MESI Snooping Cache-Coherence Controller",
           "desc": "A per-core write-back cache implementing the four-state MESI snooping coherence protocol across a shared bus.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day31",
+          "id": "day31-mshr_file",
           "title": "Non-Blocking (Lockup-Free) Cache MSHR File",
           "desc": "A Miss Status Holding Register file that turns a blocking cache into a lockup-free one, enabling memory-level parallelism.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day32",
+          "id": "day32-dram_scheduler",
           "title": "FR-FCFS DRAM Memory-Access Scheduler",
           "desc": "A memory-controller scheduler implementing first-ready/first-come-first-served DRAM command ordering with a fairness bypass cap.",
           "tags": [],
           "new": true
         },
         {
-          "id": "Day33",
+          "id": "day33-load_store_queue",
           "title": "Out-of-Order Load/Store Queue",
           "desc": "A speculative memory-disambiguation engine with youngest-store forwarding, memory-order violation detection, and pointer-checkpoint recovery.",
+          "tags": [],
+          "new": true
+        },
+        {
+          "id": "day34-secded_ecc",
+          "title": "Parameterized SECDED ECC Pipeline",
+          "desc": "An extended-Hamming encoder/decoder that corrects single-bit faults, detects double-bit faults, and protects cache, DRAM, and interconnect data.",
           "tags": [],
           "new": true
         }
