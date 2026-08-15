@@ -392,6 +392,13 @@
           "desc": "Targeted snoop fanout, response aggregation, dirty-owner data forwarding, memory fallback, and atomic directory updates.",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "day50-pcie_replay_engine",
+          "title": "PCIe-Style Data Link Replay Engine",
+          "desc": "Circular replay RAM with modular sequence tracking, cumulative ACK retirement, selective NAK replay, and timeout recovery.",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -687,6 +694,13 @@
           "desc": "Parameterized fully associative I-TLB with ASIDs, global mappings, 4 KiB/2 MiB pages, execute permission, first-invalid/round-robin replacement…",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "day35-pcie_replay_buffer",
+          "title": "UVM PCIe-Style Replay Buffer Verification",
+          "desc": "Parameterized circular replay buffer retaining sent packets until cumulative ACK; NAK restart from any outstanding sequence; complete UVM agent…",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -889,6 +903,14 @@
           "tags": [],
           "new": true,
           "metric": "38.128×"
+        },
+        {
+          "id": "day24-usb_audio_rate_matcher",
+          "title": "Usb Audio Rate Matcher",
+          "desc": "USB isochronous audio rate matcher converts endpoint FIFO occupancy error into a bounded fractional phase correction and interpolates PCM16 samples…",
+          "tags": [],
+          "new": true,
+          "metric": "7.8×"
         }
       ]
     },
@@ -1168,6 +1190,13 @@
           "id": "day34-secded_ecc",
           "title": "Parameterized SECDED ECC Pipeline",
           "desc": "An extended-Hamming encoder/decoder that corrects single-bit faults, detects double-bit faults, and protects cache, DRAM, and interconnect data.",
+          "tags": [],
+          "new": true
+        },
+        {
+          "id": "day35-noc_router",
+          "title": "Five-Port Wormhole Network-on-Chip Router",
+          "desc": "A mesh NoC router combining elastic input FIFOs, deterministic XY routing, ready/valid backpressure, and fair per-output round-robin arbitration.",
           "tags": [],
           "new": true
         }
