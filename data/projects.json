@@ -399,6 +399,13 @@
           "desc": "Circular replay RAM with modular sequence tracking, cumulative ACK retirement, selective NAK replay, and timeout recovery.",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "day51-pcie_completion_reorder_buffer",
+          "title": "PCIe-Style Completion Reorder Buffer",
+          "desc": "Tagged fragment assembly with per-tag payload storage, malformed-completion checks, and strict issue-order retirement.",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -701,6 +708,13 @@
           "desc": "Parameterized circular replay buffer retaining sent packets until cumulative ACK; NAK restart from any outstanding sequence; complete UVM agent…",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "day36-axi_read_reorder",
+          "title": "UVM AXI Multi-ID Read Reorder Verification",
+          "desc": "Parameterized tagged reorder engine accepting multiple outstanding AXI-style reads; arbitrary out-of-order memory completion with strict…",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -911,6 +925,14 @@
           "tags": [],
           "new": true,
           "metric": "7.8×"
+        },
+        {
+          "id": "day25-motor_current_loop",
+          "title": "Motor Current Loop",
+          "desc": "Mailbox-controlled phase-current accelerator uses an eight-cycle bit-serial Q8 gain engine and independent overcurrent guard to produce a saturated…",
+          "tags": [],
+          "new": true,
+          "metric": "6.668510×"
         }
       ]
     },
@@ -1197,6 +1219,13 @@
           "id": "day35-noc_router",
           "title": "Five-Port Wormhole Network-on-Chip Router",
           "desc": "A mesh NoC router combining elastic input FIFOs, deterministic XY routing, ready/valid backpressure, and fair per-output round-robin arbitration.",
+          "tags": [],
+          "new": true
+        },
+        {
+          "id": "day36-instruction_fetch_queue",
+          "title": "Dual-Issue Instruction Fetch Queue",
+          "desc": "A two-wide elastic front-end queue carrying instruction and prediction metadata with simultaneous enqueue/dequeue and redirect flush recovery.",
           "tags": [],
           "new": true
         }
