@@ -406,6 +406,13 @@
           "desc": "Tagged fragment assembly with per-tag payload storage, malformed-completion checks, and strict issue-order retirement.",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "day52-axi_read_reorder_buffer",
+          "title": "AXI4 ID-Aware Read Response Reorder Buffer",
+          "desc": "Reassembles out-of-order backend beats while preserving per-ID AXI ordering with fair cross-ID retirement and backpressure-safe bursts.",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -715,6 +722,13 @@
           "desc": "Parameterized tagged reorder engine accepting multiple outstanding AXI-style reads; arbitrary out-of-order memory completion with strict…",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "day37-chi_snoop_filter",
+          "title": "UVM CHI-Style Coherent Snoop-Filter Verification",
+          "desc": "Parameterized directory slice for ReadShared/ReadUnique/Evict; exact targeted-snoop and sharer-state checking with an independent shadow directory…",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -933,6 +947,14 @@
           "tags": [],
           "new": true,
           "metric": "6.668510×"
+        },
+        {
+          "id": "day26-sobel_line_buffer",
+          "title": "Sobel Line Buffer",
+          "desc": "Driver-managed Sobel edge accelerator retains overlapping 3x3 neighborhoods in a parameterized two-row line buffer and emits saturated uint8…",
+          "tags": [],
+          "new": true,
+          "metric": "17.960954×"
         }
       ]
     },
@@ -1226,6 +1248,13 @@
           "id": "day36-instruction_fetch_queue",
           "title": "Dual-Issue Instruction Fetch Queue",
           "desc": "A two-wide elastic front-end queue carrying instruction and prediction metadata with simultaneous enqueue/dequeue and redirect flush recovery.",
+          "tags": [],
+          "new": true
+        },
+        {
+          "id": "day37-hardware_performance_monitor",
+          "title": "Programmable Hardware Performance Monitor",
+          "desc": "A PMU with fixed cycle/retire counters, programmable event selectors, atomic snapshots, and sticky overflow interrupt reporting.",
           "tags": [],
           "new": true
         }
