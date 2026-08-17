@@ -413,6 +413,13 @@
           "desc": "Reassembles out-of-order backend beats while preserving per-ID AXI ordering with fair cross-ID retirement and backpressure-safe bursts.",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "day53-lms_adaptive_equalizer",
+          "title": "Fixed-Point LMS Adaptive FIR Equalizer",
+          "desc": "Resource-shared adaptive filter with signed fixed-point MACs, saturating LMS coefficient updates, convergence telemetry, and training freeze.",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -729,6 +736,13 @@
           "desc": "Parameterized directory slice for ReadShared/ReadUnique/Evict; exact targeted-snoop and sharer-state checking with an independent shadow directory…",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "day38-scatter_gather_dma",
+          "title": "UVM Scatter-Gather DMA Descriptor Engine Verification",
+          "desc": "Parameterized memory data mover with descriptor and active memory UVM agents coordinated by a virtual sequence; golden source-memory scoreboard for…",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -955,6 +969,14 @@
           "tags": [],
           "new": true,
           "metric": "17.960954×"
+        },
+        {
+          "id": "day27-sdr_preamble_correlator",
+          "title": "Sdr Preamble Correlator",
+          "desc": "Programmable SDR matched-filter accelerator evaluates eight complex IQ products in parallel…",
+          "tags": [],
+          "new": true,
+          "metric": "48.54×"
         }
       ]
     },
@@ -1255,6 +1277,13 @@
           "id": "day37-hardware_performance_monitor",
           "title": "Programmable Hardware Performance Monitor",
           "desc": "A PMU with fixed cycle/retire counters, programmable event selectors, atomic snapshots, and sticky overflow interrupt reporting.",
+          "tags": [],
+          "new": true
+        },
+        {
+          "id": "day38-store_set_predictor",
+          "title": "Store-Set Memory-Dependence Predictor",
+          "desc": "An SSIT/LFST predictor that learns violating load/store pairs, merges dependence classes, and orders risky loads behind the youngest in-flight store.",
           "tags": [],
           "new": true
         }
