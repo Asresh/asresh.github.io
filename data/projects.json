@@ -420,6 +420,13 @@
           "desc": "Resource-shared adaptive filter with signed fixed-point MACs, saturating LMS coefficient updates, convergence telemetry, and training freeze.",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "day54-march_c_mbist",
+          "title": "March C− SRAM Memory Built-In Self-Test Controller",
+          "desc": "10N-operation ascending/descending SRAM test with synchronous-read sequencing and sticky first-failure diagnostics.",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -743,6 +750,13 @@
           "desc": "Parameterized memory data mover with descriptor and active memory UVM agents coordinated by a virtual sequence; golden source-memory scoreboard for…",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "day39-ddr_bank_scheduler",
+          "title": "UVM DDR Bank-Command Scheduler Verification",
+          "desc": "Parameterized open-page DDR scheduler translating requests into ACT/RD/WR/PRE; request and command-flow UVM agents coordinated by a virtual sequence…",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -977,6 +991,14 @@
           "tags": [],
           "new": true,
           "metric": "48.54×"
+        },
+        {
+          "id": "day28-spdm_nonce_replay_guard",
+          "title": "Spdm Nonce Replay Guard",
+          "desc": "SPDM nonce replay guard moves freshness enforcement out of branch-heavy BMC firmware: 32 CAM entries compare each authenticated request in parallel…",
+          "tags": [],
+          "new": true,
+          "metric": "8.418806×"
         }
       ]
     },
@@ -1284,6 +1306,13 @@
           "id": "day38-store_set_predictor",
           "title": "Store-Set Memory-Dependence Predictor",
           "desc": "An SSIT/LFST predictor that learns violating load/store pairs, merges dependence classes, and orders risky loads behind the youngest in-flight store.",
+          "tags": [],
+          "new": true
+        },
+        {
+          "id": "day39-victim_cache",
+          "title": "Fully-Associative Victim Cache",
+          "desc": "A compact side cache that converts L1 conflict misses into fast associative hits with atomic line swaps, dirty tracking, and round-robin replacement.",
           "tags": [],
           "new": true
         }
