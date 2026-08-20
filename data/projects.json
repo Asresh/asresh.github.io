@@ -427,6 +427,13 @@
           "desc": "10N-operation ascending/descending SRAM test with synchronous-read sequencing and sticky first-failure diagnostics.",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "day55-islip_voq_switch",
+          "title": "Input-Queued Packet Switch with iSLIP Scheduling",
+          "desc": "Virtual output queues, parallel request/grant/accept matching, fair rotating priorities, and backpressure-safe elastic egress.",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -757,6 +764,13 @@
           "desc": "Parameterized open-page DDR scheduler translating requests into ACT/RD/WR/PRE; request and command-flow UVM agents coordinated by a virtual sequence…",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "day40-page_table_walker",
+          "title": "UVM Two-Level Page-Table Walker Verification",
+          "desc": "Parameterized Sv32-style MMU page-table walker with 4 KiB and 4 MiB leaves; request and PTE-memory responder agents coordinated by a virtual…",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -999,6 +1013,14 @@
           "tags": [],
           "new": true,
           "metric": "8.418806×"
+        },
+        {
+          "id": "day29-ras_fault_graph_engine",
+          "title": "Ras Fault Graph Engine",
+          "desc": "Datacenter RAS fault-graph engine moves repeated dependency scans out of BMC firmware: four Boolean lanes expand a 16-node frontier to fixed point…",
+          "tags": [],
+          "new": true,
+          "metric": "14.638779×"
         }
       ]
     },
@@ -1313,6 +1335,13 @@
           "id": "day39-victim_cache",
           "title": "Fully-Associative Victim Cache",
           "desc": "A compact side cache that converts L1 conflict misses into fast associative hits with atomic line swaps, dirty tracking, and round-robin replacement.",
+          "tags": [],
+          "new": true
+        },
+        {
+          "id": "day40-directory_snoop_filter",
+          "title": "Directory-Based Snoop Filter",
+          "desc": "A coherence directory that tracks per-line sharers and ownership, targets only necessary cache probes, and safely handles directory conflicts.",
           "tags": [],
           "new": true
         }
