@@ -1021,6 +1021,14 @@
           "tags": [],
           "new": true,
           "metric": "14.638779×"
+        },
+        {
+          "id": "day30-serdes_eye_margin_engine",
+          "title": "Serdes Eye Margin Engine",
+          "desc": "SerDes eye-margin accelerator moves BER thresholding and widest-open-phase selection out of PHY firmware while an eight-entry FIFO absorbs service…",
+          "tags": [],
+          "new": true,
+          "metric": "8.431925×"
         }
       ]
     },
