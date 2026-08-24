@@ -434,6 +434,13 @@
           "desc": "Virtual output queues, parallel request/grant/accept matching, fair rotating priorities, and backpressure-safe elastic egress.",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "day56-ddc_cic_decimator",
+          "title": "Programmable Quadrature DDC with CIC Decimation",
+          "desc": "Runtime-tunable NCO, signed I/Q mixers, and a widened multi-stage CIC filter providing multiplier-free sample-rate reduction.",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -771,6 +778,13 @@
           "desc": "Parameterized Sv32-style MMU page-table walker with 4 KiB and 4 MiB leaves; request and PTE-memory responder agents coordinated by a virtual…",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "day41-gshare_branch_predictor",
+          "title": "UVM Gshare Branch-Predictor Verification",
+          "desc": "Parameterized global-history XOR predictor with saturating two-bit PHT; prediction and resolution UVM agents coordinated by a virtual sequence…",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -1029,6 +1043,14 @@
           "tags": [],
           "new": true,
           "metric": "8.431925×"
+        },
+        {
+          "id": "day31-robot_arm_kinematics",
+          "title": "Robot Arm Kinematics",
+          "desc": "SPI-controlled forward-kinematics engine moves serial trigonometry out of robot/exoskeleton firmware: a queued 16-iteration CORDIC computes each…",
+          "tags": [],
+          "new": true,
+          "metric": "9.942×"
         }
       ]
     },
@@ -1350,6 +1372,13 @@
           "id": "day40-directory_snoop_filter",
           "title": "Directory-Based Snoop Filter",
           "desc": "A coherence directory that tracks per-line sharers and ownership, targets only necessary cache probes, and safely handles directory conflicts.",
+          "tags": [],
+          "new": true
+        },
+        {
+          "id": "day41-asynchronous_fifo",
+          "title": "Dual-Clock Asynchronous FIFO",
+          "desc": "A Gray-pointer CDC queue that safely transfers ordered data between unrelated clock domains with conservative full/empty backpressure.",
           "tags": [],
           "new": true
         }
