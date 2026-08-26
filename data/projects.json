@@ -441,6 +441,13 @@
           "desc": "Runtime-tunable NCO, signed I/Q mixers, and a widened multi-stage CIC filter providing multiplier-free sample-rate reduction.",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "day57-power_domain_sequencer",
+          "title": "Multi-Domain Power and Reset Sequencer",
+          "desc": "Dependency-ordered power switching, reset and isolation control with synchronized rail monitoring and sticky timeout diagnostics.",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -783,6 +790,13 @@
           "id": "day41-gshare_branch_predictor",
           "title": "UVM Gshare Branch-Predictor Verification",
           "desc": "Parameterized global-history XOR predictor with saturating two-bit PHT; prediction and resolution UVM agents coordinated by a virtual sequence…",
+          "tags": [],
+          "new": true
+        },
+        {
+          "id": "day42-power_domain_controller",
+          "title": "UVM Power-Domain Isolation and Retention Controller Verification",
+          "desc": "Parameterized low-power sequencer for save, isolate, power-off, wake, restore…",
           "tags": [],
           "new": true
         }
