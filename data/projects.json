@@ -448,6 +448,13 @@
           "desc": "Dependency-ordered power switching, reset and isolation control with synchronized rail monitoring and sticky timeout diagnostics.",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "day58-ddr_read_eye_trainer",
+          "title": "Per-Lane DDR Read-Eye Training Controller",
+          "desc": "Sweeps PHY delay taps, qualifies per-lane error-free windows, centers the widest eye, and reports marginal-lane diagnostics.",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -799,6 +806,13 @@
           "desc": "Parameterized low-power sequencer for save, isolate, power-off, wake, restore…",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "day43-credit_link_controller",
+          "title": "UVM Credit-Based High-Speed Link Controller Verification",
+          "desc": "Parameterized flit transmitter with bounded downstream credits; independent flit and credit-return UVM agents coordinated by a virtual sequence…",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -1065,6 +1079,14 @@
           "tags": [],
           "new": true,
           "metric": "9.942×"
+        },
+        {
+          "id": "day32-firmware_trace_compressor",
+          "title": "Firmware Trace Compressor",
+          "desc": "Trace compressor removes the branch-heavy repeated-event scan from control firmware: ping-pong banks sustain overlapped prefetch/encode while shared…",
+          "tags": [],
+          "new": true,
+          "metric": "22.580060×"
         }
       ]
     },
@@ -1393,6 +1415,13 @@
           "id": "day41-asynchronous_fifo",
           "title": "Dual-Clock Asynchronous FIFO",
           "desc": "A Gray-pointer CDC queue that safely transfers ordered data between unrelated clock domains with conservative full/empty backpressure.",
+          "tags": [],
+          "new": true
+        },
+        {
+          "id": "day42-burst_dma_engine",
+          "title": "Burst DMA Engine",
+          "desc": "A parameterized memory-copy engine with ready/valid backpressure, variable-latency reads, buffered writes, and completion signaling.",
           "tags": [],
           "new": true
         }
