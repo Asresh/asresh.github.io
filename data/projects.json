@@ -455,6 +455,13 @@
           "desc": "Sweeps PHY delay taps, qualifies per-lane error-free windows, centers the widest eye, and reports marginal-lane diagnostics.",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "day59-clock_failover_manager",
+          "title": "SoC Clock Health and Failover Manager",
+          "desc": "Synchronizes heartbeat toggles, qualifies clock sources, records sticky failures, and handshakes priority failover.",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -1087,6 +1094,14 @@
           "tags": [],
           "new": true,
           "metric": "22.580060×"
+        },
+        {
+          "id": "day33-power_telemetry_fusion",
+          "title": "Power Telemetry Fusion",
+          "desc": "Power telemetry fusion engine moves per-sample voltage-droop…",
+          "tags": [],
+          "new": true,
+          "metric": "27.180505×"
         }
       ]
     },
