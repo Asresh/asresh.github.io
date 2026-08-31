@@ -462,6 +462,20 @@
           "desc": "Synchronizes heartbeat toggles, qualifies clock sources, records sticky failures, and handshakes priority failover.",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "day60-nonblocking_cache_mshr",
+          "title": "Non-Blocking Cache MSHR Bank",
+          "desc": "Tracks concurrent line misses, merges secondary misses, accepts tagged out-of-order fills, and replays results to every waiter.",
+          "tags": [],
+          "new": true
+        },
+        {
+          "id": "day61-serdes_deskew_buffer",
+          "title": "Multi-Lane SerDes PCS Deskew and Elastic Buffer",
+          "desc": "Aligns independently arriving lane markers with per-lane elastic FIFOs, lockstep vector delivery, backpressure, and sticky link diagnostics.",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -820,6 +834,13 @@
           "desc": "Parameterized flit transmitter with bounded downstream credits; independent flit and credit-return UVM agents coordinated by a virtual sequence…",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "day44-march_c_memory_bist",
+          "title": "UVM March C- SRAM BIST Controller Verification",
+          "desc": "Parameterized synthesizable March C- controller with decoupled SRAM command/response channels; control and reactive memory UVM agents coordinated by…",
+          "tags": [],
+          "new": true
         }
       ]
     },
@@ -1102,6 +1123,14 @@
           "tags": [],
           "new": true,
           "metric": "27.180505×"
+        },
+        {
+          "id": "day34-ml_topk_command_engine",
+          "title": "Ml Topk Command Engine",
+          "desc": "ML top-k command engine moves branch-heavy class selection out of inference-runtime firmware while software retains buffer ownership and timeout…",
+          "tags": [],
+          "new": true,
+          "metric": "14.894630×"
         }
       ]
     },
@@ -1437,6 +1466,13 @@
           "id": "day42-burst_dma_engine",
           "title": "Burst DMA Engine",
           "desc": "A parameterized memory-copy engine with ready/valid backpressure, variable-latency reads, buffered writes, and completion signaling.",
+          "tags": [],
+          "new": true
+        },
+        {
+          "id": "day43-credit_based_vc_scheduler",
+          "title": "Credit-Based Virtual-Channel Scheduler",
+          "desc": "A credit-gated round-robin scheduler that safely shares a physical interconnect link across buffered virtual channels.",
           "tags": [],
           "new": true
         }
