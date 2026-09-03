@@ -483,6 +483,13 @@
           "desc": "Prioritizes edge/level interrupt gateways across independent contexts with enables, thresholds, atomic claim/complete service, and sticky diagnostics.",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "day63-pcie_credit_scheduler",
+          "title": "PCIe Transaction Layer Credit Manager and VC Scheduler",
+          "desc": "Tracks per-VC header/data credits and fairly schedules Posted, Non-Posted, and Completion traffic with completion-deadlock avoidance.",
+          "tags": [],
+          "new": true
         }
       ]
     },
