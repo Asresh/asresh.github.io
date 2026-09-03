@@ -476,6 +476,13 @@
           "desc": "Aligns independently arriving lane markers with per-lane elastic FIFOs, lockstep vector delivery, backpressure, and sticky link diagnostics.",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "day62-riscv_plic",
+          "title": "Multi-Context RISC-V PLIC Interrupt Controller",
+          "desc": "Prioritizes edge/level interrupt gateways across independent contexts with enables, thresholds, atomic claim/complete service, and sticky diagnostics.",
+          "tags": [],
+          "new": true
         }
       ]
     },
