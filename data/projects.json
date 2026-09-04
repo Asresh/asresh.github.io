@@ -1145,6 +1145,14 @@
           "tags": [],
           "new": true,
           "metric": "14.894630×"
+        },
+        {
+          "id": "day35-genomics_minimizer_stream_engine",
+          "title": "Genomics Minimizer Stream Engine",
+          "desc": "Genomics minimizer engine moves strand canonicalization…",
+          "tags": [],
+          "new": true,
+          "metric": "NEW"
         }
       ]
     },
@@ -1487,6 +1495,13 @@
           "id": "day43-credit_based_vc_scheduler",
           "title": "Credit-Based Virtual-Channel Scheduler",
           "desc": "A credit-gated round-robin scheduler that safely shares a physical interconnect link across buffered virtual channels.",
+          "tags": [],
+          "new": true
+        },
+        {
+          "id": "day44-coherence_transaction_tracker",
+          "title": "Outstanding Coherence Transaction Tracker",
+          "desc": "An associative tagged table that tracks unordered snoop acknowledgements for multiple concurrent coherence operations…",
           "tags": [],
           "new": true
         }
