@@ -1153,6 +1153,22 @@
           "tags": [],
           "new": true,
           "metric": "NEW"
+        },
+        {
+          "id": "day36-vibration_goertzel_monitor",
+          "title": "Vibration Goertzel Monitor",
+          "desc": "Vibration Goertzel monitor evaluates four firmware-selected rotating-machine fault bands without an FFT. Measured 48376 end-to-end clocks for 260…",
+          "tags": [],
+          "new": true,
+          "metric": "NEW"
+        },
+        {
+          "id": "day37-coherent_snoop_filter",
+          "title": "Coherent Snoop Filter",
+          "desc": "Coherent snoop filter maps current high-compensation Apple and NVIDIA SoC verification requirements into a firmware-visible directory block and…",
+          "tags": [],
+          "new": true,
+          "metric": "NEW"
         }
       ]
     },
