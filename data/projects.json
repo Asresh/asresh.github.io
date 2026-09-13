@@ -1520,6 +1520,13 @@
           "desc": "An associative tagged table that tracks unordered snoop acknowledgements for multiple concurrent coherence operations…",
           "tags": [],
           "new": true
+        },
+        {
+          "id": "day45-coherence_home_agent",
+          "title": "Directory-Based Coherence Home Agent",
+          "desc": "A coherence controller that turns directory metadata into downgrade/invalidate probes, safe line replacement, memory refill…",
+          "tags": [],
+          "new": true
         }
       ]
     }
