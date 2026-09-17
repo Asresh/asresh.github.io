@@ -1169,6 +1169,14 @@
           "tags": [],
           "new": true,
           "metric": "NEW"
+        },
+        {
+          "id": "day38-gpu_tile_mask_compactor",
+          "title": "GPU Tile Mask Compactor",
+          "desc": "GPU tile mask compactor maps current high-compensation Apple GPU verification requirements into a firmware-observable work-distribution primitive and…",
+          "tags": [],
+          "new": true,
+          "metric": "NEW"
         }
       ]
     },
