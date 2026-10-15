@@ -155,7 +155,7 @@
         var y1 = wireY[pair[0]], y2 = wireY[pair[1]];
         return '<path d="M' + x + ' ' + y1 + 'L' + x + ' ' + y2 + '" stroke="' + (i % 3 === seed % 3 ? info.accent : '#f5e9dc') + '" stroke-opacity=".8" stroke-width="3" stroke-linecap="round"/><circle cx="' + x + '" cy="' + y1 + '" r="4" fill="#f5e9dc"/><circle cx="' + x + '" cy="' + y2 + '" r="4" fill="#f5e9dc"/>';
       }).join('') + '<text x="482" y="238" text-anchor="middle" fill="#f7eee4" class="art-label">COMPARE / EXCHANGE</text>';
-    } else if (/gemm|systolic|tensor|matmul|dot.product|sparse/.test(words)) {
+    } else if (/gemm|tensor|matmul|dot.product|sparse|systolic.array|systolic.mac/.test(words)) {
       var cells = '';
       for (var row = 0; row < 4; row++) for (var col = 0; col < 4; col++) {
         var active = ((row * 5 + col * 3 + seed) % 7) < 2;
