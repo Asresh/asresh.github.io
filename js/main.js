@@ -92,69 +92,116 @@
      The image is generated from the project title and its section, so
      newly synced projects receive a matching thumbnail automatically.
   --------------------------------------------------------------- */
-  function projectArtMarkup(sectionId, seed) {
-    var common = '<rect width="600" height="280" fill="#f2e6d7"/>'
-      + '<path d="M0 70H600M0 140H600M0 210H600M100 0V280M200 0V280M300 0V280M400 0V280M500 0V280" stroke="#b48b68" stroke-opacity=".12" stroke-width="1"/>'
-      + '<circle cx="' + (470 + seed % 90) + '" cy="' + (55 + seed % 44) + '" r="' + (34 + seed % 22) + '" fill="#d57a4d" fill-opacity=".12"/>'
-      + '<path d="M' + (30 + seed % 40) + ' 238 C180 ' + (205 + seed % 28) + ', 300 ' + (260 - seed % 35) + ', 550 ' + (190 + seed % 32) + '" fill="none" stroke="#c55b32" stroke-opacity=".24" stroke-width="2"/>';
+  function escapeSvg(text) {
+    return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+  }
 
-    if (sectionId === 'verification') {
-      var labels = ['SEQUENCE', 'DRIVER', 'DUT', 'MONITOR'];
-      return common + '<path d="M125 124H235M365 124H475M520 150V204H300M80 150V204H300" fill="none" stroke="#9f795c" stroke-width="3" stroke-linecap="round"/>'
-        + labels.map(function (label, i) {
-          var x = 40 + i * 130;
-          return '<rect x="' + x + '" y="91" width="112" height="66" rx="14" fill="' + (i === seed % 4 ? '#cc5c32' : '#fffaf2') + '" stroke="#c9ad91" stroke-width="2"/>'
-            + '<text x="' + (x + 56) + '" y="130" text-anchor="middle" fill="' + (i === seed % 4 ? '#fffaf2' : '#594839') + '">' + label + '</text>';
-        }).join('')
-        + '<rect x="225" y="190" width="150" height="43" rx="12" fill="#fffaf2" stroke="#c9ad91" stroke-width="2"/>'
-        + '<text x="300" y="217" text-anchor="middle" fill="#594839">SCOREBOARD</text>';
+  function wrapCoverTitle(title) {
+    var words = title.split(/\\s+/);
+    var lines = [];
+    var line = '';
+    words.forEach(function (word) {
+      var next = line ? line + ' ' + word : word;
+      if (next.length > 27 && line) {
+        lines.push(line);
+        line = word;
+      } else line = next;
+    });
+    if (line) lines.push(line);
+    if (lines.length > 3) {
+      lines = lines.slice(0, 3);
+      lines[2] = lines[2].slice(0, 24).replace(/\\s+\\S*$/, '') + '…';
     }
-    if (sectionId === 'codesign') {
+    return lines;
+  }
+
+  function projectArtMarkup(sectionId, seed, title, tags) {
+    var sectionInfo = {
+      rtl: { label: 'RTL DESIGN', accent: '#df8a62', caption: 'LOGIC / DATAPATH' },
+      verification: { label: 'DESIGN VERIFICATION', accent: '#e1b969', caption: 'TEST / SIGN-OFF' },
+      codesign: { label: 'HARDWARE × SOFTWARE', accent: '#a3bd88', caption: 'RTL / FIRMWARE' },
+      comparch: { label: 'COMPUTER ARCHITECTURE', accent: '#a4bdc7', caption: 'MICROARCHITECTURE' },
+      ai: { label: 'AI HARDWARE', accent: '#efa267', caption: 'ACCELERATION / DATAFLOW' }
+    };
+    var info = sectionInfo[sectionId] || sectionInfo.rtl;
+    var titleLines = wrapCoverTitle(title || 'Hardware project');
+    var titleMarkup = titleLines.map(function (line, i) {
+      return '<tspan x="28" dy="' + (i === 0 ? 0 : 24) + '">' + escapeSvg(line) + '</tspan>';
+    }).join('');
+    var safeTags = escapeSvg(tags.slice(0, 3).join('  ·  ') || info.caption);
+    var gradientId = 'cover-gradient-' + seed;
+    var patternId = 'cover-grid-' + seed;
+    var words = (title + ' ' + tags.join(' ')).toLowerCase();
+    var motif = '';
+
+    if (/gemm|systolic|tensor|matmul|dot.product|sparse/.test(words)) {
       var cells = '';
-      for (var row = 0; row < 3; row++) for (var col = 0; col < 3; col++) {
-        var hot = (row * 3 + col) === seed % 9;
-        cells += '<rect x="' + (235 + col * 37) + '" y="' + (84 + row * 37) + '" width="27" height="27" rx="6" fill="' + (hot ? '#cc5c32' : '#fffaf2') + '" stroke="#c9ad91" stroke-width="2"/>';
+      for (var row = 0; row < 4; row++) for (var col = 0; col < 4; col++) {
+        var active = ((row * 5 + col * 3 + seed) % 7) < 2;
+        cells += '<rect x="' + (416 + col * 29) + '" y="' + (72 + row * 29) + '" width="20" height="20" rx="5" fill="' + (active ? info.accent : '#f5e9dc') + '" fill-opacity="' + (active ? '.96' : '.17') + '" stroke="#fff4e8" stroke-opacity=".24"/>';
       }
-      return common + '<path d="M160 126H223M378 126H440M300 70V56" fill="none" stroke="#9f795c" stroke-width="4" stroke-linecap="round"/>'
-        + '<rect x="44" y="94" width="116" height="64" rx="15" fill="#fffaf2" stroke="#c9ad91" stroke-width="2"/><text x="102" y="132" text-anchor="middle" fill="#594839">CPU / C</text>'
-        + '<rect x="440" y="94" width="116" height="64" rx="15" fill="#fffaf2" stroke="#c9ad91" stroke-width="2"/><text x="498" y="132" text-anchor="middle" fill="#594839">ACCELERATOR</text>'
-        + '<text x="300" y="48" text-anchor="middle" fill="#9b6a47">BUS + DATAFLOW</text>' + cells;
-    }
-    if (sectionId === 'comparch') {
-      var stages = ['FETCH', 'DECODE', 'EXECUTE', 'MEMORY', 'RETIRE'];
-      return common + '<path d="' + stages.map(function (_, i) { return (i ? 'M' : 'M') + (38 + i * 107) + ' 136H' + (91 + i * 107); }).join('') + '" fill="none" stroke="#9f795c" stroke-width="3" stroke-linecap="round"/>'
+      motif = '<path d="M398 82H408M398 140H408M398 198H408M448 54V65M506 54V65" stroke="' + info.accent + '" stroke-width="3" stroke-linecap="round"/>' + cells
+        + '<text x="474" y="226" text-anchor="middle" fill="#f7eee4" class="art-label">MAC / PE ARRAY</text>';
+    } else if (/uvm|verification|scoreboard|coverage|assert|testbench|sva|monitor/.test(words)) {
+      var checks = '';
+      for (var i = 0; i < 4; i++) {
+        var yy = 84 + i * 35;
+        var hot = i === seed % 4;
+        checks += '<rect x="398" y="' + yy + '" width="166" height="24" rx="8" fill="#f5e9dc" fill-opacity="' + (hot ? '.22' : '.1') + '" stroke="#f5e9dc" stroke-opacity=".22"/>'
+          + '<circle cx="416" cy="' + (yy + 12) + '" r="5" fill="' + (hot ? info.accent : '#9f8c79') + '"/>'
+          + '<path d="M431 ' + (yy + 12) + 'H' + (500 + ((seed + i) % 3) * 12) + '" stroke="#f5e9dc" stroke-opacity=".58" stroke-width="3" stroke-linecap="round"/>';
+      }
+      motif = checks + '<text x="481" y="232" text-anchor="middle" fill="#f7eee4" class="art-label">CHECKS / COVERAGE</text>';
+    } else if (/crossbar|coalesc|network|fabric|arbiter|scheduler|reconverg|simt|warp/.test(words)) {
+      var nodes = [[412, 92], [484, 74], [548, 108], [422, 162], [500, 158], [550, 202]];
+      var edges = [[0,1],[1,2],[0,3],[1,4],[2,4],[3,4],[4,5]];
+      motif = edges.map(function (edge, i) {
+        var a = nodes[edge[0]], b = nodes[edge[1]];
+        var emphasized = (i + seed) % 4 === 0;
+        return '<path d="M' + a[0] + ' ' + a[1] + 'L' + b[0] + ' ' + b[1] + '" stroke="' + (emphasized ? info.accent : '#f5e9dc') + '" stroke-opacity="' + (emphasized ? '.95' : '.3') + '" stroke-width="' + (emphasized ? '3' : '2') + '"/>';
+      }).join('') + nodes.map(function (point, i) {
+        return '<circle cx="' + point[0] + '" cy="' + point[1] + '" r="' + (i === seed % nodes.length ? '11' : '7') + '" fill="' + (i === seed % nodes.length ? info.accent : '#f5e9dc') + '"/>';
+      }).join('') + '<text x="482" y="238" text-anchor="middle" fill="#f7eee4" class="art-label">CONTROL / ROUTING</text>';
+    } else if (/stack|queue|buffer|cache|memory|tlb|store|fifo|reorder/.test(words)) {
+      var rows = '';
+      for (var r = 0; r < 4; r++) {
+        var top = 79 + r * 34;
+        var selected = r === (seed % 4);
+        rows += '<rect x="408" y="' + top + '" width="148" height="25" rx="7" fill="' + (selected ? info.accent : '#f5e9dc') + '" fill-opacity="' + (selected ? '.92' : '.16') + '" stroke="#f5e9dc" stroke-opacity=".25"/>'
+          + '<path d="M424 ' + (top + 12) + 'H' + (472 + (r % 2) * 18) + '" stroke="#fff4e8" stroke-opacity=".62" stroke-width="3" stroke-linecap="round"/>';
+      }
+      motif = rows + '<path d="M390 ' + (91 + (seed % 4) * 34) + 'H401" stroke="' + info.accent + '" stroke-width="4" stroke-linecap="round"/><text x="482" y="232" text-anchor="middle" fill="#f7eee4" class="art-label">QUEUE / STATE FLOW</text>';
+    } else {
+      var stages = ['INPUT', 'MAP', 'CORE', 'OUTPUT'];
+      motif = '<path d="M418 142H550" stroke="#f5e9dc" stroke-opacity=".5" stroke-width="2"/>'
         + stages.map(function (label, i) {
-          var x = 26 + i * 107;
-          return '<rect x="' + x + '" y="99" width="82" height="74" rx="13" fill="' + (i === seed % stages.length ? '#cc5c32' : '#fffaf2') + '" stroke="#c9ad91" stroke-width="2"/>'
-            + '<text x="' + (x + 41) + '" y="141" text-anchor="middle" fill="' + (i === seed % stages.length ? '#fffaf2' : '#594839') + '">' + label + '</text>';
-        }).join('')
-        + '<path d="M100 197H500" stroke="#c9ad91" stroke-width="2" stroke-dasharray="5 8"/><text x="300" y="222" text-anchor="middle" fill="#9b6a47">PIPELINE / STATE FLOW</text>';
-    }
-    if (sectionId === 'ai') {
-      var macs = '';
-      for (var ar = 0; ar < 4; ar++) for (var ac = 0; ac < 4; ac++) {
-        var active = (ar * 4 + ac) === seed % 16 || (ar * 4 + ac) === (seed * 7) % 16;
-        macs += '<rect x="' + (220 + ac * 40) + '" y="' + (72 + ar * 40) + '" width="30" height="30" rx="7" fill="' + (active ? '#cc5c32' : '#fffaf2') + '" stroke="#c9ad91" stroke-width="2"/>';
-      }
-      return common + '<path d="M145 90L205 114M145 140L205 140M145 190L205 166M445 140H505" fill="none" stroke="#9f795c" stroke-width="3" stroke-linecap="round"/>'
-        + '<text x="112" y="70" text-anchor="middle" fill="#9b6a47">ACTIVATIONS</text><text x="112" y="231" text-anchor="middle" fill="#9b6a47">WEIGHTS</text>'
-        + macs + '<rect x="485" y="104" width="86" height="72" rx="14" fill="#fffaf2" stroke="#c9ad91" stroke-width="2"/><text x="528" y="145" text-anchor="middle" fill="#594839">Σ ACC</text>';
+          var x = 400 + i * 43;
+          var hot = i === seed % stages.length;
+          return '<rect x="' + x + '" y="' + (116 - (i % 2) * 13) + '" width="34" height="52" rx="9" fill="' + (hot ? info.accent : '#f5e9dc') + '" fill-opacity="' + (hot ? '.96' : '.17') + '" stroke="#f5e9dc" stroke-opacity=".35"/>'
+            + '<text x="' + (x + 17) + '" y="194" text-anchor="middle" fill="#f7eee4" class="art-tiny">' + label + '</text>';
+        }).join('');
     }
 
-    var rtlBlocks = ['CTRL', 'ALU', 'MEM', 'ISSUE'];
-    return common + '<path d="M135 138H190M275 138H330M415 138H470" fill="none" stroke="#9f795c" stroke-width="3" stroke-linecap="round"/>'
-      + rtlBlocks.map(function (label, i) {
-        var x = 42 + i * 140;
-        return '<rect x="' + x + '" y="99" width="94" height="78" rx="14" fill="' + (i === seed % 4 ? '#cc5c32' : '#fffaf2') + '" stroke="#c9ad91" stroke-width="2"/>'
-          + '<text x="' + (x + 47) + '" y="143" text-anchor="middle" fill="' + (i === seed % 4 ? '#fffaf2' : '#594839') + '">' + label + '</text>';
-      }).join('')
-      + '<text x="300" y="222" text-anchor="middle" fill="#9b6a47">REGISTER TRANSFER / LOGIC PATH</text>';
+    return '<defs><linearGradient id="' + gradientId + '" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#211d1a"/><stop offset="1" stop-color="#49372b"/></linearGradient>'
+      + '<pattern id="' + patternId + '" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0H0V26" fill="none" stroke="#f5e9dc" stroke-opacity=".07"/></pattern></defs>'
+      + '<rect width="600" height="280" fill="url(#' + gradientId + ')"/><rect width="600" height="280" fill="url(#' + patternId + ')"/>'
+      + '<path d="M360 0V280" stroke="#f5e9dc" stroke-opacity=".12"/>'
+      + '<text x="28" y="37" fill="' + info.accent + '" class="art-kicker">' + info.label + '</text>'
+      + '<rect x="478" y="18" width="94" height="26" rx="13" fill="' + info.accent + '" fill-opacity=".18" stroke="' + info.accent + '" stroke-opacity=".58"/>'
+      + '<text x="525" y="35" text-anchor="middle" fill="' + info.accent + '" class="art-tiny">PROJECT</text>'
+      + '<text x="28" y="93" fill="#fff8f0" class="art-title">' + titleMarkup + '</text>'
+      + '<text x="28" y="239" fill="#d8c8b7" class="art-caption">' + safeTags + '</text>'
+      + '<text x="28" y="261" fill="' + info.accent + '" class="art-tiny">' + info.caption + '</text>'
+      + motif;
   }
 
   function addProjectArt(card, sectionId) {
     if (card.querySelector('.project-art')) return;
     var titleLink = card.querySelector('.card-title a');
     var title = titleLink ? titleLink.textContent.trim() : '';
+    var tagEls = card.querySelectorAll('.card-tech li');
+    var tags = Array.prototype.map.call(tagEls, function (tag) { return tag.textContent.trim(); });
     var seed = 2166136261;
     (sectionId + ':' + title).split('').forEach(function (character) {
       seed ^= character.charCodeAt(0);
@@ -164,7 +211,7 @@
     var figure = document.createElement('figure');
     figure.className = 'project-art';
     figure.setAttribute('aria-hidden', 'true');
-    figure.innerHTML = '<svg viewBox="0 0 600 280" preserveAspectRatio="xMidYMid slice" focusable="false">' + projectArtMarkup(sectionId, seed) + '</svg>';
+    figure.innerHTML = '<svg viewBox="0 0 600 280" preserveAspectRatio="xMidYMid slice" focusable="false">' + projectArtMarkup(sectionId, seed, title, tags) + '</svg>';
     card.insertBefore(figure, card.firstChild);
   }
 

@@ -890,7 +890,8 @@ body {
 }
 
 
-/* Project-specific vector illustrations */
+
+/* Project-specific illustrated cover cards */
 .project-card::before { display: none; }
 .project-art {
   display: block;
@@ -898,16 +899,16 @@ body {
   margin: 0;
   overflow: hidden;
   border-bottom: 1px solid rgba(91, 64, 40, 0.1);
-  background: #f2e6d7;
+  background: #2f261f;
 }
-.project-art svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-.project-art text {
-  font-family: Inter, Arial, sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 1.1px;
+.project-art svg { display: block; width: 100%; height: 100%; }
+.project-art text { font-family: Inter, Arial, sans-serif; }
+.project-art .art-kicker { font-size: 13px; font-weight: 800; letter-spacing: 2px; }
+.project-art .art-title { font-size: 20px; font-weight: 700; }
+.project-art .art-caption { font-size: 12px; font-weight: 600; }
+.project-art .art-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; }
+.project-art .art-tiny { font-size: 9px; font-weight: 700; letter-spacing: 1px; }
+@media (max-width: 600px) {
+  .project-art { height: 140px; }
+  .project-art .art-title { font-size: 19px; }
 }
