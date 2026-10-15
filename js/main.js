@@ -183,7 +183,7 @@
       motif = '<path d="' + signal.join(' ') + '" fill="none" stroke="' + info.accent + '" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>'
         + '<path d="M402 140H560M420 83V202M470 83V202M520 83V202" stroke="#f5e9dc" stroke-opacity=".18" stroke-width="1"/>'
         + '<circle cx="' + (438 + seed % 95) + '" cy="' + (122 + seed % 32) + '" r="6" fill="#fff4e8"/><text x="482" y="238" text-anchor="middle" fill="#f7eee4" class="art-label">SIGNAL / TRANSFORM</text>';
-    } else if (/crc|ecc|hamming|reed.solomon|aes|sha|crypt|viterbi|scrambl|line.code|8b\/10b/.test(words)) {
+    } else if (/crc|ecc|hamming|reed.solomon|\baes\b|\bsha(?:-?256)?\b|crypt|viterbi|scrambl|line.code|8b\/10b/.test(words)) {
       var bits = '';
       for (var b = 0; b < 16; b++) {
         var bx = 405 + (b % 4) * 39;
