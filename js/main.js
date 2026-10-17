@@ -136,7 +136,17 @@
     var words = (title + ' ' + tags.join(' ')).toLowerCase();
     var motif = '';
 
-    if (/prefix|kogge.stone|scan|reduction.tree|allreduce/.test(words)) {
+    if (/boundarycheck|readiness|deployment|scanner|security|safety/.test(words)) {
+      var checks = '';
+      for (var check = 0; check < 4; check++) {
+        var rowY = 84 + check * 35;
+        var passed = ((check + seed) % 4) !== 1;
+        checks += '<rect x="398" y="' + rowY + '" width="166" height="24" rx="8" fill="#f5e9dc" fill-opacity=".14" stroke="#f5e9dc" stroke-opacity=".24"/>'
+          + '<circle cx="416" cy="' + (rowY + 12) + '" r="6" fill="' + (passed ? info.accent : '#c77b63') + '"/>'
+          + '<path d="M431 ' + (rowY + 12) + 'H' + (500 + ((seed + check) % 3) * 12) + '" stroke="#f5e9dc" stroke-opacity=".58" stroke-width="3" stroke-linecap="round"/>';
+      }
+      motif = checks + '<text x="481" y="232" text-anchor="middle" fill="#f7eee4" class="art-label">DEPLOYMENT CHECKS</text>';
+    } else if (/prefix|kogge.stone|scan|reduction.tree|allreduce/.test(words)) {
       var treeNodes = [[418, 87], [464, 87], [510, 87], [556, 87], [441, 143], [533, 143], [487, 201]];
       var treeEdges = [[0,4],[1,4],[2,5],[3,5],[4,6],[5,6]];
       motif = treeEdges.map(function (edge, i) {
