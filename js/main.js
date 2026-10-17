@@ -122,7 +122,8 @@
       verification: { label: 'DESIGN VERIFICATION', accent: '#f4c75e', caption: 'TEST / SIGN-OFF' },
       codesign: { label: 'HARDWARE × SOFTWARE', accent: '#c65d25', caption: 'RTL / FIRMWARE' },
       comparch: { label: 'COMPUTER ARCHITECTURE', accent: '#bf6b2c', caption: 'MICROARCHITECTURE' },
-      ai: { label: 'AI HARDWARE', accent: '#f4c75e', caption: 'ACCELERATION / DATAFLOW' }
+      ai: { label: 'AI HARDWARE', accent: '#f4c75e', caption: 'ACCELERATION / DATAFLOW' },
+      aisystems: { label: 'AI SYSTEMS', accent: '#df9a55', caption: 'SERVING / RELIABILITY' }
     };
     var info = sectionInfo[sectionId] || sectionInfo.rtl;
     var titleLines = wrapCoverTitle(title || 'Hardware project');
@@ -341,7 +342,7 @@
 
   if (counters.length) {
     var builds = 0;
-    ['#rtl', '#verification', '#codesign', '#comparch'].forEach(function (sel) {
+    ['#rtl', '#verification', '#codesign', '#comparch', '#aisystems'].forEach(function (sel) {
       var sec = document.querySelector(sel);
       if (!sec) return;
       builds += sec.querySelectorAll('.project-card').length;
