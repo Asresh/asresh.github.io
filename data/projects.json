@@ -1177,6 +1177,14 @@
           "tags": [],
           "new": true,
           "metric": "NEW"
+        },
+        {
+          "id": "day39-pcie_completion_reorder_engine",
+          "title": "Pcie Completion Reorder Engine",
+          "desc": "PCIe completion reorder engine maps current high-compensation Apple and NVIDIA platform…",
+          "tags": [],
+          "new": true,
+          "metric": "NEW"
         }
       ]
     },
