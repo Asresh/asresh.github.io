@@ -46,12 +46,12 @@
       <ol class="nav-links">
         <li><a href="#experience">Experience</a></li>
         <li><a href="#skills">Skills</a></li>
+        <li><a href="#aisystems">AI Systems &amp; Networking</a></li>
         <li><a href="#rtl">RTL Design</a></li>
         <li><a href="#verification">Verification</a></li>
         <li><a href="#codesign">Co-Design</a></li>
         <li><a href="#comparch">Architecture</a></li>
         <li><a href="#ai">AI Hardware</a></li>
-        <li><a href="#aisystems">AI Systems</a></li>
       </ol>
     </div>
 
@@ -66,12 +66,12 @@
     <ol class="mobile-links">
       <li><a href="#experience">Experience</a></li>
       <li><a href="#skills">Skills</a></li>
+      <li><a href="#aisystems">AI Systems &amp; Networking</a></li>
       <li><a href="#rtl">RTL Design</a></li>
       <li><a href="#verification">Verification</a></li>
       <li><a href="#codesign">Co-Design</a></li>
       <li><a href="#comparch">Computer Architecture</a></li>
       <li><a href="#ai">AI Hardware</a></li>
-      <li><a href="#aisystems">AI Systems</a></li>
     </ol>
   </nav>
 </aside>
@@ -116,7 +116,7 @@
       and <strong>AI/LLM networking</strong>, where reliable data movement depends on the full stack working together.
     </p>
     <div class="hero-actions reveal">
-      <a href="#rtl" class="btn btn-lg">See what I've built</a>
+      <a href="#aisystems" class="btn btn-lg">See what I've built</a>
       <p class="hero-meta">
         <span class="dot" aria-hidden="true"></span>
         <span>
@@ -260,9 +260,87 @@
     </div>
   </section>
 
-  <!-- ============ 01. RTL DESIGN ============ -->
+  <!-- ============ 01. AI SYSTEMS & NETWORKING ============ -->
+  <section id="aisystems" class="numbered-section">
+    <h2 class="numbered-heading reveal"><span class="section-num">01.</span> AI Systems &amp; Networking</h2>
+    <p class="section-intro reveal">
+      Systems for AI infrastructure and high-speed networking, from TCP flow observability and distributed
+      tensor communication to reliable inference services and evidence-based operations.
+    </p>
+
+    <h3 class="sub-heading reveal">High-Speed Networking</h3>
+    <ul class="projects-grid reveal">
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/high-speed-network-systems/tree/main/project1_flow_health_observatory" target="_blank" rel="noopener" aria-label="Open Flow Health Observatory on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/high-speed-network-systems/tree/main/project1_flow_health_observatory" target="_blank" rel="noopener">Flow Health Observatory</a></h4>
+        <p class="card-desc">A Linux TCP observability tool that captures retransmission events with eBPF, groups them by flow, and returns evidence-linked diagnoses. Includes a bounded ingestion API, portable synthetic demo, tests, and an isolated network-impairment lab.</p>
+        <ul class="card-tech"><li>Linux TCP</li><li>eBPF</li><li>Python</li></ul>
+      </li>
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/high-speed-network-systems/tree/main/project2_collective_transport_lab" target="_blank" rel="noopener" aria-label="Open Collective Transport Lab on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/high-speed-network-systems/tree/main/project2_collective_transport_lab" target="_blank" rel="noopener">Collective Transport Lab</a></h4>
+        <p class="card-desc">A distributed tensor sum built with ring reduce-scatter and all-gather over framed TCP sockets. Separate C++17 ranks exchange validated tensor chunks; a Python launcher and integration tests check correctness, uneven partitions, and per-rank traffic accounting.</p>
+        <ul class="card-tech"><li>C++17</li><li>TCP collectives</li><li>Distributed systems</li></ul>
+      </li>
+    </ul>
+    <h3 class="sub-heading reveal">AI Systems</h3>
+    <ul class="projects-grid reveal">
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/ai-infrastructure-projects/tree/main/project01-inference-gateway" target="_blank" rel="noopener" aria-label="Open Inference Gateway on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/ai-infrastructure-projects/tree/main/project01-inference-gateway" target="_blank" rel="noopener">Inference Gateway</a></h4>
+        <p class="card-desc">A resilient model-serving gateway with request deadlines, tenant rate limits, cross-backend retries, circuit breakers, and operational metrics. Includes a reproducible local demo and an Ollama adapter.</p>
+        <ul class="card-tech"><li>Model serving</li><li>Reliability</li><li>Python</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/Company-Analysis-Agent" target="_blank" rel="noopener" aria-label="Open Company Analysis Agent on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/Company-Analysis-Agent" target="_blank" rel="noopener">Company Analysis Agent</a></h4>
+        <p class="card-desc">A multi-agent research workflow that turns a company or ticker into an evidence-backed investment thesis, combining market data, news, fundamentals, and sentiment.</p>
+        <ul class="card-tech"><li>Multi-agent</li><li>FastAPI</li><li>MCP tools</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/FDE-projects/tree/main/project-01-signaldesk" target="_blank" rel="noopener" aria-label="Open SignalDesk on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/FDE-projects/tree/main/project-01-signaldesk" target="_blank" rel="noopener">SignalDesk Incident Triage Copilot</a></h4>
+        <p class="card-desc">A local-first operations copilot that ranks alerts using service ownership, recent changes, and runbooks, then presents evidence-linked recommendations for a human to approve.</p>
+        <ul class="card-tech"><li>Incident response</li><li>Human review</li><li>Local-first</li></ul>
+      </li>
+
+      <li class="project-card">
+        <div class="card-top">
+          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <a class="card-link" href="https://github.com/Asresh/FDE-projects/tree/main/project-02-boundarycheck" target="_blank" rel="noopener" aria-label="Open BoundaryCheck on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+        </div>
+        <h4 class="card-title"><a href="https://github.com/Asresh/FDE-projects/tree/main/project-02-boundarycheck" target="_blank" rel="noopener">BoundaryCheck AI Readiness Scanner</a></h4>
+        <p class="card-desc">A deterministic, local-first pre-launch review for AI deployments that returns evidence-linked findings and concrete fixes without requiring customer credentials or an AI API key.</p>
+        <ul class="card-tech"><li>AI safety</li><li>Deployment review</li><li>Deterministic</li></ul>
+      </li>
+    </ul>
+
+    <ul class="chips reveal" aria-label="AI systems and infrastructure toolbox">
+      <li>Model serving</li><li>Inference reliability</li><li>Multi-agent workflows</li>
+      <li>Incident response</li><li>Deployment readiness</li><li>Human-in-the-loop systems</li>
+    </ul>
+  </section>
+
+  <!-- ============ 02. RTL DESIGN ============ -->
   <section id="rtl" class="numbered-section">
-    <h2 class="numbered-heading reveal"><span class="section-num">01.</span> RTL Design</h2>
+    <h2 class="numbered-heading reveal"><span class="section-num">02.</span> RTL Design</h2>
     <p class="section-intro reveal">
       Clean, synthesizable SystemVerilog — one self-contained, self-checking digital block a day. Every
       design ships with a golden-reference scoreboard and a Makefile flow for Icarus, Verilator, VCS and
@@ -921,9 +999,9 @@
     </ul>
   </section>
 
-  <!-- ============ 02. DESIGN VERIFICATION ============ -->
+  <!-- ============ 03. DESIGN VERIFICATION ============ -->
   <section id="verification" class="numbered-section">
-    <h2 class="numbered-heading reveal"><span class="section-num">02.</span> Design Verification</h2>
+    <h2 class="numbered-heading reveal"><span class="section-num">03.</span> Design Verification</h2>
     <p class="section-intro reveal">
       UVM environments that actually sign off a DUT — layered and virtual sequences driving real bus agents,
       reference-model scoreboards checking every transaction, functional and cross coverage closing the
@@ -1396,9 +1474,9 @@
     </ul>
   </section>
 
-  <!-- ============ 03. HW/SOFTWARE CO-DESIGN ============ -->
+  <!-- ============ 04. HW/SOFTWARE CO-DESIGN ============ -->
   <section id="codesign" class="numbered-section">
-    <h2 class="numbered-heading reveal"><span class="section-num">03.</span> Hardware&#8211;Software Co-Design</h2>
+    <h2 class="numbered-heading reveal"><span class="section-num">04.</span> Hardware&#8211;Software Co-Design</h2>
     <p class="section-intro reveal">
       Full-stack accelerators. Each build pairs parameterized SystemVerilog RTL with a real bus, working
       bare-metal C firmware that configures and drives it, and a differential testbench that proves the
@@ -1815,9 +1893,9 @@
     </ul>
   </section>
 
-  <!-- ============ 04. COMPUTER ARCHITECTURE ============ -->
+  <!-- ============ 05. COMPUTER ARCHITECTURE ============ -->
   <section id="comparch" class="numbered-section">
-    <h2 class="numbered-heading reveal"><span class="section-num">04.</span> Computer Architecture</h2>
+    <h2 class="numbered-heading reveal"><span class="section-num">05.</span> Computer Architecture</h2>
     <p class="section-intro reveal">
       From a RISC-V datapath up through the memory hierarchy and out-of-order machinery to GPU/SIMT
       microarchitecture — one self-contained architecture block a day in SystemVerilog, each checked against
@@ -2303,9 +2381,9 @@
     </ul>
   </section>
 
-  <!-- ============ 05. AI HARDWARE ============ -->
+  <!-- ============ 06. AI HARDWARE ============ -->
   <section id="ai" class="numbered-section">
-    <h2 class="numbered-heading reveal"><span class="section-num">05.</span> AI Hardware Acceleration</h2>
+    <h2 class="numbered-heading reveal"><span class="section-num">06.</span> AI Hardware Acceleration</h2>
     <p class="section-intro reveal">
       Silicon for machine learning. The through-line across everything above: quantized matmul, structured
       sparsity, and the GPU/SIMT dataflow primitives that ML kernels are actually built on — designed as RTL,
@@ -2427,63 +2505,6 @@
     <ul class="chips reveal" aria-label="AI-hardware toolbox">
       <li>INT8 quantization</li><li>Systolic arrays</li><li>Structured sparsity (2:4)</li><li>Tensor-core MAC</li>
       <li>Softmax / scan</li><li>Top-K sampling</li><li>Dataflow</li><li>SIMD</li><li>SIMT microarchitecture</li>
-    </ul>
-  </section>
-
-  <!-- ============ 06. AI SYSTEMS & INFRASTRUCTURE ============ -->
-  <section id="aisystems" class="numbered-section">
-    <h2 class="numbered-heading reveal"><span class="section-num">06.</span> AI Systems &amp; Infrastructure</h2>
-    <p class="section-intro reveal">
-      Beyond the silicon, I build the systems that make AI useful and dependable: inference routing,
-      agent workflows, and human-centered tools. These projects connect model behavior to reliability,
-      clear evidence, and real operating workflows.
-    </p>
-
-    <ul class="projects-grid reveal">
-      <li class="project-card">
-        <div class="card-top">
-          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
-          <a class="card-link" href="https://github.com/Asresh/ai-infrastructure-projects/tree/main/project01-inference-gateway" target="_blank" rel="noopener" aria-label="Open Inference Gateway on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-        </div>
-        <h4 class="card-title"><a href="https://github.com/Asresh/ai-infrastructure-projects/tree/main/project01-inference-gateway" target="_blank" rel="noopener">Inference Gateway</a></h4>
-        <p class="card-desc">A resilient model-serving gateway with request deadlines, tenant rate limits, cross-backend retries, circuit breakers, and operational metrics. Includes a reproducible local demo and an Ollama adapter.</p>
-        <ul class="card-tech"><li>Model serving</li><li>Reliability</li><li>Python</li></ul>
-      </li>
-
-      <li class="project-card">
-        <div class="card-top">
-          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
-          <a class="card-link" href="https://github.com/Asresh/Company-Analysis-Agent" target="_blank" rel="noopener" aria-label="Open Company Analysis Agent on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-        </div>
-        <h4 class="card-title"><a href="https://github.com/Asresh/Company-Analysis-Agent" target="_blank" rel="noopener">Company Analysis Agent</a></h4>
-        <p class="card-desc">A multi-agent research workflow that turns a company or ticker into an evidence-backed investment thesis, combining market data, news, fundamentals, and sentiment.</p>
-        <ul class="card-tech"><li>Multi-agent</li><li>FastAPI</li><li>MCP tools</li></ul>
-      </li>
-
-      <li class="project-card">
-        <div class="card-top">
-          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
-          <a class="card-link" href="https://github.com/Asresh/FDE-projects/tree/main/project-01-signaldesk" target="_blank" rel="noopener" aria-label="Open SignalDesk on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-        </div>
-        <h4 class="card-title"><a href="https://github.com/Asresh/FDE-projects/tree/main/project-01-signaldesk" target="_blank" rel="noopener">SignalDesk Incident Triage Copilot</a></h4>
-        <p class="card-desc">A local-first operations copilot that ranks alerts using service ownership, recent changes, and runbooks, then presents evidence-linked recommendations for a human to approve.</p>
-        <ul class="card-tech"><li>Incident response</li><li>Human review</li><li>Local-first</li></ul>
-      </li>
-
-      <li class="project-card">
-        <div class="card-top">
-          <span class="card-folder" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
-          <a class="card-link" href="https://github.com/Asresh/FDE-projects/tree/main/project-02-boundarycheck" target="_blank" rel="noopener" aria-label="Open BoundaryCheck on GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-        </div>
-        <h4 class="card-title"><a href="https://github.com/Asresh/FDE-projects/tree/main/project-02-boundarycheck" target="_blank" rel="noopener">BoundaryCheck AI Readiness Scanner</a></h4>
-        <p class="card-desc">A deterministic, local-first pre-launch review for AI deployments that returns evidence-linked findings and concrete fixes without requiring customer credentials or an AI API key.</p>
-        <ul class="card-tech"><li>AI safety</li><li>Deployment review</li><li>Deterministic</li></ul>
-      </li>
-    </ul>
-
-    <ul class="chips reveal" aria-label="AI systems and infrastructure toolbox">
-      <li>Model serving</li><li>Inference reliability</li><li>Multi-agent workflows</li>
-      <li>Incident response</li><li>Deployment readiness</li><li>Human-in-the-loop systems</li>
     </ul>
   </section>
 
