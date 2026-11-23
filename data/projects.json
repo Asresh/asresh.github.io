@@ -10,49 +10,81 @@
           "id": "day01-redundant_market_data",
           "title": "Redundant MoldUDP64 / ITCH Receiver",
           "desc": "Rebuilds one ordered market-data stream from redundant feeds. Validates datagrams, suppresses duplicates, and requests recovery for missing sequences.",
-          "tags": ["MoldUDP64", "ITCH", "Feed recovery"]
+          "tags": [
+            "MoldUDP64",
+            "ITCH",
+            "Feed recovery"
+          ]
         },
         {
           "id": "day02-banked_matching_engine",
           "title": "Banked Price-Time Matching Engine",
           "desc": "Processes instruments in parallel while preserving price-time priority within each book. Checks fills, queue order, and backpressure against an independent model.",
-          "tags": ["Order matching", "Banked RTL", "Formal checks"]
+          "tags": [
+            "Order matching",
+            "Banked RTL",
+            "Formal checks"
+          ]
         },
         {
           "id": "day03-order_risk_gateway",
           "title": "Pre-Trade Risk and Execution Gateway",
           "desc": "Reserves credit before order admission and reconciles fills, cancels, and amendments. Rejects stale events and exports sequenced, CRC-checked audit records.",
-          "tags": ["Risk limits", "Execution ledger", "Audit"]
+          "tags": [
+            "Risk limits",
+            "Execution ledger",
+            "Audit"
+          ]
         },
         {
           "id": "day04-ethernet_udp_frontend",
           "title": "Ethernet / IPv4 / UDP Front End",
           "desc": "Validates and classifies incoming datagrams and arbitrates transmit queues. Replays captured packets through the RTL against a byte-level reference.",
-          "tags": ["Ethernet", "UDP", "PCAPng replay"]
+          "tags": [
+            "Ethernet",
+            "UDP",
+            "PCAPng replay"
+          ]
         },
         {
           "id": "day05-market_state_quote_engine",
           "title": "Market-by-Order State and Quote Engine",
           "desc": "Reconstructs market state from incremental updates and snapshots. Uses freshness checks and a fixed-point policy to publish bounded passive quote intents.",
-          "tags": ["Order book", "Snapshot recovery", "Fixed-point"]
+          "tags": [
+            "Order book",
+            "Snapshot recovery",
+            "Fixed-point"
+          ]
         },
         {
           "id": "day06-multiclock_latency_telemetry",
           "title": "Multiclock Latency Telemetry",
           "desc": "Correlates timestamped events from independent clock domains and exports latency histograms and triggered traces while other observations continue.",
-          "tags": ["CDC", "Timestamping", "AXI4-Lite"]
+          "tags": [
+            "CDC",
+            "Timestamping",
+            "AXI4-Lite"
+          ]
         },
         {
           "id": "day07-ouch_order_session",
           "title": "Nasdaq OUCH / SoupBinTCP Session",
           "desc": "Implements a subset of Nasdaq OUCH order entry with SoupBinTCP framing. Tracks committed order state and reconciles replay after a disconnect.",
-          "tags": ["OUCH 5.0", "SoupBinTCP", "Session replay"]
+          "tags": [
+            "OUCH 5.0",
+            "SoupBinTCP",
+            "Session replay"
+          ]
         },
         {
           "id": "day08-host_dma_queues",
           "title": "Host/FPGA DMA Queues",
           "desc": "Moves verified packets in both directions between memory and FPGA streams. Manages ring credits, page-bounded AXI bursts, and response-ordered completions.",
-          "tags": ["AXI4", "DMA rings", "Interrupts"]
+          "tags": [
+            "AXI4",
+            "DMA rings",
+            "Interrupts"
+          ]
         }
       ]
     },
