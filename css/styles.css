@@ -1060,6 +1060,11 @@ body {
 .featured-visual .project-model-back-name { font-size: clamp(16px, 2.5vw, 22px); }
 
 @media (prefers-reduced-motion: no-preference) {
+  html:not(.project-motion-paused) .project-touch-target {
+    touch-action: pan-y;
+    touch-action: pan-y pinch-zoom;
+  }
+  .project-preview.project-preview-dragging .project-model { transition: none; }
   .project-preview .project-model {
     transform:
       rotateX(calc(var(--model-rest-pitch) + var(--model-pointer-pitch, 0deg)))
@@ -1512,4 +1517,87 @@ body { background:#f7f3eb; color:#6b4e3a; }
 @keyframes art-signal-travel {
   from { opacity: .88; stroke-dashoffset: 100; }
   to { opacity: .88; stroke-dashoffset: 0; }
+}
+
+/* Keep project controls within thumb reach on narrow screens. */
+@media (max-width: 880px) and (prefers-reduced-motion: no-preference) {
+  .project-motion-toggle {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 9px 13px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 600px) {
+  .project-layout {
+    --subject-inset: 12px;
+    margin-inline: -10px;
+    gap: 16px;
+  }
+
+  .project-art {
+    height: clamp(168px, 44vw, 204px);
+  }
+
+  .project-art .project-model {
+    width: min(74%, 204px);
+    height: clamp(110px, 29vw, 126px);
+  }
+}
+
+@media (max-width: 600px) and (prefers-reduced-motion: no-preference) {
+  .js .project-subject {
+    position: sticky;
+    top: var(--nav-height);
+    z-index: 8;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 8px;
+    padding-block: 8px;
+    background: #f7f3eb;
+    box-shadow: 0 1px 0 rgba(91, 64, 40, .12);
+    transition: top .35s var(--easing);
+  }
+
+  #header.nav-hidden ~ #content .project-subject { top: 0; }
+  .js .project-subject::before { inset-block-start: 13px; }
+  .js .project-subject .numbered-heading { font-size: clamp(18px, 5.2vw, 22px); }
+  .js .project-subject .section-num { margin-bottom: 5px; font-size: 12px; }
+  .js .project-subject .project-motion-toggle { margin: 0; }
+  .js .project-content [id] { scroll-margin-top: 84px; }
+}
+
+@media (max-width: 600px) and (hover: none) {
+  .project-card:hover {
+    transform: none;
+    box-shadow: 0 4px 14px rgba(91, 53, 35, .045);
+  }
+
+  .featured-visual:hover {
+    border-color: #e9ded0;
+    box-shadow: 0 8px 24px rgba(91, 53, 35, .06);
+  }
+}
+
+.project-drag-hint { display: none; }
+
+@media (max-width: 880px) and (any-pointer: coarse) and (prefers-reduced-motion: no-preference) {
+  .project-preview > .project-drag-hint {
+    position: absolute;
+    inset: auto 8px 8px auto;
+    z-index: 2;
+    display: block;
+    padding: 4px 7px;
+    border: 1px solid rgba(169, 115, 82, .22);
+    border-radius: 5px;
+    background: #fffaf3;
+    color: #67412c;
+    font: 600 10px/1.2 var(--font-sans);
+    pointer-events: none;
+  }
+
+  .project-motion-paused .project-preview > .project-drag-hint { display: none; }
 }

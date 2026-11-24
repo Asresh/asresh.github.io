@@ -529,52 +529,163 @@
     var frame = 0;
     var pointerX = 0;
     var pointerY = 0;
+    var steering = false;
+    var touch = null;
+    var suppressTouchClick = false;
+    var dragThreshold = 8;
+
+    function motionEnabled() {
+      return projectMotionQuery.matches &&
+        !document.documentElement.classList.contains('project-motion-paused');
+    }
+
+    function insideStage(x, y, bounds) {
+      return bounds.width && bounds.height &&
+        x >= bounds.left && x <= bounds.right &&
+        y >= bounds.top && y <= bounds.bottom;
+    }
+
+    function turn(deltaYaw, pitch) {
+      if (!steering) {
+        steering = true;
+        stage.classList.add('project-preview-steering');
+      }
+      yaw = restingYaw + deltaYaw;
+      model.style.setProperty('--model-pointer-yaw', yaw + 'deg');
+      model.style.setProperty('--model-pointer-pitch', pitch + 'deg');
+    }
 
     function endSteering() {
       if (frame) {
         window.cancelAnimationFrame(frame);
         frame = 0;
       }
-      if (startX === null) return;
-
-      // Keep the pointer's heading when the automatic turn resumes.
-      restingYaw = yaw;
       startX = null;
+      if (!steering) return;
+
+      // Keep the last heading when the automatic turn resumes.
+      restingYaw = yaw;
+      steering = false;
       stage.classList.remove('project-preview-steering');
       model.style.removeProperty('--model-pointer-pitch');
     }
 
+    function turnFromDrag(drag, x, y) {
+      var pitch = (drag.y - y) * 33 / drag.height;
+      turn((x - drag.x) * 360 / drag.width, Math.max(-25, Math.min(25, pitch)));
+    }
+
+    function finishTouch(release) {
+      var drag = touch;
+      touch = null;
+      if (!drag || !drag.active) return;
+
+      if (release && motionEnabled()) turnFromDrag(drag, release.clientX, release.clientY);
+      endSteering();
+      stage.classList.remove('project-preview-dragging');
+      if (target.hasPointerCapture && target.hasPointerCapture(drag.id)) {
+        target.releasePointerCapture(drag.id);
+      }
+    }
+
     function updateSteering() {
       frame = 0;
+      if (touch && touch.active) {
+        if (motionEnabled()) turnFromDrag(touch, pointerX, pointerY);
+        else finishTouch();
+        return;
+      }
+
       var bounds = stage.getBoundingClientRect();
-      if (pointerX < bounds.left || pointerX > bounds.right ||
-          pointerY < bounds.top || pointerY > bounds.bottom ||
-          !bounds.width || !bounds.height || !projectMotionQuery.matches ||
-          document.documentElement.classList.contains('project-motion-paused')) {
+      if (!motionEnabled() || !insideStage(pointerX, pointerY, bounds)) {
         endSteering();
         return;
       }
 
       var x = (pointerX - bounds.left) / bounds.width;
       var y = (pointerY - bounds.top) / bounds.height;
-      if (startX === null) {
-        startX = x;
-        stage.classList.add('project-preview-steering');
-      }
-      yaw = restingYaw + (x - startX) * 360;
-      model.style.setProperty('--model-pointer-yaw', yaw + 'deg');
-      model.style.setProperty('--model-pointer-pitch', ((.5 - y) * 33) + 'deg');
+      if (startX === null) startX = x;
+      turn((x - startX) * 360, (.5 - y) * 33);
     }
 
-    // The stretched card link sits above the preview, so listen on the card.
-    target.addEventListener('pointermove', function (event) {
-      if (event.pointerType !== 'mouse' && !(event.pointerType === 'pen' && !event.buttons)) return;
+    function queueTurn(event) {
       pointerX = event.clientX;
       pointerY = event.clientY;
       if (!frame) frame = window.requestAnimationFrame(updateSteering);
+    }
+
+    // The stretched card link is above the illustration, so the card owns
+    // touch actions. A short horizontal threshold separates a drag from a tap.
+    if ('PointerEvent' in window) target.classList.add('project-touch-target');
+    target.addEventListener('pointerdown', function (event) {
+      if (!event.isPrimary) {
+        if (event.pointerType === 'touch' && touch) finishTouch();
+        return;
+      }
+
+      suppressTouchClick = false;
+      if (event.pointerType !== 'touch' || !motionEnabled()) return;
+      var bounds = stage.getBoundingClientRect();
+      if (!insideStage(event.clientX, event.clientY, bounds)) return;
+
+      endSteering();
+      touch = {
+        id: event.pointerId,
+        x: event.clientX,
+        y: event.clientY,
+        width: bounds.width,
+        height: bounds.height,
+        active: false
+      };
     }, { passive: true });
-    target.addEventListener('pointerleave', endSteering);
-    target.addEventListener('pointercancel', endSteering);
+
+    target.addEventListener('pointermove', function (event) {
+      if (event.pointerType === 'touch') {
+        if (!touch || touch.id !== event.pointerId) return;
+        if (!motionEnabled()) {
+          finishTouch();
+          return;
+        }
+        if (!touch.active) {
+          var dx = Math.abs(event.clientX - touch.x);
+          var dy = Math.abs(event.clientY - touch.y);
+          if (dy >= dragThreshold && dy >= dx) {
+            touch = null;
+            return;
+          }
+          if (dx < dragThreshold) return;
+          touch.active = true;
+          suppressTouchClick = true;
+          stage.classList.add('project-preview-dragging');
+          if (target.setPointerCapture) target.setPointerCapture(event.pointerId);
+        }
+        queueTurn(event);
+        return;
+      }
+
+      if (touch || (event.pointerType !== 'mouse' && !(event.pointerType === 'pen' && !event.buttons))) return;
+      queueTurn(event);
+    }, { passive: true });
+
+    target.addEventListener('pointerup', function (event) {
+      if (touch && touch.id === event.pointerId) finishTouch(event);
+    });
+    target.addEventListener('pointercancel', function (event) {
+      if (touch && touch.id === event.pointerId) finishTouch();
+      else if (event.pointerType !== 'touch') endSteering();
+    });
+    target.addEventListener('lostpointercapture', function (event) {
+      // A link can lose implicit touch capture when the card takes over.
+      if (event.target === target && touch && touch.id === event.pointerId) finishTouch();
+    });
+    target.addEventListener('pointerleave', function (event) {
+      if (event.pointerType !== 'touch' && !touch) endSteering();
+    });
+    target.addEventListener('click', function (event) {
+      if (!suppressTouchClick || event.detail === 0) return;
+      suppressTouchClick = false;
+      event.preventDefault();
+    }, true);
   }
 
   function addModel(stage, target, diagram, seed, title, tags) {
@@ -705,6 +816,17 @@
     });
     addModel(stage, stage, diagram, (index + 1) * 17, heading.textContent.trim(), tags);
     if (previewObserver) previewObserver.observe(stage);
+  });
+
+  // Introduce touch steering on the first preview of each project section.
+  Array.prototype.forEach.call(document.querySelectorAll('.project-layout'), function (layout) {
+    var stage = layout.querySelector('.project-preview');
+    if (!stage) return;
+
+    var hint = document.createElement('span');
+    hint.className = 'project-drag-hint';
+    hint.textContent = 'Drag to rotate';
+    stage.appendChild(hint);
   });
 
   /* ---------------------------------------------------------------
