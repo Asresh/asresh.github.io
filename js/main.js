@@ -94,6 +94,7 @@
   --------------------------------------------------------------- */
   function projectArtMarkup(seed, title, tags) {
     var accent = 'currentColor';
+    var titleWords = title.toLowerCase();
     var words = (title + ' ' + tags.join(' ')).toLowerCase();
     var motif = '';
     var tempo = .88 + (seed % 13) * .025;
@@ -107,6 +108,19 @@
     function trace(path, beat, duration) {
       return '<path d="' + path + '" pathLength="100" fill="none" stroke="' + accent
         + '" stroke-width="4" stroke-linecap="round"' + motion('trace', beat, duration) + '/>';
+    }
+
+    function wire(path, beat, duration) {
+      return '<path d="' + path + '" fill="none" stroke="#a9907b" stroke-width="2" stroke-opacity=".65"/>'
+        + trace(path, beat, duration);
+    }
+
+    function caption(label, y) {
+      return '<text x="481" y="' + (y || 225) + '" text-anchor="middle" fill="#5b3824" class="art-label">' + label + '</text>';
+    }
+
+    function small(x, y, label, fill) {
+      return '<text x="' + x + '" y="' + y + '" text-anchor="middle" fill="' + (fill || '#5b3824') + '" class="art-tiny">' + label + '</text>';
     }
 
     function block(x, y, width, height, color, beat, duration) {
@@ -136,7 +150,7 @@
           return '<circle cx="' + point[0] + '" cy="' + point[1] + '" r="11" fill="'
             + (i === seed % 4 ? accent : '#a9907b') + '"' + motion('beacon', -i * .475 + 1.425, 1.9) + '/>';
         }).join('') + '<text x="480" y="228" text-anchor="middle" fill="#5b3824" class="art-label">RING COLLECTIVE</text>';
-    } else if (/moldudp|itch receiver|feed recovery/.test(words)) {
+    } else if (/moldudp|itch receiver|feed recovery|redundant a\/b/.test(words)) {
       motif = '<path d="M406 111H451L478 144H553M406 177H451L478 144" fill="none" stroke="#a9907b" stroke-width="3"/>'
         + trace('M406 111H451L478 144', 0, 3.6)
         + trace('M406 177H451L478 144', .5, 3.6)
@@ -154,12 +168,12 @@
           return '<rect x="' + (474 - width) + '" y="' + y + '" width="' + width + '" height="12" rx="3" fill="#c5a78d"' + motion('bid', i * .19, 2.8) + '/>'
             + '<rect x="487" y="' + y + '" width="' + (70 - width) + '" height="12" rx="3" fill="' + accent + '" fill-opacity="' + (i === 0 ? '.95' : '.6') + '"' + motion('ask', i * .32 + .25, 3.1) + '/>';
         }).join('') + '<text x="481" y="222" text-anchor="middle" fill="#5b3824" class="art-label">BIDS / ASKS</text>';
-    } else if (/latency telemetry|histogram/.test(words)) {
+    } else if (/latency telemetry|histogram|hardware performance monitor/.test(words)) {
       var bucketHeights = [16, 36, 63, 88, 53, 26, 13];
       motif = '<path d="M405 187H560" stroke="#a9907b" stroke-width="2"/>'
         + bucketHeights.map(function (height, i) {
           return '<rect x="' + (409 + i * 22) + '" y="' + (184 - height) + '" width="15" height="' + height + '" rx="3" fill="' + (i === 3 ? accent : '#b9967b') + '"' + motion('bar', i * .2, 2.7 + (i % 3) * .28) + '/>';
-        }).join('') + '<text x="481" y="224" text-anchor="middle" fill="#5b3824" class="art-label">LATENCY HISTOGRAM</text>';
+        }).join('') + caption(/performance monitor/.test(titleWords) ? 'PERFORMANCE COUNTERS' : 'LATENCY HISTOGRAM');
     } else if (/order.risk|execution.gateway|risk.limits|admission/.test(words)) {
       var riskPath = 'M402 140H555';
       motif = '<path d="' + riskPath + '" fill="none" stroke="#a9907b" stroke-width="3"/>'
@@ -207,6 +221,162 @@
           + '<path d="M431 ' + (rowY + 12) + 'H' + (500 + ((seed + check) % 3) * 12) + '" stroke="#a9907b" stroke-opacity=".58" stroke-width="3" stroke-linecap="round"/></g>';
       }
       motif = checks + '<text x="481" y="232" text-anchor="middle" fill="#5b3824" class="art-label">DEPLOYMENT CHECKS</text>';
+    } else if (/latency monitor|nanosecond.timestamp|tick.to.trade latency/.test(titleWords)) {
+      motif = wire('M406 103H539M406 171H539M438 98V177M520 98V177', 0, 3.9)
+        + block(427, 92, 23, 22, '#e5cdaf', .7, 3.9)
+        + block(509, 160, 23, 22, accent, 0, 3.9)
+        + '<path d="M438 137H520M438 137l7-5m-7 5 7 5m75-5-7-5m7 5-7 5" stroke="' + accent + '" fill="none" stroke-width="2"/>'
+        + caption('TIMESTAMP DELTA');
+    } else if (/retransmission|gap detector|duplicate suppress|replay buffer|replay engine|completion reorder|read response reorder|multi.id read reorder/.test(titleWords)) {
+      var replay = /gap detector|duplicate/.test(titleWords);
+      motif = wire('M405 137H558M435 167V187H526V166', .2, 4)
+        + [0, 1, 2, 3].map(function (i) {
+          return block(403 + 39 * i, 126, 29, 24, i === 2 ? accent : '#dfc2a4', (3 - i) * .33, 4)
+            + small(418 + 39 * i, 167, String((i + (replay && i > 1 ? 1 : 0)) % 8));
+        }).join('') + small(483, 199, replay ? 'GAP' : 'REPLAY') + caption(replay ? 'SEQUENCE CHECK' : 'REPLAY / REORDER');
+    } else if (/ethernet.*front end|streaming market.data feed parser|egress serializer|nasdaq ouch|soupbintcp|bitpack decode|firmware trace compressor/.test(titleWords)) {
+      var fields = /ethernet/.test(titleWords) ? ['MAC', 'IP', 'UDP']
+        : /ouch|soupbintcp/.test(titleWords) ? ['LEN', 'TYPE', 'SEQ']
+        : /bitpack/.test(titleWords) ? ['PACK', 'SHIFT', 'UNPACK']
+        : /compressor/.test(titleWords) ? ['TIME', 'DELTA', 'PACK']
+        : /serializer/.test(titleWords) ? ['TYPE', 'ORDER', 'WIRE'] : ['TYPE', 'SEQ', 'BODY'];
+      motif = wire('M405 135H560M405 184H560', 0, 3.6)
+        + fields.map(function (field, i) {
+          return block(404 + i * 53, 107, 43, 46, i === 0 ? accent : '#e6caae', (2 - i) * .4, 3.6)
+            + small(428 + i * 53, 171, field);
+        }).join('') + caption(/bitpack/.test(titleWords) ? 'BIT FIELD EXTRACT' : /compressor/.test(titleWords) ? 'TRACE COMPRESSION'
+          : /serializer/.test(titleWords) ? 'MESSAGE SERIALIZER' : /ouch|soupbintcp/.test(titleWords) ? 'SESSION FRAME' : 'PACKET PARSING');
+    } else if (/top.?k|mask compactor|structured.sparsity/.test(titleWords)) {
+      var isMask = /mask compactor/.test(titleWords);
+      var isSparse = /sparsity/.test(titleWords);
+      var selectedCount = isSparse ? 2 : 3;
+      motif = wire('M407 136H474L505 107H555M474 136L505 161H555', .3, 4)
+        + [0, 1, 2, 3, 4].map(function (i) {
+          var active = (i + seed) % 4 < selectedCount;
+          return block(405 + (i % 2) * 21, 91 + i * 20, 13, 13, active ? accent : '#e7d1b8', (4 - i) * .22, 3.8);
+        }).join('') + [0, 1, 2].slice(0, selectedCount).map(function (i) {
+          return block(517 + (i % 2) * 21, 96 + i * 26, isSparse ? 15 : 16, isSparse ? 15 : 16, accent, (2 - i) * .3, 3.8);
+        }).join('') + small(432, 200, isMask ? 'MASK' : isSparse ? '4 WEIGHTS' : 'SCORES')
+        + small(537, 200, isMask ? 'PACKED' : isSparse ? '2 KEPT' : 'TOP K')
+        + caption(isMask ? 'MASK COMPACTION' : isSparse ? 'STRUCTURED SPARSITY' : 'TOP-K SELECTION');
+    } else if (/float|fp adder|reciprocal|multiplier|divider|\balu\b|mx cast|fixed.point reciprocal/.test(titleWords)) {
+      var operation = /multiplier/.test(titleWords) ? 'MUL' : /divider|reciprocal/.test(titleWords) ? 'DIV'
+        : /float|fp adder/.test(titleWords) ? 'FP ADD' : /mx cast/.test(titleWords) ? 'CAST' : 'ALU';
+      var lane = /float|fp adder/.test(titleWords) ? ['SIGN', 'EXP', 'MANT'] : /multiplier/.test(titleWords) ? ['OP A', 'OP B', 'PROD']
+        : /divider|reciprocal/.test(titleWords) ? ['NUM', 'DEN', 'QUOT'] : /mx cast/.test(titleWords) ? ['INT', 'SCALE', 'MX'] : ['OP A', 'OP B', 'OUT'];
+      motif = wire('M412 101H447L472 133H538M412 177H447L472 133', .12, 3.7)
+        + block(405, 88, 37, 23, '#dbc0a2', .8, 3.7)
+        + block(405, 165, 37, 23, '#dbc0a2', .45, 3.7)
+        + block(465, 112, 46, 41, accent, .25, 3.7)
+        + block(527, 120, 29, 27, '#e6cfb5', 0, 3.7)
+        + small(488, 137, operation, '#fffaf3') + small(424, 123, lane[0]) + small(424, 201, lane[1]) + small(543, 162, lane[2])
+        + caption(/booth/.test(titleWords) ? 'BOOTH MULTIPLICATION' : /reciprocal/.test(titleWords) ? 'RECIPROCAL ITERATION'
+          : /float|fp adder/.test(titleWords) ? 'FLOATING POINT ADD' : /divider/.test(titleWords) ? 'INTEGER DIVISION'
+          : /mx cast/.test(titleWords) ? 'PRECISION CAST' : 'ARITHMETIC LOGIC');
+    } else if (/ann search|kernel dag|fault graph/.test(titleWords)) {
+      var graphLabels = /ann search/.test(titleWords) ? ['QUERY', 'NEIGHBORS', 'NEAREST']
+        : /kernel dag/.test(titleWords) ? ['TASKS', 'DEPENDS', 'READY'] : ['FAULT', 'IMPACT', 'ISOLATE'];
+      var graphPoints = [[410, 139], [461, 99], [462, 177], [507, 118], [510, 184], [553, 142]];
+      motif = [[0,1],[0,2],[1,3],[1,4],[2,4],[3,5],[4,5]].map(function (edge, i) {
+        var a = graphPoints[edge[0]];
+        var b = graphPoints[edge[1]];
+        return wire('M' + a.join(' ') + 'L' + b.join(' '), i * .3, 4.1);
+      }).join('') + graphPoints.map(function (point, i) {
+        return block(point[0] - 8, point[1] - 9, 15, 16, i === 0 || i === 5 ? accent : '#dfc1a2', (5 - i) * .25, 4.1);
+      }).join('') + small(410, 198, graphLabels[0]) + small(480, 212, graphLabels[1])
+        + small(552, 198, graphLabels[2]) + caption(/ann search/.test(titleWords) ? 'NEIGHBOR SEARCH'
+          : /kernel dag/.test(titleWords) ? 'DEPENDENCY GRAPH' : 'FAULT PROPAGATION', 235);
+    } else if (/\btcam\b|ternary cam|embedding gather|stride prefetcher|translation lookaside|\btlb\b|page.table walker/.test(titleWords)) {
+      var lookup = /page.table walker/.test(titleWords) ? ['PAGE TABLE WALK', 'VA', 'PTE', 'PA']
+        : /\btlb\b|ranslation/.test(titleWords) ? ['ADDRESS TRANSLATION', 'VPN', 'TLB', 'PPN']
+        : /prefetch/.test(titleWords) ? ['STRIDE PREDICTION', 'ADDR', 'STRIDE', 'NEXT']
+        : /embedding/.test(titleWords) ? ['EMBEDDING GATHER', 'IDS', 'TABLE', 'VEC'] : ['TERNARY LOOKUP', 'KEY', 'MASK', 'HIT'];
+      motif = wire('M402 132H553M426 132V169H529V132', .2, 3.7)
+        + [0, 1, 2, 3].map(function (i) {
+          return block(452, 83 + i * 28, 55, 17, i === seed % 4 ? accent : '#e1c5a9', (3 - i) * .31, 3.7);
+        }).join('') + block(401, 119, 30, 26, '#ddc2a6', .8, 3.7) + small(417, 156, lookup[1])
+        + block(529, 119, 31, 26, accent, .1, 3.7) + small(545, 156, lookup[3])
+        + small(483, 208, lookup[2]) + caption(lookup[0]);
+    } else if (/\bdma\b|p2p transport/.test(titleWords)) {
+      var p2p = /p2p/.test(titleWords);
+      var bridge = 'M420 136H550';
+      motif = wire(bridge, 0, 3.3) + wire('M421 171H550', .7, 3.3)
+        + [0, 1, 2].map(function (i) {
+          return block(402, 98 + i * 27, 33, 17, i ? '#ddbea0' : accent, i * .33, 3.8)
+            + block(523, 98 + i * 27, 34, 17, i < 2 ? '#ddbea0' : accent, (3 - i) * .33, 3.8);
+        }).join('') + block(464, 121, 38, 31, '#e8caae', .2, 3.8)
+        + small(484, 139, p2p ? 'LINK' : 'DMA') + small(420, 198, p2p ? 'PEER A' : 'SRC')
+        + small(542, 198, p2p ? 'PEER B' : 'DST') + caption(p2p ? 'GPU PEER TRANSPORT' : /descriptor|scatter|strided/.test(titleWords) ? 'DESCRIPTOR TRANSFER' : 'MEMORY TRANSFER');
+    } else if (/read.eye|eye margin|deskew|link training|clock health|power.domain|power and reset|power telemetry|hid touch|usb audio|current loop/.test(titleWords)) {
+      var isEye = /eye|deskew|link training/.test(titleWords);
+      var isPower = /power|current loop/.test(titleWords);
+      var isTouch = /hid touch/.test(titleWords);
+      var signals = isEye ? ['M402 105H433L476 169H556', 'M402 169H437L481 105H556', 'M402 105H447L492 169H556', 'M402 169H445L490 105H556']
+        : isPower ? ['M403 175H434L448 145H556', 'M403 134H466L482 106H556', 'M403 198H487L510 170H556']
+          : ['M402 106H421V91H442V106H464V91H485V106H507V91H528V106H556',
+            'M402 146H430V131H455V146H483V131H508V146H535V131H556', 'M402 183H455V168H510V183H556'];
+      motif = signals.map(function (signal, i) { return wire(signal, i * .32, 3.65); }).join('')
+        + '<path d="M483 83V197" stroke="#9c795e" stroke-opacity=".62" stroke-dasharray="3 5"/>'
+        + '<circle cx="483" cy="' + (isEye ? '136' : '106') + '" r="8" fill="' + accent + '"' + motion('beacon', .3, 3.65) + '/>'
+        + caption(isEye ? (/deskew/.test(titleWords) ? 'LANE ALIGNMENT' : 'SAMPLING EYE') : isPower
+          ? (/telemetry/.test(titleWords) ? 'RAIL TELEMETRY' : /current loop/.test(titleWords) ? 'CURRENT FEEDBACK' : 'POWER SEQUENCING')
+          : isTouch ? 'TOUCH SAMPLE FUSION' : /audio/.test(titleWords) ? 'AUDIO RATE MATCHING' : 'CLOCK FAILOVER');
+    } else if (/rng|entropy|philox|nonce|genomics/.test(titleWords)) {
+      var isDna = /genomics/.test(titleWords);
+      var isNonce = /nonce/.test(titleWords);
+      var alphabet = isDna ? ['A', 'C', 'G', 'T'] : ['0', '1', '0', '1'];
+      motif = wire('M403 145H558M412 100H555', .4, 3.9)
+        + [0, 1, 2, 3, 4, 5].map(function (i) {
+          var y = 119 + (i % 2) * 17;
+          var x = 401 + i * 26;
+          var active = (i + seed) % 3 === 0;
+          return block(x, y, 17, 24, active ? accent : '#dfbf9d', (5 - i) * .24, 3.9) + small(x + 9, y + 14,
+            alphabet[(i * 7 + seed) % alphabet.length], active ? '#fff8ed' : '#5b3824');
+        }).join('') + small(481, 200, isDna ? 'K-MER WINDOW' : isNonce ? 'NONCE HISTORY' : 'COUNTER + KEY')
+        + caption(isDna ? 'DNA MINIMIZER' : isNonce ? 'REPLAY GUARD' : 'RANDOM OUTPUT');
+    } else if (/coheren|snoop|home agent|home node|mshr|sram|read.write|cache|\bdram\b|\bddr\b|bank.conflict|register.file|ral register|store.buffer/.test(titleWords) && !/operand collector/.test(titleWords)) {
+      var coherence = /coheren|snoop|home agent|home node/.test(titleWords);
+      var banks = /\bddr\b|\bdram\b|bank.conflict/.test(titleWords);
+      var selfTest = /self.test|\bbist\b|scrub/.test(titleWords);
+      var gpuCache = /kv cache/.test(titleWords);
+      var rowLabel = coherence ? 'SNOOP / DIRECTORY' : selfTest ? 'MEMORY SCRUB' : banks ? 'BANK COMMANDS'
+        : gpuCache ? 'KV PAGE MAPPING' : /ral register/.test(titleWords) ? 'REGISTER FIELD MIRROR' : /register.file/.test(titleWords) ? 'REGISTER PORTS' : /mshr/.test(titleWords) ? 'CACHE MISS TRACKING'
+        : /store.buffer/.test(titleWords) ? 'STORE FORWARDING' : 'CACHE TAGS / WAYS';
+      motif = wire('M405 95H558M405 190H558M424 94V191M481 94V191M538 94V191', 0, 3.9)
+        + [0, 1, 2, 3, 4, 5].map(function (i) {
+          var active = i === seed % 6;
+          return block(406 + (i % 3) * 56, 109 + Math.floor(i / 3) * 41, 35, 22, active ? accent : '#e1c6aa', (5 - i) * .24, 3.9);
+        }).join('') + small(424, 210, coherence ? 'CORE' : 'BANK 0') + small(482, 210, coherence ? 'DIR' : 'BANK 1')
+        + small(539, 210, coherence ? 'CORE' : 'BANK 2') + caption(rowLabel, 237);
+    } else if (/branch.predict|branch target|reconvergence|pdom|operand collector|memory.coalesc/.test(titleWords)) {
+      var isBranch = /branch|pdom|reconvergence/.test(titleWords);
+      var routes = isBranch ? ['M402 141H447L489 105H555', 'M447 141L489 176H555']
+        : ['M402 96H438L479 143H555', 'M402 127H444L479 143', 'M402 166H443L479 143', 'M402 193H438L479 143'];
+      motif = routes.map(function (route, i) { return wire(route, i * .48, 3.7); }).join('')
+        + block(433, 127, 27, 24, accent, .5, 3.7)
+        + block(520, 95, 32, 21, '#e2c4a5', .3, 3.7)
+        + block(520, 166, 32, 21, '#e2c4a5', 0, 3.7)
+        + small(536, 128, isBranch ? 'TAKEN' : 'LINE A') + small(536, 200, isBranch ? 'FALL' : 'LINE B')
+        + caption(/pdom|reconvergence/.test(titleWords) ? 'SIMT PATH MERGE' : /branch/.test(titleWords) ? 'BRANCH PATHS'
+          : /coalesc/.test(titleWords) ? 'COALESCED REQUESTS' : 'OPERAND GATHER', 233);
+    } else if (/token.bucket|rate.limiter|pretrade|pre.trade risk.check|marketable.order trigger|spec decode verifier/.test(titleWords)) {
+      var rate = /rate|token.bucket/.test(titleWords);
+      var decode = /spec decode/.test(titleWords);
+      motif = wire('M406 134H558', .24, 3.9) + wire('M454 135H495V184H553', .6, 3.9)
+        + (rate ? '<path d="M449 103l8 58h54l8-58" fill="none" stroke="#9c795e" stroke-width="3"/>' : '')
+        + (rate ? [0, 1, 2].map(function (i) {
+          return '<circle cx="' + (467 + i * 16) + '" cy="' + (124 + (i % 2) * 16) + '" r="6" fill="' + accent + '"' + motion('beacon', i * .38, 3.9) + '/>';
+        }).join('') : block(469, 119, 34, 28, accent, .5, 3.9))
+        + small(541, 121, decode ? 'ACCEPT' : 'PASS') + small(539, 201, decode ? 'RECHECK' : 'HOLD')
+        + caption(rate ? 'TOKEN BUCKET' : decode ? 'DRAFT VERIFICATION' : 'ORDER GATE');
+    } else if (/robot arm/.test(titleWords)) {
+      motif = '<path d="M405 192H554M420 109V192M451 109V192M482 109V192M513 109V192M544 109V192" fill="none" stroke="#ba997d" stroke-width="1" stroke-opacity=".5"/>'
+        + block(415, 172, 41, 17, '#ca9d75', .7, 3.8)
+        + '<g' + motion('tile', .2, 3.8) + '><path d="M435 167L460 117L511 135L541 106" fill="none" stroke="' + accent + '" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>'
+        + '<path d="M435 167L460 117L511 135L541 106" fill="none" stroke="#eac6a5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>'
+        + [[435, 167], [460, 117], [511, 135]].map(function (a) {
+          return '<circle cx="' + a[0] + '" cy="' + a[1] + '" r="7" fill="' + accent + '" stroke="#f0d2b7"/>';
+        }).join('') + '</g>' + caption('JOINT KINEMATICS');
     } else if (/prefix|kogge.stone|scan|reduction.tree|allreduce/.test(words)) {
       var treeNodes = [[418, 87], [464, 87], [510, 87], [556, 87], [441, 143], [533, 143], [487, 201]];
       var treeEdges = [[0,4],[1,4],[2,5],[3,5],[4,6],[5,6]];
@@ -218,7 +388,7 @@
       }).join('') + treeNodes.map(function (point, i) {
         return '<circle cx="' + point[0] + '" cy="' + point[1] + '" r="10" fill="' + (i === seed % treeNodes.length ? accent : '#efd8bc') + '" stroke="#a9907b" stroke-opacity=".8" stroke-width="2"'
           + motion('beacon', i < 4 ? 1.4 : i < 6 ? .7 : 0, 3.8) + '/>';
-      }).join('') + '<text x="487" y="238" text-anchor="middle" fill="#5b3824" class="art-label">PARALLEL PREFIX TREE</text>';
+      }).join('') + caption(/allreduce/.test(titleWords) ? 'COLLECTIVE REDUCTION' : /prefix|scan/.test(titleWords) ? 'PARALLEL PREFIX TREE' : 'REDUCTION TREE', 238);
     } else if (/bitonic|sorting.network|sort(ing)?/.test(words)) {
       var wireY = [83, 111, 139, 167, 195];
       var comparatorLayers = [[0,4],[1,3],[0,2],[1,4],[2,3],[0,1],[2,4],[1,2],[3,4]];
@@ -240,17 +410,7 @@
       }
       motif = '<path d="M398 82H408M398 140H408M398 198H408M448 54V65M506 54V65" stroke="' + accent + '" stroke-width="3" stroke-linecap="round"/>' + cells
         + '<text x="474" y="226" text-anchor="middle" fill="#5b3824" class="art-label">MAC / PE ARRAY</text>';
-    } else if (/uvm|verification|scoreboard|coverage|assert|testbench|sva|monitor/.test(words)) {
-      var checks = '';
-      for (var i = 0; i < 4; i++) {
-        var yy = 84 + i * 35;
-        var hot = i === seed % 4;
-        checks += '<g' + motion('tray', (3 - i) * .38, 3.4) + '><rect x="398" y="' + yy + '" width="166" height="24" rx="8" fill="#a9907b" fill-opacity="' + (hot ? '.22' : '.1') + '" stroke="#a9907b" stroke-opacity=".22"/>'
-          + '<circle cx="416" cy="' + (yy + 12) + '" r="5" fill="' + (hot ? accent : '#806852') + '"/>'
-          + '<path d="M431 ' + (yy + 12) + 'H' + (500 + ((seed + i) % 3) * 12) + '" stroke="#a9907b" stroke-opacity=".58" stroke-width="3" stroke-linecap="round"/></g>';
-      }
-      motif = checks + '<text x="481" y="232" text-anchor="middle" fill="#5b3824" class="art-label">CHECKS / COVERAGE</text>';
-    } else if (/cordic|sine|cosine|vector.rotat|kinematic|motor.current|goertzel|fir|fft|filter|sdr|sobel|texture/.test(words)) {
+    } else if (/cordic|sine|cosine|vector.rotat|goertzel|\bfir\b|\bfft\b|filter|\bsdr\b|sobel|texture|quadrature|cic decimation|alpha.signal/.test(words)) {
       var signal = [];
       for (var wave = 0; wave < 31; wave++) {
         var px = 400 + wave * 5.2;
@@ -261,7 +421,10 @@
       motif = '<path d="M402 140H560M420 83V202M470 83V202M520 83V202" stroke="#a9907b" stroke-opacity=".25" stroke-width="1"/>'
         + '<g' + motion('wave', 0, 3.7) + '><path d="' + signalPath + '" fill="none" stroke="#9c7659" stroke-opacity=".55" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>'
         + trace(signalPath, 0, 3.7) + '</g>'
-        + '<text x="482" y="238" text-anchor="middle" fill="#5b3824" class="art-label">SIGNAL / TRANSFORM</text>';
+        + caption(/cordic/.test(titleWords) ? 'CORDIC ROTATION' : /fft/.test(titleWords) ? 'FREQUENCY TRANSFORM'
+          : /sobel/.test(titleWords) ? 'EDGE GRADIENT' : /texture/.test(titleWords) ? 'TEXTURE INTERPOLATION'
+          : /goertzel/.test(titleWords) ? 'TONE DETECTION' : /quadrature|decimation/.test(titleWords) ? 'IQ DECIMATION'
+          : /fir/.test(titleWords) ? 'FIR FILTER' : /preamble/.test(titleWords) ? 'CORRELATION PEAK' : 'SIGNAL FILTER', 238);
     } else if (/crc|ecc|hamming|reed.solomon|\baes\b|\bsha(?:-?256)?\b|crypt|viterbi|scrambl|line.code|8b\/10b/.test(words)) {
       var bits = '';
       for (var b = 0; b < 16; b++) {
@@ -271,7 +434,10 @@
         bits += '<g' + motion('bit', b * .16, 3.7) + '><rect x="' + bx + '" y="' + by + '" width="27" height="24" rx="6" fill="' + (bitOn ? accent : '#a9907b') + '" fill-opacity="' + (bitOn ? '.88' : '.24') + '" stroke="#a9907b" stroke-opacity=".3"/>'
           + '<text x="' + (bx + 13.5) + '" y="' + (by + 16) + '" text-anchor="middle" fill="' + (bitOn ? '#fffaf3' : '#5b3824') + '" class="art-tiny">' + (bitOn ? '1' : '0') + '</text></g>';
       }
-      motif = bits + '<path d="M410 226H551" stroke="' + accent + '" stroke-width="3" stroke-linecap="round"/><text x="482" y="251" text-anchor="middle" fill="#5b3824" class="art-label">ENCODE / CHECK / RECOVER</text>';
+      motif = bits + '<path d="M410 226H551" stroke="' + accent + '" stroke-width="3" stroke-linecap="round"/>'
+        + caption(/crc/.test(titleWords) ? 'CRC / FRAME CHECK' : /hamming|ecc|reed.solomon/.test(titleWords) ? 'ERROR CORRECTION'
+          : /aes/.test(titleWords) ? 'CIPHER STATE' : /sha/.test(titleWords) ? 'HASH STATE' : /viterbi/.test(titleWords) ? 'VITERBI PATH METRICS'
+          : /scrambl/.test(titleWords) ? 'BIT SCRAMBLING' : 'LINE CODE SYMBOLS', 251);
     } else if (/controller|protocol|axi|i²c|i2c|spi|uart|jtag|pcie|usb|ddr|serdes|state.machine|sequencer/.test(words)) {
       var states = [[420,96],[495,76],[548,126],[515,194],[428,190]];
       var stateEdges = [[0,1],[1,2],[2,3],[3,4],[4,0],[0,3]];
@@ -282,7 +448,10 @@
           + trace(route, (5 - i) * .3, 4);
       }).join('') + states.map(function (point, i) {
         return block(point[0] - 20, point[1] - 12, 40, 24, i === seed % states.length ? accent : '#efd8bc', (4 - i) * .55, 4);
-      }).join('') + '<text x="482" y="238" text-anchor="middle" fill="#5b3824" class="art-label">PROTOCOL / STATE FLOW</text>';
+      }).join('') + caption(/i²c|i2c/.test(titleWords) ? 'I2C STATE FLOW' : /spi/.test(titleWords) ? 'SPI SHIFT ENGINE'
+        : /uart/.test(titleWords) ? 'UART FRAME FLOW' : /jtag/.test(titleWords) ? 'JTAG TAP STATES'
+        : /axi|apb/.test(titleWords) ? 'BUS HANDSHAKE' : /credit/.test(titleWords) ? 'LINK CREDIT FLOW'
+        : /interrupt|plic/.test(titleWords) ? 'INTERRUPT ROUTING' : 'PROTOCOL STATE FLOW', 238);
     } else if (/crossbar|coalesc|network|fabric|arbiter|scheduler|reconverg|simt|warp|router|noc/.test(words)) {
       var nodes = [[412, 92], [484, 74], [548, 108], [422, 162], [500, 158], [550, 202]];
       var edges = [[0,1],[1,2],[0,3],[1,4],[2,4],[3,4],[4,5]];
@@ -294,7 +463,9 @@
           + trace(connection, ((i + seed) % 7) * .27, 3.7);
       }).join('') + nodes.map(function (point, i) {
         return '<circle cx="' + point[0] + '" cy="' + point[1] + '" r="' + (i === seed % nodes.length ? '11' : '7') + '" fill="' + (i === seed % nodes.length ? accent : '#a9907b') + '"' + motion('beacon', i * .38, 3.7) + '/>';
-      }).join('') + '<text x="482" y="238" text-anchor="middle" fill="#5b3824" class="art-label">CONTROL / ROUTING</text>';
+      }).join('') + caption(/arbiter/.test(titleWords) ? 'REQUEST ARBITRATION' : /moe/.test(titleWords) ? 'EXPERT ROUTING'
+        : /crossbar/.test(titleWords) ? 'CROSSBAR ROUTING' : /router|noc|fabric/.test(titleWords) ? 'PACKET ROUTING'
+        : /credit/.test(titleWords) ? 'CREDIT SCHEDULING' : /simt|warp/.test(titleWords) ? 'SIMT LANE ROUTING' : 'CONTROL FLOW', 238);
     } else if (/risc.v|rv32|cpu|branch.predict|register.renam|issue.queue|instruction.fetch|processor|tomasulo/.test(words)) {
       var pipeLabels = ['FETCH', 'DECODE', 'EXEC', 'MEM', 'WRITE'];
       var instructionBus = 'M402 145H565';
@@ -314,7 +485,20 @@
         rows += '<g' + motion('tray', (3 - r) * .42, 3.8) + '><rect x="408" y="' + top + '" width="148" height="25" rx="7" fill="' + (selected ? accent : '#a9907b') + '" fill-opacity="' + (selected ? '.92' : '.22') + '" stroke="#a9907b" stroke-opacity=".35"/>'
           + '<path d="M424 ' + (top + 12) + 'H' + (472 + (r % 2) * 18) + '" stroke="' + (selected ? '#f4c75e' : '#a88367') + '" stroke-opacity=".75" stroke-width="3" stroke-linecap="round"/></g>';
       }
-      motif = rows + '<path d="M390 ' + (91 + (seed % 4) * 34) + 'H401" stroke="' + accent + '" stroke-width="4" stroke-linecap="round"/><text x="482" y="232" text-anchor="middle" fill="#5b3824" class="art-label">QUEUE / STATE FLOW</text>';
+      motif = rows + '<path d="M390 ' + (91 + (seed % 4) * 34) + 'H401" stroke="' + accent + '" stroke-width="4" stroke-linecap="round"/>'
+        + caption(/fifo/.test(titleWords) ? 'FIFO READ / WRITE' : /priority|heap/.test(titleWords) ? 'PRIORITY QUEUE'
+          : /packet/.test(titleWords) ? 'PACKET QUEUES' : /load.store/.test(titleWords) ? 'LOAD / STORE QUEUE'
+          : /reorder/.test(titleWords) ? 'REORDER BUFFER' : /memory.dependence/.test(titleWords) ? 'DEPENDENCE TRACKING' : 'BUFFER / QUEUE', 232);
+    } else if (/uvm|verification|scoreboard|coverage|assert|testbench|sva|monitor/.test(words)) {
+      var checks = '';
+      for (var i = 0; i < 4; i++) {
+        var yy = 84 + i * 35;
+        var hot = i === seed % 4;
+        checks += '<g' + motion('tray', (3 - i) * .38, 3.4) + '><rect x="398" y="' + yy + '" width="166" height="24" rx="8" fill="#a9907b" fill-opacity="' + (hot ? '.22' : '.1') + '" stroke="#a9907b" stroke-opacity=".22"/>'
+          + '<circle cx="416" cy="' + (yy + 12) + '" r="5" fill="' + (hot ? accent : '#806852') + '"/>'
+          + '<path d="M431 ' + (yy + 12) + 'H' + (500 + ((seed + i) % 3) * 12) + '" stroke="#a9907b" stroke-opacity=".58" stroke-width="3" stroke-linecap="round"/></g>';
+      }
+      motif = checks + '<text x="481" y="232" text-anchor="middle" fill="#5b3824" class="art-label">CHECKS / COVERAGE</text>';
     } else {
       var stages = ['INPUT', 'MAP', 'CORE', 'OUTPUT'];
       var datapath = 'M408 142H559';
@@ -329,25 +513,109 @@
         }).join('');
     }
 
+    if (/\buvm\b|verification|functional.coverage|scoreboard/i.test(title + ' ' + tags.join(' '))) {
+      motif += '<g fill="none" stroke="#a47150" stroke-width="1.2"><rect x="526" y="52" width="39" height="14" rx="4"/>'
+        + '<path d="M530 59l2 2 3-4"/></g>' + small(550, 62, 'DUT');
+    }
     return motif;
   }
 
-  function addModel(stage, diagram, seed) {
+  var projectMotionQuery = window.matchMedia('(prefers-reduced-motion: no-preference)');
+
+  function steerModel(stage, target, model) {
+    var startX = null;
+    var restingYaw = 0;
+    var yaw = 0;
+    var frame = 0;
+    var pointerX = 0;
+    var pointerY = 0;
+
+    function endSteering() {
+      if (frame) {
+        window.cancelAnimationFrame(frame);
+        frame = 0;
+      }
+      if (startX === null) return;
+
+      // Keep the pointer's heading when the automatic turn resumes.
+      restingYaw = yaw;
+      startX = null;
+      stage.classList.remove('project-preview-steering');
+      model.style.removeProperty('--model-pointer-pitch');
+    }
+
+    function updateSteering() {
+      frame = 0;
+      var bounds = stage.getBoundingClientRect();
+      if (pointerX < bounds.left || pointerX > bounds.right ||
+          pointerY < bounds.top || pointerY > bounds.bottom ||
+          !bounds.width || !bounds.height || !projectMotionQuery.matches ||
+          document.documentElement.classList.contains('project-motion-paused')) {
+        endSteering();
+        return;
+      }
+
+      var x = (pointerX - bounds.left) / bounds.width;
+      var y = (pointerY - bounds.top) / bounds.height;
+      if (startX === null) {
+        startX = x;
+        stage.classList.add('project-preview-steering');
+      }
+      yaw = restingYaw + (x - startX) * 360;
+      model.style.setProperty('--model-pointer-yaw', yaw + 'deg');
+      model.style.setProperty('--model-pointer-pitch', ((.5 - y) * 33) + 'deg');
+    }
+
+    // The stretched card link sits above the preview, so listen on the card.
+    target.addEventListener('pointermove', function (event) {
+      if (event.pointerType !== 'mouse' && !(event.pointerType === 'pen' && !event.buttons)) return;
+      pointerX = event.clientX;
+      pointerY = event.clientY;
+      if (!frame) frame = window.requestAnimationFrame(updateSteering);
+    }, { passive: true });
+    target.addEventListener('pointerleave', endSteering);
+    target.addEventListener('pointercancel', endSteering);
+  }
+
+  function addModel(stage, target, diagram, seed, title, tags) {
     var model = document.createElement('div');
     model.className = 'project-model';
-    model.dataset.modelMotion = ['orbit', 'rock', 'sweep'][seed % 3];
-    model.style.setProperty('--model-cycle', (6.2 + (seed % 15) / 5) + 's');
-    model.style.setProperty('--model-phase', -(seed % 32) / 5 + 's');
+    model.style.setProperty('--model-cycle', (11 + (seed % 11) * .45) + 's');
+    model.style.setProperty('--model-phase', -(seed % 8) / 5 + 's');
+    if (seed % 2) model.style.setProperty('--model-direction', 'reverse');
 
-    var face = document.createElement('div');
-    face.className = 'project-model-face';
-    var detail = document.createElement('div');
-    detail.className = 'project-model-detail';
-    detail.appendChild(diagram);
-    face.appendChild(detail);
-    model.appendChild(face);
+    var rotor = document.createElement('div');
+    rotor.className = 'project-model-rotor';
+
+    var front = document.createElement('div');
+    front.className = 'project-model-face project-model-front';
+    front.appendChild(diagram);
+    rotor.appendChild(front);
+
+    var back = document.createElement('div');
+    back.className = 'project-model-face project-model-back';
+    if (tags.length) {
+      var tag = document.createElement('span');
+      tag.className = 'project-model-back-tag';
+      tag.textContent = tags.slice(0, 2).join(' / ');
+      back.appendChild(tag);
+    }
+    var name = document.createElement('span');
+    name.className = 'project-model-back-name';
+    name.textContent = title;
+    back.appendChild(name);
+    rotor.appendChild(back);
+
+    ['top', 'right', 'bottom', 'left'].forEach(function (side) {
+      var edge = document.createElement('span');
+      edge.className = 'project-model-edge project-model-edge-' + side;
+      rotor.appendChild(edge);
+    });
+
+    model.appendChild(rotor);
     stage.appendChild(model);
     stage.classList.add('project-preview');
+    steerModel(stage, target, model);
   }
 
   var previewObserver = 'IntersectionObserver' in window
@@ -417,7 +685,7 @@
     diagram.setAttribute('focusable', 'false');
     seed = seed >>> 0;
     diagram.innerHTML = projectArtMarkup(seed, title, tags);
-    addModel(figure, diagram, seed);
+    addModel(figure, card, diagram, seed, title, tags);
     card.insertBefore(figure, card.firstChild);
     if (previewObserver) previewObserver.observe(figure);
   }
@@ -429,8 +697,13 @@
 
   Array.prototype.forEach.call(document.querySelectorAll('.featured-visual'), function (stage, index) {
     var diagram = stage.querySelector('.diagram');
-    if (!diagram) return;
-    addModel(stage, diagram, (index + 1) * 17);
+    var featured = stage.closest('.featured');
+    var heading = featured && featured.querySelector('.featured-title');
+    if (!diagram || !heading) return;
+    var tags = Array.prototype.map.call(featured.querySelectorAll('.tech-list li'), function (tag) {
+      return tag.textContent.trim();
+    });
+    addModel(stage, stage, diagram, (index + 1) * 17, heading.textContent.trim(), tags);
     if (previewObserver) previewObserver.observe(stage);
   });
 
