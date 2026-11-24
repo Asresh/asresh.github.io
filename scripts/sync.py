@@ -205,12 +205,11 @@ def href(section, pid):
 
 def render_card(section, p):
     url = href(section, p["id"])
-    if section.get("cardStyle") == "metric":
-        top_right = f'<span class="card-metric">{p.get("metric", "NEW")}</span>'
-    else:
+    top_right = ""
+    if section.get("cardStyle") != "metric":
         top_right = (
-            f'<a class="card-link" href="{url}" target="_blank" rel="noopener" '
-            f'aria-label="Open {p["id"]} on GitHub">{EXT_SVG}</a>'
+            f'          <a class="card-link" href="{url}" target="_blank" rel="noopener" '
+            f'aria-label="Open {p["id"]} on GitHub">{EXT_SVG}</a>\n'
         )
     tags = "".join(f"<li>{t}</li>" for t in p.get("tags", []))
     tags_ul = f'\n        <ul class="card-tech">{tags}</ul>' if tags else ""
@@ -218,7 +217,7 @@ def render_card(section, p):
         '      <li class="project-card">\n'
         '        <div class="card-top">\n'
         f'          <span class="card-folder" aria-hidden="true">{FOLDER_SVG}</span>\n'
-        f'          {top_right}\n'
+        f'{top_right}'
         '        </div>\n'
         f'        <h4 class="card-title"><a href="{url}" target="_blank" rel="noopener">{p["title"]}</a></h4>\n'
         f'        <p class="card-desc">{p["desc"]}</p>'

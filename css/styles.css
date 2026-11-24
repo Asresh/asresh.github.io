@@ -465,15 +465,6 @@ em { color: var(--warm-earth); font-style: normal; }
 .card-folder { color: var(--orange); }
 .card-link { color: var(--warm-earth); }
 .card-link:hover { color: var(--orange); }
-.card-metric {
-  font-family: var(--font-mono);
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--orange);
-  background: var(--orange-tint);
-  padding: 4px 10px;
-  border-radius: 20px;
-}
 
 .card-title { font-size: 21px; margin-bottom: 12px; }
 .card-title a { color: var(--deep-earth); }
@@ -864,10 +855,6 @@ body {
   font-family: var(--font-sans);
   font-size: 12px;
 }
-.card-metric {
-  color: #9d421f;
-  background: rgba(204, 92, 50, 0.12);
-}
 .card-more {
   background: linear-gradient(180deg, #fffdf8, #f5ede2);
 }
@@ -1155,7 +1142,6 @@ body { background:#f7f3eb; color:#6b4e3a; }
 }
 .project-card:hover { box-shadow:0 12px 24px rgba(91,53,35,.1); }
 .card-folder, .card-link:hover, .card-title a:hover, .card-more .card-tech { color:#df7535; }
-.card-metric { color:#713b1d; background:rgba(250,204,21,.24); }
 .card-more { background:linear-gradient(180deg,#fffaf3,#f8f2e9); }
 .grid-more { border-radius:8px; border-color:#d8c8b7; color:#5f3a25; background:#fffaf3; }
 .grid-more:hover { border-color:#df7535; color:#df7535; background:#fff4e5; }
