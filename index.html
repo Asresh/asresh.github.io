@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/styles.css?v=20261016-mobile" />
+  <link rel="stylesheet" href="css/styles.css?v=20261124-project-previews" />
 
   <!-- Progressive enhancement: mark JS available before first paint so reveal
        animations only apply when JS can un-hide them (no-JS = fully visible). -->
@@ -261,8 +261,12 @@
   </section>
 
   <!-- ============ 01. RTL DESIGN ============ -->
-  <section id="rtl" class="numbered-section">
-    <h2 class="numbered-heading reveal"><span class="section-num">01.</span> RTL Design</h2>
+  <section id="rtl" class="numbered-section" aria-labelledby="subject-rtl">
+    <div class="project-layout">
+      <header class="project-subject">
+        <h2 id="subject-rtl" class="numbered-heading reveal"><span class="section-num">01.</span> RTL Design</h2>
+      </header>
+      <div class="project-content">
     <p class="section-intro reveal">
       Synthesizable SystemVerilog with self-checking verification, from FPGA trading datapaths to
       clock-domain crossings, IEEE-754 arithmetic, and GPU/SIMT microarchitecture.
@@ -1003,11 +1007,17 @@
       <li>SystemVerilog</li><li>Verilog</li><li>CDC / Gray-code</li><li>IEEE-754</li><li>Fixed-point Q2.13</li>
       <li>AXI4-Lite</li><li>SPI · UART · I²C</li><li>SECDED ECC</li><li>Booth + Wallace</li><li>Icarus / Verilator</li>
     </ul>
+      </div>
+    </div>
   </section>
 
   <!-- ============ 02. AI SYSTEMS & NETWORKING ============ -->
-  <section id="aisystems" class="numbered-section">
-    <h2 class="numbered-heading reveal"><span class="section-num">02.</span> AI Systems &amp; Networking</h2>
+  <section id="aisystems" class="numbered-section" aria-labelledby="subject-aisystems">
+    <div class="project-layout">
+      <header class="project-subject">
+        <h2 id="subject-aisystems" class="numbered-heading reveal"><span class="section-num">02.</span> AI Systems &amp; Networking</h2>
+      </header>
+      <div class="project-content">
     <p class="section-intro reveal">
       Systems for AI infrastructure and high-speed networking, from TCP flow observability and distributed
       tensor communication to reliable inference services and evidence-based operations.
@@ -1081,11 +1091,17 @@
       <li>Model serving</li><li>Inference reliability</li><li>Multi-agent workflows</li>
       <li>Incident response</li><li>Deployment readiness</li><li>Human-in-the-loop systems</li>
     </ul>
+      </div>
+    </div>
   </section>
 
   <!-- ============ 03. DESIGN VERIFICATION ============ -->
-  <section id="verification" class="numbered-section">
-    <h2 class="numbered-heading reveal"><span class="section-num">03.</span> Design Verification</h2>
+  <section id="verification" class="numbered-section" aria-labelledby="subject-verification">
+    <div class="project-layout">
+      <header class="project-subject">
+        <h2 id="subject-verification" class="numbered-heading reveal"><span class="section-num">03.</span> Design Verification</h2>
+      </header>
+      <div class="project-content">
     <p class="section-intro reveal">
       UVM environments that actually sign off a DUT — layered and virtual sequences driving real bus agents,
       reference-model scoreboards checking every transaction, functional and cross coverage closing the
@@ -1556,11 +1572,17 @@
       <li>UVM</li><li>SystemVerilog</li><li>RAL</li><li>SVA</li><li>Functional coverage</li>
       <li>Cross coverage</li><li>Constrained-random</li><li>APB4</li><li>AXI4-Lite / Stream</li><li>CDC verification</li>
     </ul>
+      </div>
+    </div>
   </section>
 
   <!-- ============ 04. HW/SOFTWARE CO-DESIGN ============ -->
-  <section id="codesign" class="numbered-section">
-    <h2 class="numbered-heading reveal"><span class="section-num">04.</span> Hardware&#8211;Software Co-Design</h2>
+  <section id="codesign" class="numbered-section" aria-labelledby="subject-codesign">
+    <div class="project-layout">
+      <header class="project-subject">
+        <h2 id="subject-codesign" class="numbered-heading reveal"><span class="section-num">04.</span> Hardware&#8211;Software Co-Design</h2>
+      </header>
+      <div class="project-content">
     <p class="section-intro reveal">
       Full-stack accelerators. Each build pairs parameterized SystemVerilog RTL with a real bus, working
       bare-metal C firmware that configures and drives it, and a differential testbench that proves the
@@ -1975,11 +1997,17 @@
       <li>SystemVerilog</li><li>Bare-metal C</li><li>AXI4-Lite / Stream</li><li>Wishbone B4</li><li>APB</li>
       <li>MMIO mailbox / IRQ</li><li>Coalesced DMA</li><li>INT8 · Q16.16</li><li>Differential verification</li><li>GitHub Actions CI</li>
     </ul>
+      </div>
+    </div>
   </section>
 
   <!-- ============ 05. COMPUTER ARCHITECTURE ============ -->
-  <section id="comparch" class="numbered-section">
-    <h2 class="numbered-heading reveal"><span class="section-num">05.</span> Computer Architecture</h2>
+  <section id="comparch" class="numbered-section" aria-labelledby="subject-comparch">
+    <div class="project-layout">
+      <header class="project-subject">
+        <h2 id="subject-comparch" class="numbered-heading reveal"><span class="section-num">05.</span> Computer Architecture</h2>
+      </header>
+      <div class="project-content">
     <p class="section-intro reveal">
       From a RISC-V datapath up through the memory hierarchy and out-of-order machinery to GPU/SIMT
       microarchitecture — one self-contained architecture block a day in SystemVerilog, each checked against
@@ -2463,11 +2491,17 @@
       <li>SystemVerilog</li><li>RISC-V RV32I</li><li>Caches · TLB</li><li>Branch prediction</li><li>Out-of-order</li>
       <li>Store buffer</li><li>Systolic MAC</li><li>SIMT / GPU</li><li>Golden-model / ISS</li><li>Icarus</li>
     </ul>
+      </div>
+    </div>
   </section>
 
   <!-- ============ 06. AI HARDWARE ============ -->
-  <section id="ai" class="numbered-section">
-    <h2 class="numbered-heading reveal"><span class="section-num">06.</span> AI Hardware Acceleration</h2>
+  <section id="ai" class="numbered-section" aria-labelledby="subject-ai">
+    <div class="project-layout">
+      <header class="project-subject">
+        <h2 id="subject-ai" class="numbered-heading reveal"><span class="section-num">06.</span> AI Hardware Acceleration</h2>
+      </header>
+      <div class="project-content">
     <p class="section-intro reveal">
       Silicon for machine learning. The through-line across everything above: quantized matmul, structured
       sparsity, and the GPU/SIMT dataflow primitives that ML kernels are actually built on — designed as RTL,
@@ -2590,6 +2624,8 @@
       <li>INT8 quantization</li><li>Systolic arrays</li><li>Structured sparsity (2:4)</li><li>Tensor-core MAC</li>
       <li>Softmax / scan</li><li>Top-K sampling</li><li>Dataflow</li><li>SIMD</li><li>SIMT microarchitecture</li>
     </ul>
+      </div>
+    </div>
   </section>
 
   <!-- ============ CONTACT ============ -->
@@ -2616,6 +2652,6 @@
   <p class="footer-credit">Designed &amp; built by Asresh Kuricheti</p>
 </footer>
 
-<script src="js/main.js?v=20261017-ai-systems-art"></script>
+<script src="js/main.js?v=20261124-project-previews"></script>
 </body>
 </html>
